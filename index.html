@@ -7,7 +7,7 @@
     <style>
         @font-face {
             font-family: 'SFPro';
-            src: url('/fonts/sfpro.ttf') format('truetype');
+            src: url('fonts/sfpro.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
         }
@@ -350,16 +350,16 @@ button:hover {
 
     <div class="navbar">
         <div class="nav-item active" data-target="home">
-            <img src="/images/bottomnav/house_fill.png" class="clicked">
+            <img src="images/bottomnav/house_fill.png" class="clicked">
         </div>
         <div class="nav-item" data-target="categories">
-            <img src="/images/bottomnav/sparkles.png"> 
+            <img src="images/bottomnav/sparkles.png"> 
         </div>
         <div class="nav-item" data-target="ipa-signer">
-            <img src="/images/bottomnav/pencil_outline.png">
+            <img src="images/bottomnav/pencil_outline.png">
         </div>
         <div class="nav-item" data-target="settings">
-            <img src="/images/bottomnav/gear.png">
+            <img src="images/bottomnav/gear.png">
         </div>
     </div>
 
@@ -389,7 +389,7 @@ const createButton = (app) => {
     button.appendChild(icon);
 
     const rightArrow = document.createElement('img');
-    rightArrow.src = '/images/home/chevron.png'; 
+    rightArrow.src = 'images/home/chevron.png'; 
     rightArrow.classList.add('right-arrow');
 
     button.appendChild(infoContainer);
