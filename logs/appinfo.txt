@@ -1,0 +1,25 @@
+   const openModal = (app) => {
+            const modalHtml = `
+                <div style="display: flex; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.9); align-items: center; justify-content: center; z-index: 1001;">
+                    <button id="back-button" style="align-self: flex-start; margin: 20px; background: transparent; border: none; color: white; font-size: 18px; cursor: pointer;">Back</button>
+                    <img id="modal-icon" style="width: 100px; height: 100px; margin-bottom: 20px;">
+                    <h2 id="modal-title"></h2>
+                    <p id="modal-description"></p>
+                    <div id="app-info"></div>
+                    <div id="preview-images"></div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+            document.getElementById('modal-icon').src = app.iconURL;
+            document.getElementById('modal-title').innerText = app.name.trim();
+            document.getElementById('modal-description').innerText = app.localizedDescription.trim();
+
+            const appInfo = `
+                <strong>Bundle ID:</strong> ${app.bundleID || 'N/A'}<br>
+                <strong>Version:</strong> ${app.version || 'N/A'}<br>
+                <strong>Size:</strong> ${(app.size / 1024 / 1024).toFixed(2)} MB<br>
+                <strong>Version Date:</strong> ${app.versionDate || 'N/A'}<br>
+                <strong>Download Link:</strong> <a href="${app.downloadURL}" target="_blank" style="color: #007BFF;">Download</a>
+            `;
+            document.getElementById('app-info').innerHTML = appInfo;

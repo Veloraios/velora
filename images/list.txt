@@ -1,0 +1,7 @@
+colors:
+white = 1
+black = 2
+
+REQUIRED:
+in progress
+

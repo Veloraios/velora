@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Testers Repo</title>
+    <style>
+        @font-face {
+            font-family: 'SFPro';
+            src: url('/fonts/sfpro.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'SFPro', Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-bottom: 80px; 
+            align-items: center;
+        }
+
+        .no-scroll {
+    overflow: hidden; /* Prevent scrolling */
+}
+
+        #search-bar-container {
+            width: 100%;
+            display: block;
+        }
+
+        .search-bar {
+            background-color: #191A1C;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            color: white;
+            padding: 10px;
+            margin: 20px 0;
+            width: 95%;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-bar::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-around;
+            width: 300px;
+            height: 70px;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+        }
+
+        .nav-item.active {
+            opacity: 1;
+        }
+
+        .nav-item img {
+            width: 40px;
+            height: 40px;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .nav-item img.clicked {
+            transform: scale(1.2);
+        }
+
+        .content {
+            padding: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        button {
+    font-family: 'SFPro', Arial, sans-serif;
+    background-color: #191A1C;
+    width: 95%;
+    height: 100px;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 15px;
+    margin: 10px auto;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #252627;
+}
+
+
+        img.icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .info {
+            position: absolute;
+            left: 110px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+            flex-grow: 1;
+            padding-left: 10px; 
+            white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    padding-left: 10px;
+        }
+
+        .info span {
+            display: block;
+            margin: 0;
+        }
+
+        .info .app-name {
+            font-size: 20px;
+        }
+
+        .info .app-description {
+            font-size: 15px;
+            opacity: 0.5;
+        }
+
+        .right-arrow {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .fullscreen-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #1F1F1F;
+            color: white;
+            padding: 20px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            z-index: 1001;
+        }
+
+        .modal-content {
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+            background-color: #2A2A2A;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .modal-content img {
+            width: 100px;
+            height: 100px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .modal-description {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .app-info {
+            text-align: left;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .get-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .get-button:hover {
+            background-color: #0056b3;
+        }
+
+        .section {
+            width: 100%;
+            border-top: 1px solid gray;
+            border-bottom: 1px solid gray;
+            padding: 10px 0;
+            margin: 10px 0;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .search-results {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+    width: 80%;
+    max-height: 70%;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none; 
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%; 
+}
+
+.result-item:hover {
+    background: rgba(255, 255, 255, 0.1); 
+}
+
+.result-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    margin-right: 10px;
+}
+
+.result-info {
+    display: flex;
+    flex-direction: column; 
+}
+
+.result-name {
+    font-size: 18px;
+    color: white;
+  
+}
+
+.result-description {
+    font-size: 14px;
+  
+    color: #ccc;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); 
+    display: none; 
+    z-index: 999; 
+}
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <div id="search-bar-container">
+        <input type="text" id="search-bar" class="search-bar" placeholder="Search for IPAs..." />
+    </div>
+
+    <div class="content active" id="home-page">
+    </div>
+    
+    <div class="content" id="categories-page">
+        <h1>Categories</h1>
+        <p>Explore various categories here.</p>
+    </div>
+    <div class="content" id="ipa-signer-page">
+        <h1>iPA Signer</h1>
+        <p>This is the iPA Signer page.</p>
+    </div>
+    <div class="content" id="settings-page">
+        <h1>Settings</h1>
+        <p>Adjust your settings here.</p>
+    </div>
+
+    <div class="navbar">
+        <div class="nav-item active" data-target="home">
+            <img src="/images/bottomnav/house_fill.png" class="clicked">
+        </div>
+        <div class="nav-item" data-target="categories">
+            <img src="/images/bottomnav/sparkles.png">
+        </div>
+        <div class="nav-item" data-target="ipa-signer">
+            <img src="/images/bottomnav/pencil_outline.png">
+        </div>
+        <div class="nav-item" data-target="settings">
+            <img src="/images/bottomnav/gear.png">
+        </div>
+    </div>
+
+    <script>
+const createButton = (app) => {
+    const button = document.createElement('button');
+    button.classList.add('app-button');
+    button.setAttribute('data-app-name', app.name.trim());
+
+    const icon = document.createElement('img');
+    icon.src = app.iconURL;
+    icon.classList.add('icon');
+
+    const infoContainer = document.createElement('div');
+    infoContainer.classList.add('info');
+
+    const appName = document.createElement('span');
+    appName.innerText = app.name.trim();
+    appName.classList.add('app-name');
+
+    const appDescription = document.createElement('span');
+    appDescription.innerText = app.localizedDescription.trim();
+    appDescription.classList.add('app-description');
+
+    infoContainer.appendChild(appName);
+    infoContainer.appendChild(appDescription);
+    button.appendChild(icon);
+
+    const rightArrow = document.createElement('img');
+    rightArrow.src = '/images/home/chevron.png'; 
+    rightArrow.classList.add('right-arrow');
+
+    button.appendChild(infoContainer);
+    button.appendChild(rightArrow);
+
+    button.onclick = () => openModal(app);
+
+    return button;
+};
+
+const fetchData = async () => {
+    try {
+        const response = await fetch('https://repo.apptesters.org');
+        const data = await response.json();
+        return data.apps || [];
+    } catch (error) {
+        console.error('Error fetching app data:', error);
+        return [];
+    }
+};
+
+const loadApps = async (searchTerm = '') => {
+    const appContainer = document.getElementById('home-page');
+    appContainer.innerHTML = '<p style="color: gray;">Loading...</p>';
+    const apps = await fetchData();
+    appContainer.innerHTML = ''; 
+
+    
+    const filteredApps = apps.filter(app => 
+        app.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+    );
+
+   
+    filteredApps.forEach(app => {
+        const button = createButton(app);
+        appContainer.appendChild(button);
+    });
+
+    if (filteredApps.length === 0) {
+        appContainer.innerHTML = '<p style="color: gray;">No apps found.</p>';
+    }
+};
+
+const openModal = (app) => {
+    const modalHtml = `
+        <div style="display: flex; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.8); color: white; align-items: center; justify-content: flex-start; padding: 20px; z-index: 1001;">
+            <button id="back-button" style="position: absolute; top: 20px; left: 20px; background: none; border: none; color: white; font-size: 24px; cursor: pointer;">&#x2190; Back</button>
+            <div style="background: #1a1a1a; border-radius: 15px; padding: 20px; width: 90%; max-width: 600px; margin-top: 80px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);">
+                <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <img id="modal-icon" style="width: 80px; height: 80px; border-radius: 10px;">
+                    <div style="margin-left: 20px;">
+                        <h2 id="modal-title" style="margin: 0; font-size: 24px; font-weight: bold;">${app.name.trim()}</h2>
+                        <span style="font-size: 16px; color: #ccc;">Version: ${app.version}</span>
+                        <button id="get-button" style="margin-top: 10px; padding: 8px 16px; border: none; background-color: #007BFF; color: white; border-radius: 25px; cursor: pointer; font-size: 16px;">Get</button>
+                    </div>
+                </div>
+                <p id="modal-description" style="margin: 10px 0; color: #ccc;">${app.localizedDescription.trim()}</p>
+                <div style="margin-bottom: 10px;">
+                    <strong>Bundle ID:</strong> ${app.bundleID || 'N/A'}<br>
+                    <strong>Size:</strong> ${(app.size / 1024 / 1024).toFixed(2)} MB<br>
+                    <strong>Version Date:</strong> ${app.versionDate || 'N/A'}<br>
+                    <strong>Download Link:</strong> <a href="${app.downloadURL}" target="_blank" style="color: #007BFF;">Download</a>
+                </div>
+                <div id="preview-images" style="display: flex; overflow-x: auto; padding: 10px 0; width: 100%;">
+                    ${app.previewImages && app.previewImages.length > 0 ? app.previewImages.map(imageURL => 
+                        `<img src="${imageURL}" style="max-width: 150px; margin-right: 10px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">`
+                    ).join('') : '<p style="color: gray;">No preview images available.</p>'}
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+    document.getElementById('modal-icon').src = app.iconURL;
+
+    document.getElementById('back-button').onclick = closeModal;
+    document.getElementById('get-button').onclick = () => window.open(app.downloadURL, '_blank');
+};
+
+const closeModal = () => {
+    const modal = document.querySelector('div[style*="position: fixed;"]');
+    if (modal) modal.remove();
+};
+
+
+const setupSearch = async () => {
+    const searchBar = document.getElementById('search-bar');
+    const resultsContainer = document.createElement('div');
+    resultsContainer.id = 'search-results';
+    resultsContainer.classList.add('search-results');
+
+    
+    const overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+    document.body.appendChild(overlay);
+    document.body.appendChild(resultsContainer);
+
+    const apps = await fetchData(); 
+
+    searchBar.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        resultsContainer.innerHTML = ''; 
+
+        if (searchTerm) {
+            const filteredApps = apps.filter(app => app.name.toLowerCase().includes(searchTerm));
+
+            
+            if (filteredApps.length > 0) {
+                overlay.style.display = 'block'; 
+                resultsContainer.style.display = 'block'; 
+                document.body.classList.add('no-scroll'); 
+
+                filteredApps.forEach(app => {
+                    const resultItem = document.createElement('div');
+                    resultItem.classList.add('result-item');
+
+                    const icon = document.createElement('img');
+                    icon.src = app.iconURL;
+                    icon.classList.add('result-icon');
+
+                    const appName = document.createElement('span');
+                    appName.innerText = app.name.trim();
+                    appName.classList.add('result-name');
+
+                    const appDescription = document.createElement('span');
+                    appDescription.innerText = app.localizedDescription.trim();
+                    appDescription.classList.add('result-description');
+
+                    resultItem.appendChild(icon);
+                    resultItem.appendChild(appName);
+                    resultItem.appendChild(appDescription);
+                    resultItem.onclick = () => {
+                        const appButton = document.querySelector(`button[data-app-name="${app.name.trim()}"]`);
+                        if (appButton) {
+                            appButton.scrollIntoView({ behavior: 'smooth' }); 
+                            openModal(app); 
+                        }
+                        resultsContainer.innerHTML = ''; 
+                        overlay.style.display = 'none'; 
+                        resultsContainer.style.display = 'none';
+                        document.body.classList.remove('no-scroll');
+                    };
+
+                    resultsContainer.appendChild(resultItem);
+                });
+            } else {
+                resultsContainer.innerHTML = '<p style="color: gray;">No apps found.</p>';
+                resultsContainer.style.display = 'block'; 
+            }
+        } else {
+            resultsContainer.innerHTML = ''; 
+            overlay.style.display = 'none'; 
+            resultsContainer.style.display = 'none'; 
+            document.body.classList.remove('no-scroll');
+        }
+    });
+
+    
+    overlay.onclick = () => {
+        resultsContainer.innerHTML = '';
+        overlay.style.display = 'none'; 
+        resultsContainer.style.display = 'none'; 
+        document.body.classList.remove('no-scroll'); 
+    };
+};
+
+// Navigation functionality
+const navItems = document.querySelectorAll('.nav-item');
+const pages = document.querySelectorAll('.content');
+
+navItems.forEach(item => {
+    item.addEventListener('click', () => {
+        const target = item.getAttribute('data-target');
+
+        pages.forEach(page => {
+            page.classList.remove('active');
+        });
+
+        const activePage = document.getElementById(`${target}-page`);
+        activePage.classList.add('active');
+
+        if (target === 'home') {
+            document.getElementById('search-bar-container').style.display = 'block'; 
+            loadApps(); 
+        } else {
+            document.getElementById('search-bar-container').style.display = 'none'; 
+        }
+
+        navItems.forEach(nav => {
+            nav.classList.remove('active');
+            nav.querySelector('img').classList.remove('clicked');
+        });
+        item.classList.add('active');
+        item.querySelector('img').classList.add('clicked');
+    });
+});
+
+// Initialize
+setupSearch();
+loadApps();
+
+
+    </script>
+</body>
+</html>
