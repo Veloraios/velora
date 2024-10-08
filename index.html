@@ -125,7 +125,7 @@ img {
         button {
     font-family: 'SFPro', Arial, sans-serif;
     background-color: #191A1C;
-    width: 95%;
+    width: 100%; /* Make the button full width */
     height: 100px;
     border: none;
     color: white;
@@ -136,6 +136,7 @@ img {
     position: relative;
     transition: background-color 0.3s;
 }
+
 
 button:hover {
     background-color: #252627;
@@ -179,10 +180,10 @@ button:hover {
         }
 
         .info .app-description {
-            font-size: 15px;
-            opacity: 0.5;
-        }
-
+    font-size: 15px;
+    opacity: 0.5;
+    white-space: normal; /* Allow wrapping */
+}
         .right-arrow {
             width: 30px;
             height: 30px;
@@ -282,9 +283,7 @@ button:hover {
     left: 50%;
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(15px);
-            border-radius: 25px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
     border-radius: 15px;
     padding: 20px;
     width: 80%;
@@ -316,7 +315,7 @@ button:hover {
 
 .result-info {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column; /* Stack elements vertically */
 }
 
 .result-name {
@@ -438,12 +437,10 @@ const loadApps = async (searchTerm = '') => {
     const apps = await fetchData();
     appContainer.innerHTML = ''; 
 
-    
     const filteredApps = apps.filter(app => 
         app.name.toLowerCase().startsWith(searchTerm.toLowerCase())
     );
 
-   
     filteredApps.forEach(app => {
         const button = createButton(app);
         appContainer.appendChild(button);
@@ -495,14 +492,12 @@ const closeModal = () => {
     if (modal) modal.remove();
 };
 
-
 const setupSearch = async () => {
     const searchBar = document.getElementById('search-bar');
     const resultsContainer = document.createElement('div');
     resultsContainer.id = 'search-results';
     resultsContainer.classList.add('search-results');
 
-    
     const overlay = document.createElement('div');
     overlay.classList.add('overlay');
     document.body.appendChild(overlay);
@@ -517,7 +512,6 @@ const setupSearch = async () => {
         if (searchTerm) {
             const filteredApps = apps.filter(app => app.name.toLowerCase().includes(searchTerm));
 
-            
             if (filteredApps.length > 0) {
                 overlay.style.display = 'block'; 
                 resultsContainer.style.display = 'block'; 
@@ -531,6 +525,9 @@ const setupSearch = async () => {
                     icon.src = app.iconURL;
                     icon.classList.add('result-icon');
 
+                    const resultInfo = document.createElement('div');
+                    resultInfo.classList.add('result-info');
+
                     const appName = document.createElement('span');
                     appName.innerText = app.name.trim();
                     appName.classList.add('result-name');
@@ -539,9 +536,11 @@ const setupSearch = async () => {
                     appDescription.innerText = app.localizedDescription.trim();
                     appDescription.classList.add('result-description');
 
+                    resultInfo.appendChild(appName);
+                    resultInfo.appendChild(appDescription); // Move description below the name
+
                     resultItem.appendChild(icon);
-                    resultItem.appendChild(appName);
-                    resultItem.appendChild(appDescription);
+                    resultItem.appendChild(resultInfo);
                     resultItem.onclick = () => {
                         const appButton = document.querySelector(`button[data-app-name="${app.name.trim()}"]`);
                         if (appButton) {
@@ -568,7 +567,6 @@ const setupSearch = async () => {
         }
     });
 
-    
     overlay.onclick = () => {
         resultsContainer.innerHTML = '';
         overlay.style.display = 'none'; 
@@ -598,19 +596,14 @@ navItems.forEach(item => {
         } else {
             document.getElementById('search-bar-container').style.display = 'none'; 
         }
-
-        navItems.forEach(nav => {
-            nav.classList.remove('active');
-            nav.querySelector('img').classList.remove('clicked');
-        });
-        item.classList.add('active');
-        item.querySelector('img').classList.add('clicked');
     });
 });
- 
+
 // Initialize
-setupSearch();
-loadApps();
+document.addEventListener('DOMContentLoaded', async () => {
+    setupSearch();
+    loadApps();
+});
 
 
     </script>
