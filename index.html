@@ -471,11 +471,6 @@ const openModal = (app) => {
                     <strong>Version Date:</strong> ${app.versionDate || 'N/A'}<br>
                     <strong>Download Link:</strong> <a href="${app.downloadURL}" target="_blank" style="color: #007BFF;">Download</a>
                 </div>
-                <div id="preview-images" style="display: flex; overflow-x: auto; padding: 10px 0; width: 100%;">
-                    ${app.previewImages && app.previewImages.length > 0 ? app.previewImages.map(imageURL => 
-                        `<img src="${imageURL}" style="max-width: 150px; margin-right: 10px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">`
-                    ).join('') : '<p style="color: gray;">No preview images available.</p>'}
-                </div>
             </div>
         </div>
     `;
@@ -596,14 +591,19 @@ navItems.forEach(item => {
         } else {
             document.getElementById('search-bar-container').style.display = 'none'; 
         }
+
+        navItems.forEach(nav => {
+            nav.classList.remove('active');
+            nav.querySelector('img').classList.remove('clicked');
+        });
+        item.classList.add('active');
+        item.querySelector('img').classList.add('clicked');
     });
 });
 
 // Initialize
-document.addEventListener('DOMContentLoaded', async () => {
-    setupSearch();
-    loadApps();
-});
+setupSearch();
+loadApps();
 
 
     </script>
