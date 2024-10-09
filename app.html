@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/framework7/6.0.0/css/framework7.bundle.min.css">
+    <title>Progress Dialog Example</title>
+</head>
+<body>
+    <div id="app">
+        <div class="view view-main">
+            <div class="page">
+                <div class="page-content">
+                    <div class="block">
+                        <button id="start-progress" class="button">Start Progress</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/framework7/6.0.0/js/framework7.bundle.min.js"></script>
+    <script>
+        // Initialize Framework7
+        const app = new Framework7({
+            root: '#app',
+        });
+
+        // Start progress dialog when button is clicked
+        document.getElementById('start-progress').addEventListener('click', function () {
+            const progressDialog = app.dialog.progress('Loading...');
+
+            // Simulate a loading process
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                app.dialog.progress(progress);
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    app.dialog.close(); // Close the dialog when done
+                }
+            }, 500); // Update progress every 500ms
+        });
+    </script>
+</body>
+</html>
