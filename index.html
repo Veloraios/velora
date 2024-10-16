@@ -64,39 +64,57 @@ img {
     overflow: hidden; /* Prevent scrolling */
 }
 
-        #search-bar-container {
-            width: 100%;
-            display: block;
-        }
+#search-bar-container {
+    width: 100%;
+    display: block;
+}
 
-        .search-bar {
-            background-color: #191A1C;
-            border: 1px solid #222325;
-            border-radius: 15px;
-            color: white;
-            padding: 10px;
-            margin: 20px 0;
-            display: block;
-            position: relative;
-            top: 30px;
-            width: 85%;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: "SFPro", sans-serif;
-           
-            font-size: 16px;
-            outline: none;
-        }
+.search-bar-wrapper {
+    position: relative;
+    width: calc(100% - 60px); /* Adjust based on your margins */
+    left: 50%;
+    transform: translateX(-50%);
+    top: 30px; /* Keep the same top positioning */
+    margin: 20px 0;
+}
 
-        .search-bar::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
+.search-bar {
+    background-color: #191A1C;
+    border: 1px solid #222325;
+    border-radius: 15px;
+    color: white;
+    padding: 10px 10px 10px 40px; /* Added left padding for the icon */
+    font-family: "SFPro", sans-serif;
+    font-size: 16px;
+    outline: none;
+    width: 100%; /* Make input take full width */
+}
+
+.search-bar::placeholder {
+    color: white;
+    opacity: 70%;
+    font-weight: 300;
+   
+}
+
+.search-icon {
+    width: 25px;
+    height: 25px;
+    opacity: 70%;
+    position: absolute;
+    left: 10px; /* Position icon inside input */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    pointer-events: none; /* Prevent mouse events on the icon */
+}
+
+
 
         .navbar {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(15px);
             border-radius: 25px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid #222325;
             display: flex;
             justify-content: space-around;
             width: 300px;
@@ -144,10 +162,17 @@ img {
             display: block;
         }
 
-        button {
+   
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows buttons to wrap */
+}
+
+button {
     font-family: 'SFPro', Arial, sans-serif;
     background-color: #191A1C;
-    width: 100%; /* Make the button full width */
+    width: calc(100% - 20px); /* Default to full width with margin */
     height: 90px;
     border: none;
     color: white;
@@ -155,67 +180,73 @@ img {
     font-size: 18px;
     cursor: pointer;
     border-radius: 15px;
-    margin: 10px auto;
+    margin: 10px; /* Space between buttons */
     position: relative;
     transition: background-color 0.3s;
     border: #222325 1px solid;
 }
 
-
 button:hover {
     background-color: #252627;
 }
 
+img.icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 15px;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
-        img.icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 15px;
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .info {
-            position: absolute;
-            left: 90px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: left;
-            flex-grow: 1;
-            padding-left: 10px; 
-            white-space: nowrap;
+.info {
+    position: absolute;
+    left: 90px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    flex-grow: 1;
+    padding-left: 10px; 
+    white-space: nowrap; 
     overflow: hidden; 
     text-overflow: ellipsis; 
-    padding-left: 10px;
-        }
+}
 
-        .info span {
-            display: block;
-            margin: 0;
-        }
+.info span {
+    display: block;
+    margin: 0;
+}
 
-        .info .app-name {
-            font-size: 20px;
-        }
+.info .app-name {
+    font-size: 20px;
+}
 
-        .info .app-description {
+.info .app-description {
     font-size: 15px;
     opacity: 0.5;
     white-space: normal; /* Allow wrapping */
 }
-        .right-arrow {
-            width: 30px;
-            height: 30px;
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
+
+.right-arrow {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Responsive styles */
+@media (min-width: 600px) { /* Adjust as needed for your design */
+    button {
+        flex: 1 1 calc(50% - 20px); /* Two buttons per row */
+    }
+}
+
 
         .fullscreen-modal {
             display: none;
@@ -459,12 +490,14 @@ button:hover {
     </style>
 </head>
 <body>
- 
-   
     <div id="search-bar-container">
-        <input type="text" id="search-bar" class="search-bar" placeholder="Search for IPAs..." />
+        <div class="search-bar-wrapper">
+            <input type="text" id="search-bar" class="search-bar" placeholder="Search for IPAs...">
+            <img src="images/home/search.png" alt="Search" class="search-icon">
+        </div>
     </div>
-
+    
+    
     <div class="content active" id="home-page" style="overflow-x: hidden;">
     </div>
     
