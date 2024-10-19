@@ -41,7 +41,7 @@ const fetchData = async () => {
         if (!response.ok) throw new Error('Network response was not ok');
 
         const data = await response.json();
-        console.log('Fetched data:', data); // Log the fetched data
+        console.log('Fetched data:', data); 
         return data.apps || [];
     } catch (error) {
         console.error('Error fetching app data:', error);
@@ -90,25 +90,25 @@ const openModal = (app) => {
     const modal = document.getElementById('modal');
     modal.style.visibility = 'visible';
     setTimeout(() => {
-        modal.style.opacity = '1'; // Fade in
-    }, 10); // Slight delay
+        modal.style.opacity = '1'; 
+    }, 10);
 
     const appContainer = document.getElementById('home-page');
-    appContainer.style.overflow = 'hidden'; // Disable scroll
+    appContainer.style.overflow = 'hidden'; 
 
-    document.getElementById('back-button').onclick = closeModal; // Attach close event
+    document.getElementById('back-button').onclick = closeModal; 
 };
 
 const closeModal = () => {
     const modal = document.getElementById('modal');
-    modal.style.opacity = '0'; // Fade out
+    modal.style.opacity = '0'; 
     setTimeout(() => {
-        modal.style.visibility = 'hidden'; // Hide after fade out
-        modal.remove(); // Remove from DOM
-    }, 300); // Match duration with transition time
+        modal.style.visibility = 'hidden'; 
+        modal.remove(); 
+    }, 300); 
 
     const appContainer = document.getElementById('home-page');
-    appContainer.style.overflow = 'auto'; // Enable scroll
+    appContainer.style.overflow = 'auto'; 
 };
 
 const setupSearch = async () => {
@@ -194,7 +194,7 @@ const setupSearch = async () => {
     };
 };
 
-// Navigation functionality
+
 const navItems = document.querySelectorAll('.nav-item');
 const pages = document.querySelectorAll('.content');
 
@@ -225,6 +225,6 @@ navItems.forEach(item => {
     });
 });
 
-// Initialize
+
 setupSearch();
 loadApps();
