@@ -23,3 +23,11 @@
                 <strong>Download Link:</strong> <a href="${app.downloadURL}" target="_blank" style="color: #007BFF;">Download</a>
             `;
             document.getElementById('app-info').innerHTML = appInfo;
+
+
+
+            curl -L -o ted.nic.tar https://github.com/Veloraios/ipa-signer/releases/download/ios/ted.nic.tar
+ccdcdc
+
+
+wget [https://github.com/Veloraios/ipa-signer/releases/download/ios/ted.nic.tar]

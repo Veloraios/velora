@@ -72,7 +72,7 @@ const loadApps = async (searchTerm = '') => {
 const openModal = (app) => {
     const modalHtml = `
    <div id="modal" style="top: 0; left: 0; display: block; width: 100vh; overflow-x: hidden; height: 100vh; background-color: #131416; position: fixed; z-index: 1000000000000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
-    <div style="position: relative; width: 100%; height: 100%;">
+    <div style="position: relative; top: 0; left: 0; width: 100%; height: 100%; overflow-x: hidden;">
         <button id="back-button" style="display: block; position: absolute; left: 5px; top: 5px; border-radius: 50%; width: 50px; background-color: #191A1C; height: 50px; border: 2px solid #222325; cursor: pointer;">
             <img src="images/home/chevron_left.png" style="width: 40px; height: 40px; display: block; margin: auto;">
         </button>
