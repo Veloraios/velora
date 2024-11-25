@@ -588,43 +588,50 @@ left: calc(130px * 2 + 2px);
         <div style="width: 100%; position: absolute; left: 0; right: 0; padding: 0 5%; box-sizing: border-box;">
             <h1 id="settingsHeader" style="margin-bottom: 25px; margin-left: 17.5px; font-weight: 1; font-size: 25px;">Settings</h1>
 
-            <div id="topbar" style="z-index: 1000; top: -48px; left: 0; right: 0; text-align: center; width: 100%; height: 100px; background-color: rgba(28, 28, 28, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); position: fixed; display: none; margin: 0; padding: 0; opacity: 0; transition: opacity 0.2s ease-in-out;">
-
-            <h1 style="font-size: 17.5px; color: white; text-align: center; bottom: 5px; position: absolute; display: block; left: 50%; transform: translateX(-50%);">Settings</h1>
-            </div>
+            <div id="topbar" style="z-index: 1000; top: -48px; left: 0; right: 0; text-align: center; width: 100%; height: 100px; background-color: rgba(28, 28, 28, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); position: fixed; display: none; margin: 0; padding: 0; transition: none;">
+                <h1 style="font-size: 17.5px; color: white; text-align: center; bottom: 5px; position: absolute; display: block; left: 50%; transform: translateX(-50%);">Settings</h1>
+              </div>
             
-            <script>
-              const topbar = document.getElementById('topbar');
-            
-              function checkScrollPosition() {
-                const scrollPosition = window.scrollY;
-            
-                // Show the topbar if scroll position is at least 100px
-                if (scrollPosition >= 50) {
-                  if (topbar.style.display !== 'block') {
-                    topbar.style.display = 'block';
-                    setTimeout(() => {
-                      topbar.style.opacity = 1; // Fade in
-                    }, 10); // Small delay for transition
-                  }
-                } else {
-                  // Hide the topbar if scroll position is less than 100px
-                  if (topbar.style.display !== 'none') {
-                    topbar.style.opacity = 0; // Fade out
-                    setTimeout(() => {
-                      topbar.style.display = 'none';
-                    }, 200); // Wait for fade-out before hiding
+              <script>
+                const topbar = document.getElementById('topbar');
+              
+                function checkScrollPosition() {
+                  const scrollPosition = window.scrollY;
+              
+                  // Show the topbar with animation if scroll position is at least 50px
+                  if (scrollPosition >= 50) {
+                    if (topbar.style.display !== 'block') {
+                      topbar.style.display = 'block';
+                      
+                      // Reset the position and opacity for animation
+                      topbar.style.transform = 'translateY(-100%)';
+                      topbar.style.opacity = 0;
+                      
+                      // Animate the topbar to slide in and fade in
+                      setTimeout(() => {
+                        topbar.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
+                        topbar.style.transform = 'translateY(0)';
+                        topbar.style.opacity = 1;
+                      }, 10); // Small delay to ensure the display change takes effect before transition starts
+                    }
+                  } else {
+                    // Hide the topbar with animation when scroll position is less than 50px
+                    if (topbar.style.display !== 'none') {
+                      topbar.style.transition = 'transform 0.3s ease-in, opacity 0.3s ease-in';
+                      topbar.style.transform = 'translateY(-100%)';
+                      topbar.style.opacity = 0;
+              
+                      // Wait for animation to finish before hiding
+                      setTimeout(() => {
+                        topbar.style.display = 'none';
+                      }, 300); // Delay matches the transition duration
+                    }
                   }
                 }
-              }
-            
-              window.addEventListener('scroll', checkScrollPosition);
-            </script>
-            
-            
-            
-            
-            
+              
+                window.addEventListener('scroll', checkScrollPosition);
+              </script>
+              
             
             <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
                 <img src="images/settingspage/gear.png" style="width: 30px; height: 30px; position: absolute; left: 10px; display: block;">
