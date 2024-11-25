@@ -598,27 +598,24 @@ left: calc(130px * 2 + 2px);
                 function checkScrollPosition() {
                   const scrollPosition = window.scrollY;
               
-                  // Show the topbar with animation if scroll position is at least 50px
+                  // Show the topbar with fade-in animation if scroll position is at least 50px
                   if (scrollPosition >= 50) {
                     if (topbar.style.display !== 'block') {
                       topbar.style.display = 'block';
                       
-                      // Reset the position and opacity for animation
-                      topbar.style.transform = 'translateY(-100%)';
+                      // Reset opacity for animation
                       topbar.style.opacity = 0;
                       
-                      // Animate the topbar to slide in and fade in
+                      // Allow the display change to take effect, then start the fade-in animation
                       setTimeout(() => {
-                        topbar.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
-                        topbar.style.transform = 'translateY(0)';
+                        topbar.style.transition = 'opacity 0.3s ease-out';
                         topbar.style.opacity = 1;
                       }, 10); // Small delay to ensure the display change takes effect before transition starts
                     }
                   } else {
-                    // Hide the topbar with animation when scroll position is less than 50px
+                    // Hide the topbar with fade-out animation when scroll position is less than 50px
                     if (topbar.style.display !== 'none') {
-                      topbar.style.transition = 'transform 0.3s ease-in, opacity 0.3s ease-in';
-                      topbar.style.transform = 'translateY(-100%)';
+                      topbar.style.transition = 'opacity 0.3s ease-in';
                       topbar.style.opacity = 0;
               
                       // Wait for animation to finish before hiding
@@ -631,6 +628,7 @@ left: calc(130px * 2 + 2px);
               
                 window.addEventListener('scroll', checkScrollPosition);
               </script>
+              
               
             
             <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
