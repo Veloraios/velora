@@ -1,33 +1,733 @@
-   const openModal = (app) => {
-            const modalHtml = `
-                <div style="display: flex; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.9); align-items: center; justify-content: center; z-index: 1001;">
-                    <button id="back-button" style="align-self: flex-start; margin: 20px; background: transparent; border: none; color: white; font-size: 18px; cursor: pointer;">Back</button>
-                    <img id="modal-icon" style="width: 100px; height: 100px; margin-bottom: 20px;">
-                    <h2 id="modal-title"></h2>
-                    <p id="modal-description"></p>
-                    <div id="app-info"></div>
-                    <div id="preview-images"></div>
-                </div>
-            `;
-            document.body.insertAdjacentHTML('beforeend', modalHtml);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="apple-touch-icon" href="images/home/chevron.png"/>
+    <link rel="apple-touch-startup-image" href="images/home/chevron.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    
+    <title>App Testers Repo</title>
+   
+   
+    
+  <style>
+      
+    
+      @font-face {
+          font-family: 'SFPro';
+          src: url('fonts/sfpro/sfpro.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+      }
 
-            document.getElementById('modal-icon').src = app.iconURL;
-            document.getElementById('modal-title').innerText = app.name.trim();
-            document.getElementById('modal-description').innerText = app.localizedDescription.trim();
+      @font-face {
+  font-family: 'apple';
+  src: url('fonts/sfpro/sfproregular.OTF') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
 
-            const appInfo = `
-                <strong>Bundle ID:</strong> ${app.bundleID || 'N/A'}<br>
-                <strong>Version:</strong> ${app.version || 'N/A'}<br>
-                <strong>Size:</strong> ${(app.size / 1024 / 1024).toFixed(2)} MB<br>
-                <strong>Version Date:</strong> ${app.versionDate || 'N/A'}<br>
-                <strong>Download Link:</strong> <a href="${app.downloadURL}" target="_blank" style="color: #007BFF;">Download</a>
-            `;
-            document.getElementById('app-info').innerHTML = appInfo;
+  
 
 
+      body, h1, h2, h3, p, div, img {
+  margin: 0;
+  padding: 0;
 
-            curl -L -o ted.nic.tar https://github.com/Veloraios/ipa-signer/releases/download/ios/ted.nic.tar
-ccdcdc
+
+}
+
+html {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+* {
+  box-sizing: border-box;
+}
 
 
-wget [https://github.com/Veloraios/ipa-signer/releases/download/ios/ted.nic.tar]
+      body {
+          margin: 0 auto;
+          font-family: 'SFPro', Arial, sans-serif;
+          background-color: #131416;
+          color: white;
+      
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+          padding-bottom: 80px; 
+          
+         
+      }
+
+      .no-scroll {
+  overflow: hidden; /* Prevent scrolling */
+}
+
+#search-bar-container {
+  width: 100%;
+  display: block;
+}
+
+.search-bar-wrapper {
+  position: relative;
+  width: calc(100% - 60px); /* Adjust based on your margins */
+  left: 50%;
+  transform: translateX(-50%);
+  top: 30px; /* Keep the same top positioning */
+  margin: 20px 0;
+}
+
+.search-bar {
+  background-color: #191A1C;
+  border: 1px solid #222325;
+  border-radius: 15px;
+  color: white;
+  padding: 10px 10px 10px 40px; /* Added left padding for the icon */
+  font-family: "apple";
+  font-size: 16px;
+  outline: none;
+
+  width: 100%; /* Make input take full width */
+}
+
+.search-bar::placeholder {
+  color: white;
+  opacity: 70%;
+  font-weight: 300;
+ 
+}
+
+.search-icon {
+  width: 25px;
+  height: 25px;
+  opacity: 70%;
+  position: absolute;
+  left: 10px;
+  top: 50%; 
+  transform: translateY(-50%); 
+  pointer-events: none; 
+}
+
+
+
+      .navbar {
+          background: rgba(0, 0, 0, 0.75);
+          backdrop-filter: blur(15px);
+          -webkit-backdrop-filter: blur(15px);
+          border-radius: 25px;
+          border: 2px solid #222325;
+          display: flex;
+          justify-content: space-around;
+          width: 300px;
+          height: 70px;
+          position: fixed;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.75);
+          z-index: 1000;
+      }
+
+      .nav-item {
+          flex: 1;
+          text-align: center;
+          opacity: 0.6;
+          transition: opacity 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 5px;
+      }
+
+      .nav-item.active {
+          opacity: 1;
+      }
+
+      .nav-item img {
+          width: 40px;
+          height: 40px;
+          transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .nav-item img.clicked {
+          transform: scale(1.2);
+      }
+
+      .content {
+          padding: 20px;
+          display: none;
+          
+         
+      }
+
+      .content.active {
+          display: block;
+          left: 10px;
+          
+      }
+
+ 
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap; 
+}
+
+button {
+  font-family: 'SFPro', Arial, sans-serif;
+  background-color: #191A1C;
+  width: calc(100% - 20px);
+  height: 90px;
+  border: none;
+  color: white;
+  z-index: 1;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 18px;
+  margin: 10px; 
+  position: relative;
+  transition: background-color 0.3s;
+  
+}
+
+button:hover {
+  background-color: #252627;
+}
+
+img.icon {
+  width: 75px;
+  height: 75px;
+  border-radius: 18px;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.info {
+  position: absolute;
+  left: 90px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  flex-grow: 1;
+  padding-left: 10px; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+
+.info span {
+  display: block;
+  margin: 0;
+}
+
+.info .app-name {
+  font-size: 20px;
+}
+
+.info .app-description {
+  font-size: 15px;
+  opacity: 0.5;
+  font-family: "apple", sans-serif;
+  white-space: normal; 
+}
+
+.right-arrow {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  opacity: 50%;
+  transform: translateY(-50%);
+}
+
+
+@media (min-width: 600px) {
+  button {
+      flex: 1 1 calc(50% - 20px);
+  }
+}
+
+
+      .fullscreen-modal {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #1F1F1F;
+          color: white;
+          padding: 20px;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          z-index: 1001;
+      }
+
+      .modal-content {
+          text-align: center;
+          width: 90%;
+          max-width: 500px;
+          background-color: #2A2A2A;
+          border-radius: 15px;
+          padding: 20px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+          position: relative;
+      }
+
+      .modal-content img {
+          width: 100px;
+          height: 100px;
+          border-radius: 15px;
+          margin-bottom: 20px;
+      }
+
+      .modal-title {
+          font-size: 24px;
+          margin: 10px 0;
+      }
+
+      .modal-description {
+          font-size: 16px;
+          margin: 10px 0;
+      }
+
+      .app-info {
+          text-align: left;
+          margin: 10px 0;
+          font-size: 14px;
+      }
+
+      .get-button {
+          background-color: #007BFF;
+          color: white;
+          border: none;
+          border-radius: 15px;
+          padding: 10px 20px;
+          font-size: 18px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+      }
+
+      .get-button:hover {
+          background-color: #0056b3;
+      }
+
+      .section {
+          width: 100%;
+          border-top: 1px solid gray;
+          border-bottom: 1px solid gray;
+          padding: 10px 0;
+          margin: 10px 0;
+      }
+
+      .back-button {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          background-color: transparent;
+          border: none;
+          color: white;
+          font-size: 18px;
+          cursor: pointer;
+      }
+
+      .search-results {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 15px;
+  padding: 20px;
+  width: 80%;
+  max-height: 70%;
+  overflow-y: auto;
+  z-index: 100000;
+  display: none; 
+}
+
+
+.result-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: 100%; 
+  position: relative; 
+  overflow: hidden;
+}
+
+.result-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -10px;
+  right: -10px; 
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0; 
+  transition: opacity 0.3s ease; 
+  z-index: -1; 
+}
+
+.result-item:hover::before {
+  opacity: 1; 
+
+}
+
+.result-icon  { 
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  margin-right: 10px;
+}
+
+
+
+.result-info {
+  display: flex;
+  flex-direction: column; 
+}
+
+.result-name {
+  font-size: 18px;
+  color: white;
+}
+
+.result-description {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); 
+  display: none; 
+  z-index: 10000; 
+}
+
+
+.tab-container {
+
+position: relative;
+border: #222325 1px solid;
+
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+
+padding: 2px;
+
+background-color: #191A1C;
+border-radius: 9px;
+}
+
+.indicator {
+content: "";
+width: 130px;
+height: 30px;
+background: #ffffff;
+opacity: 30%;
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+left: 2px;
+z-index: 9;
+border: 0.5px solid rgba(0, 0, 0, 0.04);
+box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12), 0px 3px 1px rgba(0, 0, 0, 0.04);
+border-radius: 7px;
+transition: all 0.2s ease-out;
+}
+
+.tab {
+width: 130px;
+height: 28px;
+position: absolute;
+z-index: 99;
+outline: none;
+opacity: 0;
+border: #222325 1px solid;
+}
+
+.tab_label {
+width: 130px;
+height: 28px;
+
+position: relative;
+z-index: 999;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+border: 0;
+
+font-size: 14px;
+opacity: 0.6;
+
+cursor: pointer;
+}
+
+.tab--1:checked ~ .indicator {
+left: 2px;
+}
+
+.tab--2:checked ~ .indicator {
+left: calc(130px + 2px);
+}
+
+.tab--3:checked ~ .indicator {
+left: calc(130px * 2 + 2px);
+}  
+  </style>
+    
+
+
+
+
+    
+</head>
+<body>
+    <div id="search-bar-container">
+        <div class="search-bar-wrapper">
+            <input type="text" id="search-bar" class="search-bar" placeholder="Search for IPAs...">
+            <img src="images/home/search.png" alt="Search" class="search-icon">
+            
+        </div>
+    </div>
+    
+    
+    <div class="content active" id="home-page" style="overflow-x: hidden;">
+    
+    </div>
+    <div class="content" id="categories-page" style="overflow-x: hidden; overflow-y: auto; height: 100vh;">
+        
+        <div style="display: flex; overflow-x: auto; width: 100%; position: fixed; top: 40px; left: 50%; transform: translateX(-50%); white-space: nowrap;">
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;;">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50);">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">System Tweaks</span>
+                <img src="images/library/gear.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+            </button>
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">Themes</span>
+                <img src="images/library/paintbrush_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+            </button>
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 17px; transform: translateY(-50%); font-family: apple, sans-serif;">Virtual Jailbreaks</span>
+                <img src="images/library/ant_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+            </button>
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 16px; transform: translateY(-50%); font-family: apple, sans-serif;">Package Managers</span>
+                <img src="images/library/cube_box_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+            </button>
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">3rd Party Store</span>
+                <img src="images/library/app_badge_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+            </button>
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">JB Launchers</span>
+                <img src="images/library/logo_apple.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+            </button>
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">Emulators</span>
+                <img src="images/library/gamecontroller_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+            </button>
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">Shortcut Tweaks</span>
+                <img src="images/library/sparkles.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+            </button>
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">Utilities</span>
+                <img src="images/library/hammer_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+            </button>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="content" id="ipa-signer-page">
+
+        <div style="top: -48px; left: 0; right: 0; width: 100%; height: 100px; background-color: rgba(28, 28, 28, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); position: fixed; display: block; margin: 0; padding: 0;">
+        </div>
+
+        <div style="display: block; width: 90%; height: 100%;" id="signWrapper"></div>
+        <h1>Sign</h1>
+       
+    </div>
+        
+    </div>
+    <div class="content" id="settings-page">
+        <div style="width: 100%; position: absolute; left: 0; right: 0; padding: 0 5%; box-sizing: border-box;">
+            <h1 id="settingsHeader" style="margin-bottom: 25px; margin-left: 17.5px; font-weight: 1; font-size: 25px;">Settings</h1>
+
+            <div id="topbar" style="z-index: 1000; top: -48px; left: 0; right: 0; text-align: center; width: 100%; height: 100px; background-color: rgba(28, 28, 28, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); position: fixed; display: none; margin: 0; padding: 0; opacity: 0; transition: opacity 0.2s ease-in-out;">
+
+            <h1 style="font-size: 17.5px; color: white; text-align: center; bottom: 5px; position: absolute; display: block; left: 50%; transform: translateX(-50%);">Settings</h1>
+            </div>
+            
+            <script>
+              const topbar = document.getElementById('topbar');
+            
+              function checkScrollPosition() {
+                const scrollPosition = window.scrollY;
+            
+                // Show the topbar if scroll position is at least 100px
+                if (scrollPosition >= 50) {
+                  if (topbar.style.display !== 'block') {
+                    topbar.style.display = 'block';
+                    setTimeout(() => {
+                      topbar.style.opacity = 1; // Fade in
+                    }, 10); // Small delay for transition
+                  }
+                } else {
+                  // Hide the topbar if scroll position is less than 100px
+                  if (topbar.style.display !== 'none') {
+                    topbar.style.opacity = 0; // Fade out
+                    setTimeout(() => {
+                      topbar.style.display = 'none';
+                    }, 200); // Wait for fade-out before hiding
+                  }
+                }
+              }
+            
+              window.addEventListener('scroll', checkScrollPosition);
+            </script>
+            
+            
+            
+            
+            
+            
+            <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+                <img src="images/settingspage/gear.png" style="width: 30px; height: 30px; position: absolute; left: 10px; display: block;">
+                <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">General</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
+            </button>
+            
+            <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+                <img src="images/settingspage/paintbrush_fill.png" style="width: 27px; height: 27px; position: absolute; left: 12px; display: block;">
+                <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Theming</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
+            </button>
+            
+            <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+                <img src="images/settingspage/app_badge.png" style="width: 27px; height: 27px; position: absolute; left: 12px; display: block;">
+                <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Notifications</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
+            </button>
+            
+            <h1 style="font-size: 17.5px; color: white; opacity: 50%; margin-top: 25px; margin-left: 17.5px; font-family: 'apple', sans-serif;">SOCIALS</h1>
+
+            <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+                <img src="images/settingspage/discord-logo-2-1.png" style="width: 28px; height: 23px; position: absolute; left: 10px; display: block;">
+                <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Discord</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
+            </button>
+            
+            <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+                <img src="images/settingspage/telegram-logo-telegram-logo-transparent-telegram-icon-transparent-free-free-png.webp" style="width: 30px; height: 30px; position: absolute; left: 8px; display: block;">
+                <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Telegram</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
+            </button>
+            
+            <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+                <img src="images/settingspage/tiktok-128.png" style="width: 27px; height: 27px; position: absolute; left: 12px; display: block;">
+                <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">TikTok</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
+            </button>
+
+            <h1 style="font-size: 17.5px; color: white; opacity: 50%; margin-top: 25px; margin-left: 17.5px; font-family: 'apple', sans-serif;">INFORMATION</h1>
+
+            <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+                <img src="images/settingspage/person_crop_circle_fill_badge_exclam.png" style="width: 30px; height: 30px; position: absolute; left: 10px; display: block;">
+                <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Help Center</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
+            </button>
+            
+            <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+                <img src="images/settingspage/hand.png" style="width: 27px; height: 27px; position: absolute; left: 12px; display: block;">
+                <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Privacy Policy</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
+            </button>
+            
+            <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+                <img src="images/settingspage/globe.png" style="width: 30px; height: 30px; position: absolute; left: 10px; display: block;">
+                <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Our Website</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
+            </button>
+
+            <h1 style="font-size: 17.5px; color: white; opacity: 50%; margin-top: 25px; margin-left: 17.5px; font-family: 'apple', sans-serif;">OTHERS</h1>
+
+            <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+                <img src="images/settingspage/gift_fill.png" style="width: 30px; height: 28.5px; position: absolute; left: 10px; display: block;">
+                <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Donate Us</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
+            </button>
+            
+            <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+                <img src="images/settingspage/rectangle_stack_fill_badge_plus.png" style="width: 26px; height: 27px; position: absolute; left: 10px; display: block;">
+                <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Request App/Tweak</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
+            </button>
+
+            <h1 style=" display: block; position: absolute; margin-top: 60px; color: white; opacity: 50%; text-align: center; align-items: center; font-family: 'apple', sans-serif; font-size: 14px;"></h1>
+       
+         <div style="height: 125px; width: 100%; background: transparent; display: block; margin-top: 10px;"></div>
+        </div>
+        
+    </div>
+
+    <div class="navbar">
+        <div class="nav-item active" data-target="home">
+            <img src="images/bottomnav/house_fill.png" class="clicked">
+        </div>
+        <div class="nav-item" data-target="categories">
+            <img src="images/bottomnav/sparkles.png"> 
+        </div>
+        <div class="nav-item" data-target="ipa-signer">
+            <img src="images/bottomnav/pencil_outline.png">
+        </div>
+        <div class="nav-item" data-target="settings">
+            <img src="images/bottomnav/gear.png">
+        </div>
+    </div>
+
+  <script src="js/homeload.js"></script>
+
+    <script src="js/nozoom.js"></script>
+
+    <script>document.addEventListener('DOMContentLoaded', () => {
+    
+        window.Ionic.start();
+    });
+    </script>
+</body>
+</html>
