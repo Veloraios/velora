@@ -71,7 +71,7 @@ const loadApps = async (searchTerm = '') => {
 
 const openModal = (app) => {
     const modalHtml = `
-   <div id="modal" style="top: 0; left: 0; display: block; width: 100vw; overflow-x: hidden; height: calc(100vh + 48px); top: -48px;  background-color: #131416; position: fixed; z-index: 1000000000000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
+   <div id="modal" style="left: 0; display: block; width: 100vw; overflow-x: hidden; height: calc(100vh + 48px); top: -48px;  background-color: #131416; position: fixed; z-index: 1000000000000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
     <div style="position: relative; top: 0; left: 0; width: 100%; height: 100%; overflow-x: hidden;">
 <div class="image-wrapper" style="width: 100%; height: 200px; background-image: url('${app.iconURL}');  background-size: 3500% 3500%;  background-position: bottom right; background-repeat: no-repeat;">
 </div>
@@ -80,7 +80,7 @@ const openModal = (app) => {
  <button id="back-button" style="display: block; position: absolute; left: 5px; top: 50px; border-radius: 50%; width: 50px; background-color: #191A1C; height: 50px; border: 2px solid #222325; cursor: pointer;">
             <img src="images/home/chevron_left.png" style="width: 40px; height: 40px; display: block; margin: auto;">
         </button>
-        <img src="${app.iconURL}" alt="${app.name}" style="width: 80px; border-radius: 15px; position: absolute; display: block; top: 250px; height: 80px; margin-top: 20px;">
+        <img src="${app.iconURL}" alt="${app.name}" style="width: 70px; border-radius: 15px; position: absolute; display: block; top: 225px; height: 70px; margin-top: 20px;">
         
     </div>
     </div>
