@@ -83,12 +83,11 @@ const openModal = (app) => {
         </div>
     `;
 
-
     // Insert modal HTML into the DOM
     document.body.insertAdjacentHTML('beforeend', modalHtml);
     const modal = document.getElementById('modal');
 
-    // Calculate the height of the status bar for mobile (black-translucent) and set the top position accordingly
+    // Adjust the modal position for safe areas, especially for iPhone X-like status bars
     const statusBarHeight = (navigator.userAgent.includes("iPhone") && window.innerWidth === 375 && window.innerHeight === 812) ? 44 : 0; // Adjust for iPhone X-like status bar
     modal.style.top = `${statusBarHeight}px`; // Ensure the modal is below the status bar on mobile
 
