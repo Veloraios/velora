@@ -71,19 +71,22 @@ const loadApps = async (searchTerm = '') => {
 
 const openModal = (app) => {
     const modalHtml = `
-   <div id="modal" style="top: 0; left: 0; display: block; width: 100vh; overflow-x: hidden; height: 100vh; background-color: #131416; position: fixed; z-index: 1000000000000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
+   <div id="modal" style="top: 0; left: 0; display: block; width: 100vw; overflow-x: hidden; height: calc(100vh + 48px); top: -48px;  background-color: #131416; position: fixed; z-index: 1000000000000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
     <div style="position: relative; top: 0; left: 0; width: 100%; height: 100%; overflow-x: hidden;">
-        <button id="back-button" style="display: block; position: absolute; left: 5px; top: 5px; border-radius: 50%; width: 50px; background-color: #191A1C; height: 50px; border: 2px solid #222325; cursor: pointer;">
+<div class="image-wrapper" style="width: 100%; height: 200px; background-image: url('${app.iconURL}');  background-size: 3500% 3500%;  background-position: bottom right; background-repeat: no-repeat;">
+</div>
+
+
+ <button id="back-button" style="display: block; position: absolute; left: 5px; top: 50px; border-radius: 50%; width: 50px; background-color: #191A1C; height: 50px; border: 2px solid #222325; cursor: pointer;">
             <img src="images/home/chevron_left.png" style="width: 40px; height: 40px; display: block; margin: auto;">
         </button>
-        <img src="${app.iconURL}" alt="${app.name}" style="width: 100%; height: auto; margin-top: 20px;">
-        <h2 style="color: white;">${app.name}</h2>
-        <p style="color: gray;">${app.localizedDescription}</p>
-        <p style="color: white;">Version: ${app.version}</p>
-        <p style="color: white;">Size: ${app.size} bytes</p>
-        <p style="color: white;">Download: <a href="${app.downloadURL}" style="color: lightblue;">Get it here</a></p>
+        <img src="${app.iconURL}" alt="${app.name}" style="width: 80px; border-radius: 15px; position: absolute; display: block; top: 250px; height: 80px; margin-top: 20px;">
+        
     </div>
     </div>
+
+    
+
     `;
 
     document.body.insertAdjacentHTML('beforeend', modalHtml);
