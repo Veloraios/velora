@@ -71,7 +71,7 @@ const loadApps = async (searchTerm = '') => {
 
 const openModal = (app) => {
     const modalHtml = `
-        <div id="modal" style="left: 0; display: block; width: 100vw; overflow-x: hidden; height: calc(100vh + 48px); top: 0; background-color: #131416; position: fixed; z-index: 1000000000000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
+        <div id="modal" style="left: 0; display: block; width: 100vw; overflow-x: hidden; height: calc(100vh + 48px); background-color: #131416; position: fixed; z-index: 1000000000000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
             <div style="position: relative; top: 0; left: 0; width: 100%; height: 100%; overflow-x: hidden;">
                 <div class="image-wrapper" style="width: 100%; height: 200px; background-image: url('${app.iconURL}'); background-size: 3500% 3500%; background-position: bottom right; background-repeat: no-repeat;">
                 </div>
@@ -83,8 +83,14 @@ const openModal = (app) => {
         </div>
     `;
 
+    // Insert modal HTML into the DOM
     document.body.insertAdjacentHTML('beforeend', modalHtml);
     const modal = document.getElementById('modal');
+
+    // Calculate and adjust the modal top position to avoid being cut off by the status bar (especially for iOS with black-translucent)
+    const statusBarHeight = window.innerWidth === 375 && window.innerHeight === 812 ? 44 : 0; // Basic check for iPhone X-like screens
+    modal.style.top = `${statusBarHeight}px`;
+
     modal.style.visibility = 'visible';
     setTimeout(() => {
         modal.style.opacity = '1'; 
@@ -96,6 +102,7 @@ const openModal = (app) => {
     const appContainer = document.getElementById('home-page');
     appContainer.style.overflow = 'hidden'; 
 
+    // Set up the back button to close the modal
     document.getElementById('back-button').onclick = closeModal; 
 };
 
