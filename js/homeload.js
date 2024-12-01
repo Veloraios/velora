@@ -71,7 +71,7 @@ const loadApps = async (searchTerm = '') => {
 
 const openModal = (app) => {
     const modalHtml = `
-        <div id="modal" style="left: 0; display: block; width: 100vw; height: 100vh; padding-top: env(safe-area-inset-top); background-color: #131416; position: fixed; top: 0; z-index: 1000000000000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
+        <div id="modal" style="left: 0; display: block; width: 100vw; height: 100vh; padding-top: 50px;  background-color: #131416; position: fixed; top: 0; z-index: 1000000000000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
             <div style="position: relative; top: 0; left: 0; width: 100%; height: 100%; overflow-x: hidden; padding-top: env(safe-area-inset-top);">
                 <div class="image-wrapper" style="width: 100%; height: 200px; background-image: url('${app.iconURL}'); background-size: 3500% 3500%; background-position: bottom right; top: -48px; position: absolute; background-repeat: no-repeat;">
                 </div>
