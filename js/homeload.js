@@ -71,7 +71,7 @@ const loadApps = async (searchTerm = '') => {
 
 const openModal = (app) => {
     const modalHtml = `
-        <div id="modal" style="left: 0; display: block; width: 100vw; overflow-x: hidden; height: 100vh; background-color: #131416; position: fixed; top: 0; z-index: 1000000000000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
+        <div id="modal" style="left: 0; display: block; width: 100vw; height: 100vh; background-color: rgba(19, 20, 22, 0.9); position: fixed; top: 0; z-index: 1000000000000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
             <div style="position: relative; top: env(safe-area-inset-top); left: 0; width: 100%; height: calc(100vh - env(safe-area-inset-top)); overflow-x: hidden;">
                 <div class="image-wrapper" style="width: 100%; height: 200px; background-image: url('${app.iconURL}'); background-size: 3500% 3500%; background-position: bottom right; background-repeat: no-repeat;">
                 </div>
@@ -82,7 +82,7 @@ const openModal = (app) => {
             </div>
         </div>
     `;
-
+    
     // Insert modal HTML into the DOM
     document.body.insertAdjacentHTML('beforeend', modalHtml);
     const modal = document.getElementById('modal');
