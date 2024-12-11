@@ -1,3 +1,48 @@
+let repoData = null; // Store fetched data globally
+
+// Function to load data from a given source URL
+const fetchData = async (sourceURL) => {
+    try {
+        if (repoData) {
+            // If data is already loaded, return the cached data
+            console.log('Using cached repo data');
+            return repoData;
+        }
+
+        const response = await fetch(sourceURL);
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        console.log('Fetched data:', data); // Debugging to verify fetched data
+        repoData = data; // Store data in global variable
+        return data;
+    } catch (error) {
+        console.error('Error fetching repo data:', error);
+        return null; // Return null if there is an error
+    }
+};
+
+// Load apps from the repo data
+const loadApps = async (repoData, searchTerm = '') => {
+    const appContainer = document.getElementById('home-page');
+    appContainer.innerHTML = '<p style="color: gray;">Loading...</p>';
+    const apps = repoData?.apps || [];
+    appContainer.innerHTML = ''; // Clear previous apps
+
+    const filteredApps = apps.filter(app =>
+        app.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+    );
+
+    filteredApps.forEach(app => {
+        const button = createButton(app);
+        appContainer.appendChild(button);
+    });
+
+    if (filteredApps.length === 0) {
+        appContainer.innerHTML = '<p style="color: gray;">No apps found.<br>Request an App/Update in Settings</p>';
+    }
+};
+
+// Helper function to create an app button
 const createButton = (app) => {
     const button = document.createElement('button');
     button.classList.add('app-button');
@@ -14,16 +59,17 @@ const createButton = (app) => {
     appName.innerText = app.name.trim();
     appName.classList.add('app-name');
 
-    const appDescription = document.createElement('span');
-    appDescription.innerText = app.localizedDescription.trim();
-    appDescription.classList.add('app-description');
+    // Display the version instead of the description
+    const appVersion = document.createElement('span');
+    appVersion.innerText = `Version: ${app.version || 'Unknown'}`; // Handle missing version
+    appVersion.classList.add('app-description'); // Add version-specific class
 
     infoContainer.appendChild(appName);
-    infoContainer.appendChild(appDescription);
+    infoContainer.appendChild(appVersion);  // Append version to the info container
     button.appendChild(icon);
 
     const rightArrow = document.createElement('img');
-    rightArrow.src = 'images/home/chevron.png'; 
+    rightArrow.src = 'images/home/chevron.png'; // Arrow image
     rightArrow.classList.add('right-arrow');
 
     button.appendChild(infoContainer);
@@ -34,52 +80,77 @@ const createButton = (app) => {
     return button;
 };
 
-const fetchData = async () => {
-    try {
-        const response = await fetch('https://repo.apptesters.org');
-
-        if (!response.ok) throw new Error('Network response was not ok');
-
-        const data = await response.json();
-        console.log('Fetched data:', data); 
-        return data.apps || [];
-    } catch (error) {
-        console.error('Error fetching app data:', error);
-        return [];
-    }
-};
-
-const loadApps = async (searchTerm = '') => {
-    const appContainer = document.getElementById('home-page');
-    appContainer.innerHTML = '<p style="color: gray;">Loading...</p>';
-    const apps = await fetchData();
-    appContainer.innerHTML = ''; 
-
-    const filteredApps = apps.filter(app => 
-        app.name.toLowerCase().startsWith(searchTerm.toLowerCase())
-    );
-
-    filteredApps.forEach(app => {
-        const button = createButton(app);
-        appContainer.appendChild(button);
-    });
-
-    if (filteredApps.length === 0) {
-        appContainer.innerHTML = '<p style="color: gray;">No apps found.<br>Request an App/Update in Settings</p>';
-    }
-};
-
+// Open modal to display app details with versions
 const openModal = (app) => {
-    const modalHtml = `
-        <div id="modal" style="left: 0; display: block; width: 100vw; height: 100vh;   background-color: #131416; position: fixed; top: 0; z-index: 1000000000000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
-            <div style="position: relative; width: 100%; height: 100%; overflow-x: hidden;
-            ">
-                <div class="image-wrapper" style="width: 100%; height: 200px; background-image: url('${app.iconURL}'); background-size: 3500% 3500%; background-position: bottom right; top: -48px; position: absolute; background-repeat: no-repeat;">
-                </div>
-                <button id="back-button" style="display: block; position: absolute; left: 5px; top: 50px; border-radius: 50%; width: 50px; background-color: #191A1C; height: 50px; border: 2px solid #222325; cursor: pointer;">
-                    <img src="images/home/chevron_left.png" style="width: 40px; height: 40px; display: block; margin: auto;">
-                </button>
-                <img src="${app.iconURL}" alt="${app.name}" style="width: 70px; left: 15px; border-radius: 15px; position: absolute; display: block; top: 200px; height: 70px; margin-top: 20px;">
+    const versionDate = app.versionDate ? `Version Date: ${app.versionDate}` : 'Version Date: Unknown';
+    
+    // Fallback if description or subtitle is missing
+    const description = app.localizedDescription || 'No description available';
+    const subtitle = app.subtitle || 'No subtitle available';  // Check if subtitle exists
+
+    let modalHtml = `
+<div id="modal" style="left: 0; display: block; width: 100vw; height: 100vh; background-color: #131416; position: fixed; top: 0; z-index: 1000000000000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
+    <div style="position: relative; width: 100%; height: 100%; overflow-x: hidden;">
+        <div class="image-wrapper" style="width: 100%; bottom-border: #ffffff40 1px solid; height: 200px; background-image: url('${app.iconURL}'); background-size: 3500% 3500%; background-position: bottom right; top: -48px; position: absolute; background-repeat: no-repeat;">
+        </div>
+        <img src="images/home/chevron_left.png" style="width: 40px; height: 40px; filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3)); position: absolute; top: 17.5px; left: 15px; display: block;" id="back">
+        
+        <img src="${app.iconURL}" alt="${app.name}" style="width: 70px; left: 15px; border-radius: 15px; position: absolute; display: block; top: 150px; height: 70px; margin-top: 20px;">
+        <img src="images/home/arrow_down_doc_fill.png" style="top: 170px; position: absolute; margin-top: 20px; width: 30px; height: 30px; display: block; right: 25px;" onclick="document.getElementById('ipaBG').style.visibility='visible'; document.getElementById('ipaBG').style.opacity='1'; document.getElementById('ipaBG').style.transition='opacity 0.3s ease';">
+        
+        <p style="top: 175px; position: absolute; left: 100px; font-size: 18.5px;"> ${app.name}</p>
+        <p style="top: 200px; position: absolute; left: 100px; font-size: 15.5px; font-family: 'apple'; opacity: 50%;"> ${subtitle}</p>
+        
+        <button style="background-image: url('${app.iconURL}'); background-size: 3500% 3500%; background-position: bottom right; height: 25px; width: 60px; position: absolute; display: block; margin-top: 20px; top: 170px; right: 50px; color: white; font-weight: 1; font-size: 16px; text-align: center;">
+            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); filter: drop-shadow(0 0 8px rgba(0, 0, 0, 1));">SIGN</span>
+        </button>
+
+     <div id="ipaBG" style="width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 2; position: fixed; top: 0; left: 0; visibility: hidden; opacity: 0; transition: opacity 0.3s ease;" onclick="if(event.target === this) { this.style.opacity='0'; setTimeout(() => { this.style.visibility='hidden'; }, 300); }">
+    <div style="background-color: rgba(28, 28, 28, 0.65); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); height: 120px; width: 240px; position: absolute; display: block; top: 190px; right: 55px; border-radius: 15px; font-size: 16px; color: white;  z-index: 3;">
+    <div style="top: 50%; transform: translateY(-50%); position: absolute; height: 1px; width: 100%; background-color: #ffffff40;"></div>
+       
+    <div style="background: transparent; width: 100%; height: 58px; position: absolute; top: 0; left: 0;" onclick="window.location.href='${app.downloadURL}';">  
+    <img src="images/home/arrow_down_doc_fill.png" style="width: 30px; height: 30px; left: 10px; top: 50%; transform: translateY(-50%); position: absolute; display: block;">
+      <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; right: 10px; top: 50%; transform: translateY(-50%); position: absolute; display: block;">
+   
+    <h1 style="left: 45px; position: absolute; color: white; font-size: 15px; font-weight: 1; top: 16px;">Install .ipa</h1>
+        <h1 style="left: 45px; position: absolute; color: white; opacity: 50%; font-family: 'apple', sans-serif; font-size: 14.5px; font-weight: 1; top: 30px;">Install .ipa In Web Browser</h1>
+     </div>  
+     
+       <div style="background: transparent; width: 100%; height: 58px; position: absolute; bottom: 0; left: 0;">  
+    <img src="images/home/arrow_up_doc_fill.png" style="width: 30px; height: 30px; left: 10px; top: 50%; transform: translateY(-50%); position: absolute; display: block;">
+      <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; right: 10px; top: 50%; transform: translateY(-50%); position: absolute; display: block;">
+   
+    <h1 style="left: 45px; position: absolute; color: white; font-size: 15px; font-weight: 1; top: 16px;">Import to...</h1>
+        <h1 style="left: 45px; position: absolute; color: white; opacity: 50%; font-family: 'apple', sans-serif; font-size: 14.5px; font-weight: 1; top: 30px;">Import .ipa To Other Apps</h1>
+     </div>  
+    </div>
+</div>
+
+
+
+    </div>
+</div>
+
+
+
+
+    `;
+
+    // Add versions to the modal
+    if (app.versions && app.versions.length > 0) {
+        modalHtml += '<div style="color: white; margin-top: 20px;">';
+        app.versions.forEach((version, index) => {
+            modalHtml += `
+             
+            `;
+        });
+        modalHtml += '</div>';
+    } else {
+        modalHtml += '<p>No versions available.</p>';
+    }
+
+    modalHtml += `
             </div>
         </div>
     `;
@@ -87,10 +158,6 @@ const openModal = (app) => {
     // Insert modal HTML into the DOM
     document.body.insertAdjacentHTML('beforeend', modalHtml);
     const modal = document.getElementById('modal');
-
-    // Adjust the modal position for safe areas, especially for iPhone X-like status bars
-    const statusBarHeight = (navigator.userAgent.includes("iPhone") && window.innerWidth === 375 && window.innerHeight === 812) ? 44 : 0; // Adjust for iPhone X-like status bar
-    modal.style.bottom = `${statusBarHeight}px`; // Ensure the modal is below the status bar on mobile
 
     modal.style.visibility = 'visible';
     setTimeout(() => {
@@ -103,9 +170,10 @@ const openModal = (app) => {
     appContainer.style.overflow = 'hidden'; 
 
     // Set up the back button to close the modal
-    document.getElementById('back-button').onclick = closeModal; 
+    document.getElementById('back').onclick = closeModal; 
 };
 
+// Close modal
 const closeModal = () => {
     const modal = document.getElementById('modal');
     modal.style.opacity = '0'; 
@@ -121,6 +189,12 @@ const closeModal = () => {
     appContainer.style.overflow = 'auto'; 
 };
 
+// Convert size from bytes to MB
+const bytesToMB = (bytes) => {
+    return (bytes / (1024 * 1024)).toFixed(2); // Convert bytes to MB and limit to 2 decimal places
+};
+
+// Setup search functionality
 const setupSearch = async () => {
     const searchBar = document.getElementById('search-bar');
     const resultsContainer = document.createElement('div');
@@ -132,14 +206,12 @@ const setupSearch = async () => {
     document.body.appendChild(overlay);
     document.body.appendChild(resultsContainer);
 
-    const apps = await fetchData(); 
-
     searchBar.addEventListener('input', (e) => {
         const searchTerm = e.target.value.toLowerCase();
         resultsContainer.innerHTML = ''; 
 
         if (searchTerm) {
-            const filteredApps = apps.filter(app => app.name.toLowerCase().includes(searchTerm));
+            const filteredApps = repoData.apps.filter(app => app.name.toLowerCase().includes(searchTerm));
 
             if (filteredApps.length > 0) {
                 overlay.style.display = 'block'; 
@@ -158,81 +230,30 @@ const setupSearch = async () => {
                     resultInfo.classList.add('result-info');
 
                     const appName = document.createElement('span');
-                    appName.innerText = app.name.trim();
-                    appName.classList.add('result-name');
-
-                    const appDescription = document.createElement('span');
-                    appDescription.innerText = app.localizedDescription.trim();
-                    appDescription.classList.add('result-description');
-
+                    appName.innerText = app.name;
                     resultInfo.appendChild(appName);
-                    resultInfo.appendChild(appDescription);
-
                     resultItem.appendChild(icon);
                     resultItem.appendChild(resultInfo);
-                    resultItem.onclick = () => {
-                        const appButton = document.querySelector(`button[data-app-name="${app.name.trim()}"]`);
-                        if (appButton) {
-                            appButton.scrollIntoView({ behavior: 'smooth' }); 
-                            openModal(app); 
-                        }
-                        resultsContainer.innerHTML = ''; 
-                        overlay.style.display = 'none'; 
-                        resultsContainer.style.display = 'none';
-                        document.body.classList.remove('no-scroll');
-                    };
 
+                    resultItem.onclick = () => openModal(app);
                     resultsContainer.appendChild(resultItem);
                 });
             } else {
-                resultsContainer.innerHTML = '<p style="color: gray;">No apps found. <br>Request Apps in the Settings Category.</p>';
-                resultsContainer.style.display = 'block'; 
+                resultsContainer.innerHTML = '<p>No results found</p>';
             }
         } else {
-            resultsContainer.innerHTML = ''; 
             overlay.style.display = 'none'; 
             resultsContainer.style.display = 'none'; 
-            document.body.classList.remove('no-scroll');
+            document.body.classList.remove('no-scroll'); 
         }
     });
-
-    overlay.onclick = () => {
-        resultsContainer.innerHTML = '';
-        overlay.style.display = 'none'; 
-        resultsContainer.style.display = 'none'; 
-        document.body.classList.remove('no-scroll'); 
-    };
 };
 
-const navItems = document.querySelectorAll('.nav-item');
-const pages = document.querySelectorAll('.content');
-
-navItems.forEach(item => {
-    item.addEventListener('click', () => {
-        const target = item.getAttribute('data-target');
-
-        pages.forEach(page => {
-            page.classList.remove('active');
-        });
-
-        const activePage = document.getElementById(`${target}-page`);
-        activePage.classList.add('active');
-
-        if (target === 'home') {
-            document.getElementById('search-bar-container').style.display = 'block'; 
-            loadApps(); 
-        } else {
-            document.getElementById('search-bar-container').style.display = 'none'; 
-        }
-
-        navItems.forEach(nav => {
-            nav.classList.remove('active');
-            nav.querySelector('img').classList.remove('clicked');
-        });
-        item.classList.add('active');
-        item.querySelector('img').classList.add('clicked');
-    });
-});
-
-setupSearch();
-loadApps();
+// Initialize on page load
+window.onload = async () => {
+    const repoData = await fetchData('https://wuxu1.github.io/wuxu-complete-plus.json');
+    if (repoData) {
+        loadApps(repoData);
+        setupSearch();
+    }
+};
