@@ -93,13 +93,13 @@ const openModal = (app) => {
     <div style="position: relative; width: 100%; height: 100%; overflow-x: hidden;">
         <div class="image-wrapper" style="width: 100%; bottom-border: #ffffff40 1px solid; height: 200px; background-image: url('${app.iconURL}'); background-size: 3500% 3500%; background-position: bottom right; top: -48px; position: absolute; background-repeat: no-repeat;">
         </div>
-        <img src="images/home/chevron_left.png" style="width: 40px; height: 40px; filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3)); position: absolute; top: 17.5px; left: 15px; display: block;" id="back">
+        <img src="images/home/chevron_left.png" style="width: 40px; height: 40px; filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3)); position: absolute; top: 37.5px; left: 15px; display: block;" id="back">
         
         <img src="${app.iconURL}" alt="${app.name}" style="width: 70px; left: 15px; border-radius: 15px; position: absolute; display: block; top: 150px; height: 70px; margin-top: 20px;">
-        <img src="images/home/arrow_down_doc_fill.png" style="top: 170px; position: absolute; margin-top: 20px; width: 30px; height: 30px; display: block; right: 25px;" onclick="document.getElementById('ipaBG').style.visibility='visible'; document.getElementById('ipaBG').style.opacity='1'; document.getElementById('ipaBG').style.transition='opacity 0.3s ease';">
+        <img src="images/home/arrow_down_doc_fill.png" style="top: 167.5px; position: absolute; margin-top: 20px; width: 30px; height: 30px; display: block; right: 25px;" onclick="document.getElementById('ipaBG').style.visibility='visible'; document.getElementById('ipaBG').style.opacity='1'; document.getElementById('ipaBG').style.transition='opacity 0.3s ease';">
         
-        <p style="top: 175px; position: absolute; left: 100px; font-size: 18.5px;"> ${app.name}</p>
-        <p style="top: 200px; position: absolute; left: 100px; font-size: 15.5px; font-family: 'apple'; opacity: 50%;"> ${subtitle}</p>
+        <p style="top: 175px; position: absolute; left: 100px; font-size: 18.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 140px);"> ${app.name}</p>
+        <p style="top: 200px; position: absolute; left: 100px; font-size: 15.5px; font-family: 'apple'; opacity: 50%; max-width: calc(100% - 140px); word-wrap: break-word; white-space: normal;"> ${subtitle}</p>
         
         <button style="background-image: url('${app.iconURL}'); background-size: 3500% 3500%; background-position: bottom right; height: 25px; width: 60px; position: absolute; display: block; margin-top: 20px; top: 170px; right: 50px; color: white; font-weight: 1; font-size: 16px; text-align: center;">
             <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); filter: drop-shadow(0 0 8px rgba(0, 0, 0, 1));">SIGN</span>
@@ -126,12 +126,7 @@ const openModal = (app) => {
      </div>  
     </div>
 </div>
-
-
-
-    </div>
 </div>
-
 
 
 
