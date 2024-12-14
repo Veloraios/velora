@@ -87,10 +87,14 @@ const openModal = (app) => {
     const description = app.localizedDescription || 'No description available';
     const subtitle = app.subtitle || 'No subtitle available';  // Check if subtitle exists
 
-    const formattedDescription = app.localizedDescription.replace(/\n/g, '<br>');
+    const formattedDescription = app.localizedDescription
+  .replace(/\*\*(.*?)\*\*/g, '<span style="font-weight: bold; ">$1</span>') // This replaces **text** with <span>text</span> with bold
+  .replace(/\n/g, '<br>'); // This replaces newlines with <br>
+
+  
     let modalHtml = 
     `<div id="modal" style="left: 0; display: block; width: 100vw; height: 100vh; background-color: #131416; position: fixed; top: 0; z-index: 1000000000000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
-        <div style="position: relative; width: 100%; height: 100%; overflow-x: hidden; display: flex; flex-direction: column; padding-top: 200px; padding-bottom: 20px; box-sizing: border-box;">
+        <div style="position: relative; width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto;  flex-direction: column;  padding-top: 200px; padding-bottom: 20px; box-sizing: border-box;">
             
             <!-- Image Wrapper (App Icon) -->
             <div class="image-wrapper" style="width: 100%; height: 200px; background-image: url('${app.iconURL}'); background-size: 3500% 3500%; background-position: bottom right; top: -48px; position: absolute; background-repeat: no-repeat;"></div>
@@ -115,19 +119,68 @@ const openModal = (app) => {
                 <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); filter: drop-shadow(0 0 8px rgba(0, 0, 0, 1));">SIGN</span>
             </button>
 
-            <!-- Description Section -->
-            <h1 style="color: white; font-size: 16px; font-family: 'apple', sans-serif; margin-top: 50px; margin-left: 15px; margin-right: 15px;">${formattedDescription}</h1>
+        
+
+<div style="color: white; font-size: 16px; font-family: 'apple', sans-serif; margin-top: 50px; margin-left: 15px; margin-right: 15px;">
+    ${formattedDescription} <br><br>Bundle ID: ${app.bundleIdentifier}
+</div>
+
+<div style="display: flex; flex-direction: row; flex-wrap: nowrap; overflow-x: auto; margin-top: 20px; background: transparent; height: 70px; width: 100%; position: relative;">
+    <!-- Left Half Section with border-right -->
+    <div style="width: 50%; height: 100%; display: flex; flex-direction: row; border-bottom: 1px solid #ffffff40; border-right: 0.5px solid #ffffff40; position: relative;">
+        <!-- Centered Text in Left Section -->
+        <h1 style="color: white; font-family: 'apple', sans-serif; font-size: 17.5px;  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0;">
+            Details
+        </h1>
+    </div>
+
+    <!-- Right Half Section with border-left -->
+    <div style="width: 50%; height: 100%; display: flex; flex-direction: row; border-bottom: 1px solid #ffffff40; border-left: 0.5px solid #ffffff40; position: relative;">
+        <!-- Centered Text in Right Section -->
+        <h1 style="color: white; font-size: 17.5px; font-family: 'apple', sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0;">
+            Changelog
+        </h1>
+    </div>
+</div>
+
+
+
+
+            <div id="" style="">
+
+     
 
             <!-- Screenshots Section -->
             <div style="display: flex; flex-direction: row; flex-wrap: nowrap; overflow-x: auto; margin-top: 20px; margin-left: 15px; margin-right: 15px;">
                 ${app.screenshotURLs.map(url => 
-                    `<img src="${url}" alt="Screenshot" style="height: 400px; margin-right: 10px; border-radius: 10px; object-fit: cover;">`
+                    `<img src="${url}" alt="Screenshot" style=" max-width: 100%; object-fit: contain; height: auto;  max-height: 400px; margin-right: 10px; border-radius: 10px;">`
                 ).join('')}
             </div>
 
+              <div style="display: flex; flex-direction: row; flex-wrap: nowrap; overflow-x: auto; margin-top: 20px; background-color: #191A1C; height: 300px; margin-left: 15px; border-radius: 10px; margin-right: 15px;">
+               
+            </div>
+             <div style="display: flex; flex-direction: row; flex-wrap: nowrap; overflow-x: auto; margin-top: 20px; background-color: blue; height: 1000px; margin-left: 15px; margin-right: 15px;">
+               
+            </div>
+ <div style="display: flex; flex-direction: row; flex-wrap: nowrap; overflow-x: auto; margin-top: 20px; background-color: blue; height: 1000px; margin-left: 15px; margin-right: 15px;">
+               
+            </div>
+
+             <div style="display: flex; flex-direction: row; flex-wrap: nowrap; overflow-x: auto; margin-top: 20px; background-color: blue; height: 1000px; margin-left: 15px; margin-right: 15px;">
+               
+            </div>
+
+             <div style="display: flex; flex-direction: row; flex-wrap: nowrap; overflow-x: auto; margin-top: 20px; background-color: blue; height: 1000px; margin-left: 15px; margin-right: 15px;">
+               
+            </div>
+
+
+            <div style="background-color: transparent; width: 100%; height: 200px; top: 400px; "></div>
+
             <!-- IPA Background Modal -->
             <div id="ipaBG" style="width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 2; position: fixed; top: 0; left: 0; visibility: hidden; opacity: 0; transition: opacity 0.3s ease;" onclick="if(event.target === this) { this.style.opacity='0'; setTimeout(() => { this.style.visibility='hidden'; }, 300); }">
-                <div style="background-color: rgba(28, 28, 28, 0.65); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); height: 120px; width: 240px; position: absolute; display: block; top: 50px; right: 55px; border-radius: 15px; font-size: 16px; color: white; z-index: 3;">
+                <div style="background-color: rgba(28, 28, 28, 0.65); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); height: 120px; width: 240px; position: absolute; display: block; top: 50px; right: 55px; border-radius: 15px; font-size: 16px; color: white; z-index: 99;">
                     <div style="top: 50%; transform: translateY(-50%); position: absolute; height: 1px; width: 100%; background-color: #ffffff40;"></div>
 
                     <!-- Install IPA Option -->
@@ -138,28 +191,46 @@ const openModal = (app) => {
                         <h1 style="left: 45px; position: absolute; color: white; opacity: 50%; font-family: 'apple', sans-serif; font-size: 14.5px; font-weight: 1; top: 30px;">Install .ipa In Web Browser</h1>
                     </div>  
 
-                    <!-- Import IPA Option -->
-                    <div style="background: transparent; width: 100%; height: 58px; position: absolute; bottom: 0; left: 0;" onclick="
-    var select = document.createElement('select');
-    select.innerHTML = '<option value=\'https://example.com/trollstore'>Trollstore</option>' +
-                       '<option value=\'https://example.com/scarlet'>Scarlet</option>' +
-                       '<option value=\'https://example.com/altstore'>AltStore</option>' +
-                       '<option value=\'https://example.com/sidestore'>SideStore</option>' +
-                       '<option value=\'https://example.com/tanarasign'>TanaraSign</option>';
-    select.onchange = function() {
-      window.location.href = this.value;
-    };
-    this.appendChild(select);
-  "> 
-                        <img src="images/home/arrow_up_doc_fill.png" style="width: 30px; height: 30px; left: 10px; top: 50%; transform: translateY(-50%); position: absolute; display: block;">
-                        <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; right: 10px; top: 50%; transform: translateY(-50%); position: absolute; display: block;">
-                        <h1 style="left: 45px; position: absolute; color: white; font-size: 15px; font-weight: 1; top: 16px;">Import to...</h1>
-                        <h1 style="left: 45px; position: absolute; color: white; opacity: 50%; font-family: 'apple', sans-serif; font-size: 14.5px; font-weight: 1; top: 30px;">Import .ipa To Other Apps</h1>
-                    </div>  
+      <div style="background: transparent; width: 100%; height: 58px; position: absolute; bottom: 0; left: 0;" onclick="
+  var optionsDiv = document.getElementById('optionsDiv');
+  var isVisible = optionsDiv.style.display === 'block';
+  optionsDiv.style.display = isVisible ? 'none' : 'block';
+  
+  if (!isVisible) {
+    // Close the optionsDiv when clicking anywhere outside
+    document.addEventListener('click', function(event) {
+      if (!optionsDiv.contains(event.target) && !event.target.closest('div[onclick]')) {
+        optionsDiv.style.display = 'none';
+      }
+    });
+  }
+">
+  <img src="images/home/arrow_up_doc_fill.png" style="width: 30px; height: 30px; left: 10px; top: 50%; transform: translateY(-50%); position: absolute; display: block;">
+  <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; right: 10px; top: 50%; transform: translateY(-50%); position: absolute; display: block;">
+  <h1 style="left: 45px; position: absolute; color: white; font-size: 15px; font-weight: 1; top: 16px;">Import to...</h1>
+  <h1 style="left: 45px; position: absolute; color: white; opacity: 50%; font-family: 'apple', sans-serif; font-size: 14.5px; font-weight: 1; top: 30px;">Import .ipa To Other Apps</h1>
+</div>
+
+<div id="optionsDiv" style="display: none; position: absolute; top: 135px; background-color: rgba(28, 28, 28); border-radius: 15px; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); color: white; width: 240px; height: 240px; padding: 20px; z-index: 100;">
+  <ul style="list-style-type: none; padding: 0;">
+    <li onclick="window.location.href='https://example.com/trollstore'">Trollstore</li>
+    <li onclick="window.location.href='https://example.com/scarlet'">Scarlet</li>
+    <li onclick="window.location.href='https://example.com/altstore'">AltStore</li>
+    <li onclick="window.location.href='https://example.com/sidestore'">SideStore</li>
+    <li onclick="window.location.href='https://example.com/tanarasign'">TanaraSign</li>
+  </ul>
+</div>
+
+
+
+
+
                 </div>
             </div>
         </div>
-    </div>`;
+    </div>
+    </div>
+    `;
 
     // Insert modal HTML into the DOM
     document.body.insertAdjacentHTML('beforeend', modalHtml);
@@ -178,6 +249,7 @@ const openModal = (app) => {
     // Set up the back button to close the modal
     document.getElementById('back').onclick = closeModal; 
 };
+
 
 // Close modal
 const closeModal = () => {
@@ -257,7 +329,7 @@ const setupSearch = async () => {
 
 // Initialize on page load
 window.onload = async () => {
-    const repoData = await fetchData('https://theodyssey.dev/altstore/odysseysource.json');
+    const repoData = await fetchData('https://quarksources.github.io/dist/quantumsource.min.json');
     if (repoData) {
         loadApps(repoData);
         setupSearch();

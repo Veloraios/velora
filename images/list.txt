@@ -5,3 +5,4 @@ black = 2
 REQUIRED:
 in progress
 
+position: relative; width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto; display: flex; flex-direction: column;  padding-top: 200px; padding-bottom: 20px; box-sizing: border-box;
