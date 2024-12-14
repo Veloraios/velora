@@ -206,35 +206,36 @@ function formatSize(bytes) {
                 <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); filter: drop-shadow(0 0 8px rgba(0, 0, 0, 1));">SIGN</span>
             </button>
 
-    <div style="display: flex; overflow-y: hidden;flex-direction: row; flex-wrap: nowrap; overflow-x: auto; margin-top: 70px; background: transparent; border-top: #ffffff40 1px solid; border-bottom: #ffffff40 1px solid; height: 85px; margin-left: 15px; margin-right: 15px;">
-    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 85px; width: 158px; margin-left: 5px; background: transparent; position: relative;">
+  <div style="display: flex; overflow-y: hidden; flex-direction: row; flex-wrap: nowrap; overflow-x: auto; margin-top: 70px; background: transparent; border-top: #ffffff40 1px solid; border-bottom: #ffffff40 1px solid; height: 85px; margin-left: 15px; margin-right: 15px;">
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 85px; min-width: 140px; max-width: 158px; margin-left: 5px; background: transparent; position: relative;">
         <h1 style="color: white; font-size: 16px; font-weight: 1;">Bundle ID</h1>
         <h1 style="color: white; font-size: 13px; font-family: 'apple', sans-serif;">${app.bundleIdentifier}</h1>
         <!-- Vertical line between divs -->
         <div style="position: absolute; right: -5px; top: 50%; transform: translateY(-50%); height: 60%; width: 1px; background-color: rgba(255, 255, 255, 0.25);"></div>
     </div>
 
-    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 85px; width: 158px; margin-left: 5px; background: transparent; position: relative;">
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 85px; min-width: 140px; max-width: 158px; margin-left: 5px; background: transparent; position: relative;">
         <h1 style="color: white; font-size: 16px; font-weight: 1;">Size</h1>
         <h1 style="color: white; font-size: 13px; font-family: 'apple', sans-serif;">${app.latestSize}</h1>
         <!-- Vertical line between divs -->
         <div style="position: absolute; right: -5px; top: 50%; transform: translateY(-50%); height: 60%; width: 1px; background-color: rgba(255, 255, 255, 0.25);"></div>
     </div>
 
-    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 85px; width: 158px; margin-left: 5px; background: transparent; position: relative;">
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 85px; min-width: 140px; max-width: 158px; margin-left: 5px; background: transparent; position: relative;">
         <h1 style="color: white; font-size: 16px; font-weight: 1;">Developer</h1>
         <h1 style="color: white; font-size: 13px; font-family: 'apple', sans-serif;">${app.developerName}</h1>
         <!-- Vertical line between divs -->
         <div style="position: absolute; right: -5px; top: 50%; transform: translateY(-50%); height: 60%; width: 1px; background-color: rgba(255, 255, 255, 0.25);"></div>
     </div>
 
-    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 85px; width: 158px; margin-left: 5px; background: transparent; position: relative;">
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 85px; min-width: 140px; max-width: 158px; margin-left: 5px; background: transparent; position: relative;">
         <h1 style="color: white; font-size: 16px; font-weight: 1;">Last Updated</h1>
         <h1 style="color: white; font-size: 13px; font-family: 'apple', sans-serif;">${app.latestVersionDate}</h1>
         <!-- Vertical line between divs -->
         <div style="position: absolute; right: -5px; top: 50%; transform: translateY(-50%); height: 60%; width: 1px; background-color: rgba(255, 255, 255, 0.25);"></div>
     </div>
 </div>
+
 
 
  <!-- Screenshots Section -->
