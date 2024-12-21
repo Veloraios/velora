@@ -4,3 +4,301 @@
                     <p style="opacity: 0;"><strong>Release Date:</strong> ${version.date || 'Unknown'}</p>
                     <p style="opacity: 0;"><a href="${version.downloadURL}" target="_blank" style="color: #6D00FF;">Download</a></p>
                 </div>
+
+
+                Settings 
+
+                 <div class="content" id="settings-page">
+     
+        <h1 id="settingsHeader" style="margin-bottom: 25px; margin-left: 10px; font-weight: 1; font-size: 25px;">Settings</h1>
+      
+      
+
+          <div id="topbar" style="z-index: 1000; top: 0; left: 0; right: 0; text-align: center; width: 100%; height: 90px; background-color: rgba(28, 28, 28, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); position: fixed; display: none; margin: 0; padding: 0; transition: none;">
+              <h1 style="font-size: 17.5px; color: white; text-align: center; font-weight: 1;  bottom: 5px; position: absolute; display: block; left: 50%; transform: translateX(-50%);">Settings</h1>
+          </div>
+          <script>function adjustTopbarHeight() {
+            const topbar = document.getElementById('topbar');
+            
+            // Function to detect if the device is a phone
+            function isPhone() {
+              const userAgent = navigator.userAgent.toLowerCase();
+              // Common phone user agent strings
+              return /iphone|ipod|android.*mobile|windows.*phone|blackberry.*mobile|iemobile|opera.*mini/.test(userAgent);
+            }
+          
+            // Function to detect if the device is a tablet
+            function isTablet() {
+              const userAgent = navigator.userAgent.toLowerCase();
+              // Common tablet user agent strings
+              return /ipad|android(?!.*mobile)/.test(userAgent);
+            }
+          
+            // If it's a phone, don't change the height of the topbar
+            if (isPhone()) {
+              topbar.style.height = 'auto'; // Keep the height as default for phones
+            } else {
+              // For tablet, computer, or console, reduce the height of the topbar by 50px
+              topbar.style.height = 'calc(90px - 50px)'; // Adjust this based on your default height
+            }
+          }
+          
+          // Call on page load
+          window.onload = adjustTopbarHeight;
+          
+          // Call on window resize to handle changes in screen size
+          window.onresize = adjustTopbarHeight;
+          </script>
+          
+          <div id="generalPage" style="background-color: #131416; height: 100%; width: 100%; top: 0; left: 0; position: fixed; display: none; z-index: 10000000;">
+          <div style="width: 95%; height: 100%; overflow-y: auto; position: absolute; left: 50%; transform: translateX(-50%);" id="scrollGeneral">
+           
+
+            
+            <img src="images/home/chevron_left.png" style="left: 0px; top: 10px; width: 30px; height: 30px; position: absolute;" alt="">
+           <h1 style="position: absolute; font-size: 20px; font-family: 'apple'; color: white; font-weight: 1; margin-top: 70px; left: 0px;">General</h1>
+           <h1 style="position: absolute; font-size: 14px; opacity: 50%; font-family: 'apple'; color: white; font-weight: 1; margin-top: 100px; left: 0px;">Here you can Manage Important Settings.</h1>
+           <div style="width: 100%; left: 50%; transform: translateX(-50%); top: 120px; position: absolute; display: block; margin: 0 auto; background-color: #191A1C; border-radius: 8px;  font-family: 'Apple', sans-serif;">
+            <div style="display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #ffffff40;">
+              <div style="color: white; font-size: 16px;">Version</div>
+              <div style="color: white; font-size: 16px;">1.0</div>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #ffffff40;">
+              <div style="color: white; font-size: 16px;">Web Url</div>
+              <div id="webUrl" style="color: white; font-size: 16px;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #ffffff40;">
+              <div style="color: white; font-size: 16px;">Bundle ID</div>
+              <div style="color: white; font-size: 16px;">com.velora.webapp</div>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 10px;">
+              <div style="color: white; font-size: 16px;">iOS/iPadOS</div>
+              <div id="iosVersion" style="color: white; font-size: 16px;"></div>
+            </div>
+           </div>
+    
+
+          <h1 style="position: absolute; font-size: 17.5px; opacity: 50%; font-family: 'apple'; color: white; font-weight: 1; margin-top: 300px; left: 0px;">App Settings</h1>
+          <button style="width: 95%; background-color: #191A1C; left: 50%;transform: translateX(-50%); position: absolute; margin-top: 20px;">
+
+            <span style="color: white; font-size: 16px; font-weight: 1; position: absolute; top: 50%; transform: translateY(-50%);"></span>
+          </button>
+
+              
+          
+             
+          
+            </div>
+          </div>
+    </div>
+          
+          
+          
+          <script>
+            // Function to detect the iOS version from the user agent string
+            function getIOSVersion() {
+              var userAgent = navigator.userAgent;
+              var match = userAgent.match(/(iPhone|iPad).*OS (\d+_\d+)_/);
+              if (match) {
+                return match[2].replace('_', '.'); // Return version in format "xx.xx"
+              } else {
+                return 'Not iOS';  // If it's not iOS
+              }
+            }
+          
+            // Set the Web URL dynamically
+            document.getElementById("webUrl").textContent = window.location.href;
+          
+            // Set the iOS version dynamically
+            document.getElementById("iosVersion").textContent = getIOSVersion();
+          </script>
+          
+          
+
+
+          </div>
+          </div>
+          
+          
+          
+          
+          <div id="themeCenter" style="background: transparent; backdrop-filter: blur(15px); position: fixed; top: 0; left: 0; display: none; -webkit-backdrop-filter: blur(15px); height: 100%; width: 100%; z-index: 1000000000000;">
+            <div style="display: block; position: absolute; height: 262.5px; border-radius: 10px;  width: 300px; background-color: #131416; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+              <h1 style="position: absolute; left: 10px; top: 10px; font-size: 16px; font-family: 'apple', sans-serif; color: white; opacity: 50%;">Theming</h1>
+              <button style="height: 50px; width: 95%;  background-color: #191A1C; border-radius: 10px; margin-top: 40px; margin-left: 0; margin-right: 0; display: block; position: absolute; left: 50%; transform: translateX(-50%);">
+                <span style="color: white; font-size: 16px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 17.5px; font-family: 'apple', sans-serif;">Appearance</span>
+                <span style="color: white; font-size: 13px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 33.5px; opacity: 50%; font-family: 'apple', sans-serif;">Transform the app's look.</span>
+                <img src="images/settingspage/slider_horizontal_below_rectangle.png" style="width: 25px; height: 25px; left: 10px; top: 50%; transform: translateY(-50%); position: absolute;" alt="">
+            
+              </button>
+              <button style="height: 50px; width: 95%; background-color: #191A1C; border-radius: 10px; margin-top: 95px; margin-left: 0; margin-right: 0; display: block; position: absolute; left: 50%; transform: translateX(-50%);">
+               <span style="color: white; font-size: 16px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 17.5px; font-family: 'apple', sans-serif;" >Themes</span>
+               <span style="color: white; font-size: 13px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 33.5px; opacity: 50%; font-family: 'apple', sans-serif;">Change the app's theme.</span>
+               <img src="images/settingspage/paintbrush_fill.png" style="width: 25px; height: 25px; left: 10px; top: 50%; transform: translateY(-50%); position: absolute;" alt="">
+            
+              </button>
+              <button style="height: 50px; width: 95%; background-color: #191A1C; border-radius: 10px; margin-top: 150px; margin-left: 0; margin-right: 0; display: block; position: absolute; left: 50%; transform: translateX(-50%);">
+                <span style="color: white; font-size: 16px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 17.5px; font-family: 'apple', sans-serif;">Font</span>
+                <span style="color: white; font-size: 13px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 33.5px; opacity: 50%; font-family: 'apple', sans-serif;">Customize the font to your liking.</span>
+                <img src="images/settingspage/textformat.png" style="width: 25px; height: 25px; left: 10px; top: 50%; transform: translateY(-50%); position: absolute;" alt="">
+            
+              </button>
+              <button style="height: 50px; width: 95%; background-color: #191A1C; border-radius: 10px; margin-top: 205px; margin-left: 0; margin-right: 0; display: block; position: absolute; left: 50%; transform: translateX(-50%);">
+                <span style="color: white; font-size: 16px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 17.5px; font-family: 'apple', sans-serif;">App Settings</span>
+                <span style="color: white; font-size: 13px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 33.5px; opacity: 50%; font-family: 'apple', sans-serif;">Edit the app's information.</span>
+                <img src="images/settingspage/gear.png" style="width: 25px; height: 25px; left: 10px; top: 50%; transform: translateY(-50%); position: absolute;" alt="">
+            
+              </button>
+              
+            </div>
+          </div>
+  
+          </div>
+
+            <div style="background-color: #131416; height: calc(100vh + 48px); width: 100vw; display: none; position: fixed; top: -48px; left: 0; z-index: 10000;" id="helpCenter">
+             
+              <div id="scrollHelpCenter" style="height: 100vh; width: 100vw; overflow-y: auto; overflow-x: hidden; position: absolute; top: 90px; z-index: 1;">
+                <div id="topbar1" style="top: -48px; left: 0; right: 0; width: 100%; height: 90px; background-color: rgba(28, 28, 28, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); position: fixed; display: flex; align-items: center; justify-content: space-between; z-index: 10000; padding: 0; transition: none;">
+                  <h1 style="font-size: 17.5px; color: white; left: 50%; transform: translateX(-50%); font-weight: 1; position: absolute; bottom: 5px;">Help Center</h1>
+                  <img src="images/home/chevron_left.png" style="width: 30px; height: 30px; position: absolute; left: 10px; bottom: 7.5px;" alt="">
+                  <img src="images/settingspage/envelope_badge_fill.png" style="width: 30px; height: 30px; position: absolute; bottom: 7.5px; right: 10px;" alt="">
+              </div>
+                <img src="images/settingspage/question_circle.png" style="margin-top: 20px; z-index: 1; left: 50%; transform: translateX(-50%); position: relative; width: 100px; height: 100px;" alt="">
+                 <h1 style="font-size: 20px; font-weight: 1; color: white; margin-top: 10px; text-align: center;">How Can We Help You?</h1>
+              </div>
+            </div>
+            
+          </div>
+
+            
+          
+          
+            
+            
+          
+            <script>
+              const topbar = document.getElementById('topbar');
+            
+              function checkScrollPosition() {
+                const scrollPosition = window.scrollY;
+            
+                // Show the topbar with animation if scroll position is at least 50px
+                if (scrollPosition >= 50) {
+                  if (topbar.style.display !== 'block') {
+                    topbar.style.display = 'block';
+                    
+                    // Reset the position and opacity for animation
+                    topbar.style.transform = 'translateY(-100%)';
+                    topbar.style.opacity = 0;
+                    
+                    // Animate the topbar to slide in and fade in
+                    setTimeout(() => {
+                      topbar.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out';
+                      topbar.style.transform = 'translateY(0)';
+                      topbar.style.opacity = 1;
+                    }, 10); // Small delay to ensure the display change takes effect before transition starts
+                  }
+                } else {
+                  // Hide the topbar with animation when scroll position is less than 50px
+                  if (topbar.style.display !== 'none') {
+                    topbar.style.transition = 'transform 0.3s ease-in, opacity 0.3s ease-in';
+                    topbar.style.transform = 'translateY(-100%)';
+                    topbar.style.opacity = 0;
+            
+                    // Wait for animation to finish before hiding
+                    setTimeout(() => {
+                      topbar.style.display = 'none';
+                    }, 300); // Delay matches the transition duration
+                  }
+                }
+              }
+            
+              window.addEventListener('scroll', checkScrollPosition);
+            </script>
+            
+            
+              <!-- General Settings Button -->
+              <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; margin-top: 10px; position: relative;">
+                <img src="images/settingspage/gear.png" style="width: 30px; height: 30px; position: absolute; left: 10px; top: 50%; transform: translateY(-50%);">
+                <span style="position: absolute; left: 50px; top: 50%; transform: translateY(-50%); font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">General</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+              </button>
+            
+              <!-- Theming Settings Button -->
+              <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; margin-top: 10px; position: relative;">
+                <img src="images/settingspage/paintbrush_fill.png" style="width: 27px; height: 27px; position: absolute; left: 12px; top: 50%; transform: translateY(-50%);">
+                <span style="position: absolute; left: 50px; top: 50%; transform: translateY(-50%); font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Theming</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+              </button>
+            
+              <!-- Notifications Settings Button -->
+              <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; margin-top: 10px; position: relative;">
+                <img src="images/settingspage/app_badge.png" style="width: 27px; height: 27px; position: absolute; left: 12px; top: 50%; transform: translateY(-50%);">
+                <span style="position: absolute; left: 50px; top: 50%; transform: translateY(-50%); font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Notifications</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+              </button>
+            
+              <!-- Socials Section Heading -->
+              <h1 style="font-size: 17.5px; color: white; opacity: 50%; margin-top: 25px; margin-left: 10px; font-family: 'apple', sans-serif; position: relative; left: 0;">SOCIALS</h1>
+            
+              <!-- Discord Button -->
+              <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; margin-top: 10px; position: relative;">
+                <img src="images/settingspage/discord-logo-2-1.png" style="width: 28px; height: 23px; position: absolute; left: 10px; top: 50%; transform: translateY(-50%);">
+                <span style="position: absolute; left: 50px; top: 50%; transform: translateY(-50%); font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Discord</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+              </button>
+            
+              <!-- Telegram Button -->
+              <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; margin-top: 10px; position: relative;">
+                <img src="images/settingspage/telegram-logo-telegram-logo-transparent-telegram-icon-transparent-free-free-png.webp" style="width: 30px; height: 30px; position: absolute; left: 8px; top: 50%; transform: translateY(-50%);">
+                <span style="position: absolute; left: 50px; top: 50%; transform: translateY(-50%); font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Telegram</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+              </button>
+            
+              <!-- TikTok Button -->
+              <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; margin-top: 10px; position: relative;">
+                <img src="images/settingspage/tiktok-128.png" style="width: 27px; height: 27px; position: absolute; left: 12px; top: 50%; transform: translateY(-50%);">
+                <span style="position: absolute; left: 50px; top: 50%; transform: translateY(-50%); font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">TikTok</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+              </button>
+            
+              <!-- Information Section Heading -->
+              <h1 style="font-size: 17.5px; color: white; opacity: 50%; margin-top: 25px; margin-left: 10px; font-family: 'apple', sans-serif; position: relative; left: 0;">INFORMATION</h1>
+            
+              <!-- Help Center Button -->
+              <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; margin-top: 10px; position: relative;">
+                <img src="images/settingspage/person_crop_circle_fill_badge_exclam.png" style="width: 30px; height: 30px; position: absolute; left: 10px; top: 50%; transform: translateY(-50%);">
+                <span style="position: absolute; left: 50px; top: 50%; transform: translateY(-50%); font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Help Center</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+              </button>
+            
+              <!-- Privacy Policy Button -->
+              <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; margin-top: 10px; position: relative;">
+                <img src="images/settingspage/hand.png" style="width: 27px; height: 27px; position: absolute; left: 12px; top: 50%; transform: translateY(-50%);">
+                <span style="position: absolute; left: 50px; top: 50%; transform: translateY(-50%); font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Privacy Policy</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+              </button>
+            
+              <!-- Our Website Button -->
+              <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; margin-top: 10px; position: relative;">
+                <img src="images/settingspage/globe.png" style="width: 30px; height: 30px; position: absolute; left: 10px; top: 50%; transform: translateY(-50%);">
+                <span style="position: absolute; left: 50px; top: 50%; transform: translateY(-50%); font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Our Website</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+              </button>
+            
+              <!-- Terms of Service Button -->
+              <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; margin-top: 10px; position: relative;">
+                <img src="images/settingspage/terms.png" style="width: 30px; height: 30px; position: absolute; left: 10px; top: 50%; transform: translateY(-50%);">
+                <span style="position: absolute; left: 50px; top: 50%; transform: translateY(-50%); font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Terms of Service</span>
+                <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+              </button>
+
+          <h1 style=" display: block; position: absolute; margin-top: 60px; color: white; opacity: 50%; text-align: center; align-items: center; font-family: 'apple', sans-serif; font-size: 14px;"></h1>
+     
+       <div style="height: 125px; width: 100%; background: transparent; display: block; margin-top: 10px;"></div>
+      
+      
+            </div>
+     
+    
+  </div>

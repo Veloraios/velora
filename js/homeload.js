@@ -271,7 +271,7 @@ function formatSize(bytes) {
             var closeBtn = document.createElement('img');
             closeBtn.src = 'https://icon-library.com/images/cancel-icon-transparent/cancel-icon-transparent-3.jpg'; // Use the image for the close button
             closeBtn.style.position = 'absolute';
-            closeBtn.style.top = '20px';
+            closeBtn.style.top = '50px';
             closeBtn.style.right = '20px';
             closeBtn.style.width = '30px'; // Adjust size of the close button image if needed
             closeBtn.style.height = '30px'; // Adjust height if needed
@@ -464,7 +464,7 @@ const setupSearch = async () => {
 
 // Initialize on page load
 window.onload = async () => {
-    const repoData = await fetchData('https://wuxu1.github.io/wuxu-complete-plus.json');
+    const repoData = await fetchData('https://repository.apptesters.org/');
     if (repoData) {
         loadApps(repoData);
         setupSearch();
