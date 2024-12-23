@@ -565,7 +565,7 @@ left: calc(130px * 2 + 2px);
 <body>
 
   <div onclick="closeOverlay(event)" class="overlay" style="background-color: rgba(0, 0, 0, 0.65); width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 100000000000000000000; opacity: 0; transition: opacity 0.5s ease-in-out;">
-    <div style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 350px; border-radius: 15px; max-width: 400px; background-color: rgba(0, 0, 0, 0.65); position: fixed; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);" onclick="event.stopPropagation()">
+    <div style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 350px; border-radius: 15px; max-width: 400px; background-color: rgba(22, 25, 28, 0.65); position: fixed; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);" onclick="event.stopPropagation()">
         <img src="images/home/arrow_counterclockwise.png" style="right: 85px; top: 10px; position: absolute; opacity: 65%; width: 22.5px; height: 22.5px;" alt="refresh" onclick="event.stopPropagation()">
         <img id="toggle-pencil" onclick="toggleDeleteButton();" src="images/home/pencil.png" style="right: 45px; top: 10px; position: absolute; opacity: 65%; width: 25px; height: 25px;" alt="refresh">
         <img onclick="promptSource(); event.stopPropagation()" src="images/settingspage/plus.png" style="right: 10px; top: 10px; position: absolute; opacity: 65%; width: 25px; height: 25px;" alt="refresh">
@@ -662,7 +662,7 @@ async function fetchRepoInfo(url) {
     // Fetch repository details (simulated fetch here)
     const response = await fetch(normalizedURL);
     if (!response.ok) {
-      alert("Failed to fetch repo info.");
+      alert("Invalid URL/Not a Repo we have support for yet.");
       return;
     }
 

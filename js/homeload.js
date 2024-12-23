@@ -271,7 +271,7 @@ function formatSize(bytes) {
             var closeBtn = document.createElement('img');
             closeBtn.src = 'https://icon-library.com/images/cancel-icon-transparent/cancel-icon-transparent-3.jpg'; // Use the image for the close button
             closeBtn.style.position = 'absolute';
-            closeBtn.style.top = '50px';
+            closeBtn.style.top = '20px';
             closeBtn.style.right = '20px';
             closeBtn.style.width = '30px'; // Adjust size of the close button image if needed
             closeBtn.style.height = '30px'; // Adjust height if needed
@@ -291,7 +291,7 @@ function formatSize(bytes) {
 </div>
 
             <div style="color: white; font-size: 16px; font-family: 'apple', sans-serif; margin-top: 50px; margin-left: 15px; margin-right: 15px;">
-                ${formattedDescription} <br><br>Bundle ID: ${app.bundleIdentifier}
+                ${formattedDescription}
             </div>
 
 
@@ -301,8 +301,7 @@ function formatSize(bytes) {
 
 
 
-            <div style="display: flex; flex-direction: row; flex-wrap: nowrap; overflow-x: auto; margin-top: 20px; background-color: #191A1C; height: 300px; margin-left: 15px; border-radius: 10px; margin-right: 15px;"></div>
-
+          
             <div style="background-color: transparent; width: 100%; height: 200px; top: 400px;"></div>
 
             <!-- IPA Background Modal -->
@@ -464,7 +463,7 @@ const setupSearch = async () => {
 
 // Initialize on page load
 window.onload = async () => {
-    const repoData = await fetchData('https://repository.apptesters.org/');
+    const repoData = await fetchData('https://wuxu1.github.io/wuxu-complete-plus.json');
     if (repoData) {
         loadApps(repoData);
         setupSearch();
