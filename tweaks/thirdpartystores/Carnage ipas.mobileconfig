@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>ConsentText</key>
+		<dict>
+			<key>default</key>
+			<string>Your about to install one of Serenity's tweaks.
+
+If anything bad happens, its not our fault you should've inspected the tweak better.</string>
+		</dict>
+		<key>PayloadContent</key>
+		<array>
+			<dict>
+				<key>FullScreen</key>
+				<true />
+				<key>Label</key>
+				<string>Carnage iPas</string>
+				<key>PayloadDisplayName</key>
+				<string>Web Clip #1</string>
+				<key>PayloadIdentifier</key>
+				<string>com.apple.webClip.managed.9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadType</key>
+				<string>com.apple.webClip.managed</string>
+				<key>PayloadUUID</key>
+				<string>9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadVersion</key>
+				<integer>1</integer>
+				<key>Precomposed</key>
+				<true />
+				<key>URL</key>
+				<string>https://carnageipas.com/homepage</string>
+			</dict>
+		</array>
+		<key>PayloadDescription</key>
+		<string>Carnage ipas is Jailbreak without jailbreak
+
+𝗧𝗵𝗶𝘀 𝗖𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝘄𝗮𝘀 𝗺𝗮𝗱𝗲 𝗯𝘆 𝗦𝗲𝗿𝗲𝗻𝗶𝘁𝘆 
+
+⚠️ 𝗜𝗳 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲 𝗴𝗹𝗶𝘁𝗰𝗵𝗲𝘀 𝗶𝗻 𝗮𝗻𝘆-𝘄𝗮𝘆 𝘂𝘀𝗶𝗻𝗴 𝗮𝗻𝘆 𝗼𝗳 𝘁𝗵𝗲𝘀𝗲 𝗽𝗿𝗼𝗳𝗶𝗹𝗲𝘀 𝗶𝘁𝘀 𝗻𝗼𝘁 𝗴𝗼𝗻𝗻𝗮 𝗯𝗲 𝗼𝘂𝗿 𝗳𝗮𝘂𝗹𝘁, 𝗷𝘂𝘀𝘁 𝘀𝘁𝗮𝘆 𝘀𝗮𝗳𝗲 𝗮𝗻𝗱 𝗱𝗼𝗻𝘁 𝘂𝘀𝗲 𝘀𝗸𝗲𝘁𝗰𝗵𝘆 𝘀𝘆𝘀𝘁𝗲𝗺 𝘁𝘄𝗲𝗮𝗸𝘀 𝘁𝗵𝗮𝘁 𝘆𝗼𝘂 𝘁𝗵𝗶𝗻𝗸 𝗰𝗮𝗻 𝗹𝗶𝗺𝗶𝘁 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲𝘀 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 𝘁𝗼 𝗺𝘂𝗰𝗵. ⚠️</string>
+		<key>PayloadDisplayName</key>
+		<string>Carnage ipas</string>
+		<key>PayloadIdentifier</key>
+		<string>com.serenity.tps.carnage</string>
+		<key>PayloadOrganization</key>
+		<string>https://serenityios.com/</string>
+		<key>PayloadType</key>
+		<string>Configuration</string>
+		<key>PayloadUUID</key>
+		<string>397a09da-850d-48cf-b936-f5df2d7138f6</string>
+		<key>PayloadVersion</key>
+		<integer>1</integer>
+	</dict>
+</plist>

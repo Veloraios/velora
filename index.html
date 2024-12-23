@@ -563,15 +563,279 @@ left: calc(130px * 2 + 2px);
     
 </head>
 <body>
-    <div id="search-bar-container">
-        <div class="search-bar-wrapper">
-            <input type="text" id="search-bar" class="search-bar" placeholder="Search for Apps...">
-            <img src="images/home/search.png" alt="Search" class="search-icon">
-            
-        </div>
+
+  <div onclick="closeOverlay(event)" class="overlay" style="background-color: rgba(0, 0, 0, 0.65); width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 100000000000000000000; opacity: 0; transition: opacity 0.5s ease-in-out;">
+    <div style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 350px; border-radius: 15px; max-width: 400px; background-color: rgba(0, 0, 0, 0.65); position: fixed; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);" onclick="event.stopPropagation()">
+        <img src="images/home/arrow_counterclockwise.png" style="right: 85px; top: 10px; position: absolute; opacity: 65%; width: 22.5px; height: 22.5px;" alt="refresh" onclick="event.stopPropagation()">
+        <img id="toggle-pencil" onclick="toggleDeleteButton();" src="images/home/pencil.png" style="right: 45px; top: 10px; position: absolute; opacity: 65%; width: 25px; height: 25px;" alt="refresh">
+        <img onclick="promptSource(); event.stopPropagation()" src="images/settingspage/plus.png" style="right: 10px; top: 10px; position: absolute; opacity: 65%; width: 25px; height: 25px;" alt="refresh">
+
+        <h1 style="color: white; opacity: 65%; font-size: 17px; position: absolute; left: 15px; top: 10px; font-weight: 1;">Sources</h1>
+        <div style="height: 1px; width: 100%; background-color: rgba(255, 255, 255, 0.2); position: absolute; top: 40px;"></div>
+
+        <div id="repo-list" style="position: absolute; top: 41px; bottom: 10px; overflow-y: auto;  width: 100%;"></div>
     </div>
+</div>
+
+<script>
+  // Get the overlay and body elements
+const overlay = document.querySelector('.overlay'); // The div with the black transparent background
+const body = document.querySelector('body');
+
+// Add event listener for the overlay click to close (fade out)
+overlay.addEventListener('click', function(event) {
+    // Ensure the click is only on the overlay background, not on the inner content
+    if (event.target === overlay) {
+        closeOverlay();
+    }
+});
+
+// Function to close the overlay with a fade-out effect
+function closeOverlay() {
+    overlay.style.transition = 'opacity 0.2s ease-out'; // Set fade-out transition to 200ms
+    overlay.style.opacity = '0'; // Fade out
+    setTimeout(() => {
+        overlay.style.display = 'none'; // Hide the overlay after fade out
+        body.style.overflow = 'auto'; // Reset body overflow to normal
+    }, 200); // Match the fade-out duration
+}
+
+// Function to show the overlay with a fade-in effect
+function showOverlay() {
+    overlay.style.display = 'block'; // Make the overlay visible
+    setTimeout(() => {
+        overlay.style.transition = 'opacity 0.2s ease-in'; // Set fade-in transition to 200ms
+        overlay.style.opacity = '1'; // Set the opacity to fully visible
+    }, 4); // Short delay to ensure the transition triggers properly
+    body.style.overflow = 'hidden'; // Disable body scroll while overlay is visible
+}
+
+
+overlay.addEventListener('click', function(event) {
+    // Ensure the click is only on the overlay background, not on the inner content
+    if (event.target === overlay) {
+        closeOverlay();
+    }
+});
+
+
+</script>
+
+
+
+
+<script>
+// Flag to track delete mode
+let isDeleteMode = false;
+
+// Function to prompt for a new repository URL
+function promptSource() {
+  const sourceURL = prompt("Enter the repository URL");
+  if (sourceURL) {
+    fetchRepoInfo(sourceURL);  // Fetch repository data when URL is provided
+  }
+}
+
+// Function to toggle the visibility of the delete (X) button
+function toggleDeleteButton() {
+  isDeleteMode = !isDeleteMode; // Toggle delete mode
+  const repoDivs = document.querySelectorAll('.repo-item');
+
+  repoDivs.forEach(repoDiv => {
+    const deleteButton = repoDiv.querySelector('.delete-btn');
+    deleteButton.style.display = isDeleteMode ? 'block' : 'none'; // Show or hide delete button
+  });
+}
+
+// Function to fetch repository info based on URL
+async function fetchRepoInfo(url) {
+  try {
+    const normalizedURL = url.replace(/\/$/, ""); // Normalize URL by removing trailing slash
+
+    // Check if the repository has already been added (from localStorage)
+    const repos = getReposFromLocalStorage();
+    if (repos.some(repo => repo.url === normalizedURL)) {
+      alert("This repository has already been added.");
+      return;
+    }
+
+    // Fetch repository details (simulated fetch here)
+    const response = await fetch(normalizedURL);
+    if (!response.ok) {
+      alert("Failed to fetch repo info.");
+      return;
+    }
+
+    const data = await response.json(); // Assuming the response is in JSON format
+    const repoName = data.name;
+    const repoId = data.identifier;
+    const iconURL = data.iconURL;
+
+    // Create a new repo object
+    const newRepo = {
+      url: normalizedURL,
+      name: repoName || "Undefined Name in repo lol💀💀",
+      iconURL: iconURL || "https://via.placeholder.com/30", // Default placeholder icon
+      repoId: repoId || "dont mind this, dev is having fun",
+    };
+
+    // Add the new repository to localStorage and render it
+    addRepoToLocalStorage(newRepo);
+    renderRepo(newRepo);
+  } catch (error) {
+    console.error('Error fetching repo info:', error);
+    alert('Error fetching repository information.');
+  }
+}
+
+// Function to render a repository div
+function renderRepo(repo) {
+  const repoDiv = document.createElement('div');
+  repoDiv.classList.add('repo-item'); // Add class for easy selection
+  repoDiv.style.marginBottom = '15px';
+  repoDiv.style.padding = '10px';
+  repoDiv.style.width = '100%';
+  repoDiv.style.height = '80px';
+  repoDiv.style.borderBottom = '1px solid rgba(255, 255, 255, 0.2)';
+  repoDiv.style.position = 'relative';
+  repoDiv.dataset.url = repo.url; // Store URL in data-url attribute
+
+  repoDiv.innerHTML = `
+    <img src="${repo.iconURL}" alt="${repo.name}" style="width: 60px; height: 60px; border-radius: 15px; margin-left: 0px;">
+    <strong style="position: absolute; font-weight: 1; color: white; left: 75px; top: 15px;">${repo.name}</strong>
+    <p style="font-size: 14px; color: rgba(255, 255, 255, 0.7); font-family: 'apple', sans-serif; bottom: 20px; left: 75px; position: absolute;">${repo.repoId}</p>
+    <button class="delete-btn" onclick="removeRepo(this)" style="position: absolute; right: 10px; top: 10px; background: red; font-size: 12px; font-weight: 1; border-radius: 15px; height: 25px; width: 60px; border: none; color: white; display: none;">REMOVE</button>
+  `;
+  
+  // Append the div to the repo-list container
+  const repoList = document.getElementById('repo-list');
+  if (repoList) {
+    repoList.appendChild(repoDiv);
+  }
+}
+
+// Function to add a repository to localStorage
+function addRepoToLocalStorage(repo) {
+  const repos = getReposFromLocalStorage(); // Get current repositories list from localStorage
+  repos.push(repo); // Add the new repository to the list
+  saveReposToLocalStorage(repos); // Save updated list to localStorage
+}
+
+// Function to save repositories to localStorage
+function saveReposToLocalStorage(repos) {
+  localStorage.setItem('repos', JSON.stringify(repos)); // Save repositories to localStorage
+}
+
+// Function to get repositories from localStorage
+function getReposFromLocalStorage() {
+  const repos = localStorage.getItem('repos');
+  return repos ? JSON.parse(repos) : []; // Return the list or empty array if none found
+}
+
+// Function to remove a repository from the list
+function removeRepo(button) {
+  const repoDiv = button.parentElement;
+  const repoURL = repoDiv.dataset.url; // Get the URL from data-url
+
+  // Remove the repository URL from the list in localStorage
+  const repos = getReposFromLocalStorage();
+  const updatedRepos = repos.filter(repo => repo.url !== repoURL); // Remove the specific repo
+  saveReposToLocalStorage(updatedRepos); // Save updated list to localStorage
+
+  // Remove the repo div from the DOM
+  repoDiv.remove();
+}
+
+// Function to load repositories from localStorage when the page loads
+function loadReposFromLocalStorage() {
+  const repos = getReposFromLocalStorage();
+  repos.forEach(renderRepo); // Render each repository from localStorage
+}
+
+// Ensure repositories are loaded when the page is fully loaded
+document.addEventListener('DOMContentLoaded', loadReposFromLocalStorage);
+</script>
+
+
+
+
+
+  
+
+  <div id="search-bar-container">
 
     
+    <!-- Top Bar (Fixed) -->
+    <div id="topbar5" style="z-index: 1000; top: -90px; left: 0; visibility: hidden; right: 0; text-align: center; width: 100%; height: 90px; background-color: rgba(28, 28, 28, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); position: fixed; margin: 0; padding: 0; transition: top 0.2s ease-in-out;">
+      <h1 style="font-size: 17.5px; color: white; text-align: center; font-weight: 1; bottom: 5px; position: absolute; display: block; left: 50%; transform: translateX(-50%);">Home</h1>
+      <img src="images/home/chevron_up.png"  
+     style="position: absolute; left: 15px; bottom: 5px; width: 30px; height: 30px; opacity: 50%;" 
+     onclick="window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });">
+
+    </div>
+  
+    <!-- Space for topbar5 -->
+    <div style="height: 30px; width: 1px; background: transparent;"></div>
+  
+    <!-- Serenity Header -->
+    <div style="height: 50px; width: 100%;">
+      <h1 style="font-size: 25px; font-weight: 1; left: 40px; position: absolute; color: white;">Serenity</h1>
+      <img src="images/settingspage/plus.png" style="height: 35px; width: 35px; right: 40px; position: absolute;" onclick="showOverlay()" alt="Settings">
+    </div>
+  
+    <!-- Space below Serenity -->
+    <div style="height: 200px; width: 1px; background: transparent;"></div>
+  
+    <!-- Search Bar Wrapper -->
+    <div class="search-bar-wrapper" style="position: relative;">
+      <input type="text" id="search-bar" class="search-bar" placeholder="Search for Apps...">
+      <img src="images/home/search.png" alt="Search" class="search-icon" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%);">
+      
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+  window.onscroll = function() {
+    let topbar = document.getElementById("topbar5");
+
+    // Check if device is in portrait (vertical) or landscape (horizontal) mode
+    const isHorizontal = window.innerWidth > window.innerHeight;
+
+    // Adjust the top bar's initial position depending on the orientation
+    let topPosition = isHorizontal ? "-30px" : "-90px"; // -30px for horizontal, -90px for vertical
+
+    // When user scrolls down 100px or more
+    if (window.scrollY > 375) {
+        // Only show and slide down if the top bar is hidden
+        if (topbar.style.visibility === "hidden" || topbar.style.top === topPosition) {
+            topbar.style.visibility = "visible";  // Make it visible when scrolling down
+            topbar.style.top = "0"; // Slide it in from the top
+        }
+    } else {
+        // When user scrolls up above 100px
+        if (topbar.style.top === "0px") {
+            topbar.style.top = topPosition; // Slide it out of view based on orientation
+            setTimeout(function() {
+                topbar.style.visibility = "hidden"; // Hide it after animation ends
+            }, 200); // Match the duration of the animation (0.2s)
+        }
+    }
+};
+
+// Adjust the visibility and position dynamically when orientation changes
+window.onresize = function() {
+    let topbar = document.getElementById("topbar5");
+    const isHorizontal = window.innerWidth > window.innerHeight;
+
+    // Adjust topbar position when the orientation changes
+    topbar.style.top = isHorizontal ? "-30px" : "-90px";
+};
+
+</script>
+
+
+  
    
 
    
@@ -580,73 +844,147 @@ left: calc(130px * 2 + 2px);
       
     </div>
     <div class="content" id="categories-page" style="overflow-x: hidden; overflow-y: auto; height: 100vh;">
-        
-<!-- Header Section -->
-<div style="display: flex; align-items: center; position: relative; height: 60px;">
-  <h1 style="font-size: 24px; margin: 0;">What's New?</h1>
-  <img src="images/settingspage/plus.png" alt="plus icon" style="position: absolute; right: 20px; width: 30px; height: 30px; top: 50%; transform: translateY(-50%);">
-</div>
+      <!-- Header Section -->
+      <div style="display: flex; align-items: center; position: relative; height: 60px;">
+          <h1 style="font-size: 24px; margin: 0;">What's New?</h1>
+          <img src="images/settingspage/plus.png" alt="plus icon" style="position: absolute; right: 20px; width: 30px; height: 30px; top: 50%; transform: translateY(-50%);">
+      </div>
 
-
-<div style="height: 225px; width: 100%; display: flex; align-items: center; overflow-x: auto; padding: 0;">
-  <div style="border-radius: 10px; overflow: hidden; flex-shrink: 0;">
-    <img src="images/library/IMG_2971.png" style="height: auto; max-height: 200px; width: auto; max-width: 500px;" alt="">
-  </div>
-  <div style="border-radius: 10px; overflow: hidden; flex-shrink: 0; margin-left: 10px;">
-    <img src="images/library/IMG_2970.png" style="height: auto; max-height: 200px; width: auto; max-width: 500px;" alt="">
-  </div>
-</div>
-
-
-
-
-
-
-
+      <div style="height: 225px; width: 100vw; display: flex; align-items: center; overflow-x: auto; padding: 0; box-sizing: border-box;">
+        <div style="border-radius: 10px; overflow: hidden; flex-shrink: 0;">
+          <img src="images/library/IMG_2971.png" style="height: auto; max-height: 200px; width: auto; max-width: 100%;" alt="">
+        </div>
+        <div style="border-radius: 10px; overflow: hidden; flex-shrink: 0; margin-left: 10px;">
+          <img src="images/library/IMG_2970.png" style="height: auto; max-height: 200px; width: auto; max-width: 100%;" alt="">
+        </div>
+      
+        <div style="border-radius: 10px; width: 400px; overflow: hidden; flex-shrink: 0; margin-left: 10px;">
+          
+        </div>
+      </div>
 
       
-      <!-- Buttons Section -->
-      <div style="display: flex; overflow-x: auto; width: 100%; position: absolute; margin-top: 0px; left: 50%; transform: translateX(-50%); white-space: nowrap;">
-          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px; display: flex; align-items: center; justify-content: flex-start;">
-              <img src="images/library/gear.png" alt="systemtweaks" style="width: 30px; height: 30px; margin-left: 10px;">
-              <span style="font-size: 19px; margin-left: 10px; font-family: apple, sans-serif;">System Tweaks</span>
-          </button>
-          
-          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px; display: flex; align-items: center; justify-content: flex-start;">
-              <img src="images/library/paintbrush_fill.png" alt="themes" style="width: 30px; height: 30px; margin-left: 10px;">
-              <span style="font-size: 19px; margin-left: 10px; font-family: apple, sans-serif;">Themes</span>
-          </button>
-          
-          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;">
-              <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 17px; transform: translateY(-50%); font-family: apple, sans-serif;">Virtual Jailbreaks</span>
-              <img src="images/library/ant_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
-          </button>
-          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;">
-              <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 16px; transform: translateY(-50%); font-family: apple, sans-serif;">Package Managers</span>
-              <img src="images/library/cube_box_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
-          </button>
-          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;">
-              <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">3rd Party Store</span>
-              <img src="images/library/app_badge_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
-          </button>
-          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;">
-              <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">JB Launchers</span>
-              <img src="images/library/logo_apple.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
-          </button>
-          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;">
-              <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">Emulators</span>
-              <img src="images/library/gamecontroller_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
-          </button>
-          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;">
-              <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">Shortcut Tweaks</span>
-              <img src="images/library/sparkles.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
-          </button>
-          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;">
-              <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">Utilities</span>
-              <img src="images/library/hammer_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
-          </button>
-      </div>
+  
+          <!-- Buttons Section -->
+          <div style="display: flex; overflow-x: auto; width: 100%; position: absolute; margin-top: 0px; left: 50%; transform: translateX(-50%); white-space: nowrap;" >
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px; display: flex; align-items: center; justify-content: flex-start;" class="nav-button" data-target="system-tweaks">
+                <img src="images/library/gear.png" alt="systemtweaks" style="width: 30px; height: 30px; margin-left: 10px;">
+                <span style="font-size: 19px; margin-left: 10px; font-family: apple, sans-serif;">System Tweaks</span>
+            </button>
+            
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px; display: flex; align-items: center; justify-content: flex-start;" class="nav-button" data-target="themes">
+                <img src="images/library/paintbrush_fill.png" alt="themes" style="width: 30px; height: 30px; margin-left: 10px;">
+                <span style="font-size: 19px; margin-left: 10px; font-family: apple, sans-serif;">Themes</span>
+            </button>
+            
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-target="virtual-jailbreaks">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 17px; transform: translateY(-50%); font-family: apple, sans-serif;">Virtual Jailbreaks</span>
+                <img src="images/library/ant_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+            </button>
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-target="package-managers">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 16px; transform: translateY(-50%); font-family: apple, sans-serif;">Package Managers</span>
+                <img src="images/library/cube_box_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+            </button>
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-target="third-party-store">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">3rd Party Stores</span>
+                <img src="images/library/app_badge_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+            </button>
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-target="jb-launchers">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">JB Launchers</span>
+                <img src="images/library/logo_apple.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+            </button>
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-target="emulators">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">Emulators</span>
+                <img src="images/library/gamecontroller_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+            </button>
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-target="shortcut-tweaks">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">Shortcut Tweaks</span>
+                <img src="images/library/sparkles.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+            </button>
+            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-target="utilities">
+                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">Utilities</span>
+                <img src="images/library/hammer_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+            </button>
+        </div>
+  
+    
+<div class="content-div system-tweaks" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+  <p>This is the System Tweaks content.</p>
+</div>
+
+<div class="content-div themes" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+  <p>This is the Themes content.</p>
+</div>
+
+<div class="content-div virtual-jailbreaks" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+  <p>This is the Virtual Jailbreaks content.</p>
+</div>
+
+<div class="content-div package-managers" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+  <p>This is the Package Managers content.</p>
+</div>
+
+<div class="content-div third-party-store" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+  <p>This is the 3rd Party Store content.</p>
+</div>
+
+<div class="content-div jb-launchers" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+  <p>This is the JB Launchers content.</p>
+</div>
+
+<div class="content-div emulators" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+  <p>This is the Emulators content.</p>
+</div>
+
+<div class="content-div shortcut-tweaks" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+  <p>This is the Shortcut Tweaks content.</p>
+</div>
+
+<div class="content-div utilities" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+  <p>This is the Utilities content.</p>
+</div>
+
   </div>
+  
+  <script>
+      // Get all buttons and content divs
+      const buttons = document.querySelectorAll('.nav-button');
+      const contentDivs = document.querySelectorAll('.content-div');
+  
+      // Function to handle button click and switch content
+      function handleButtonClick(event) {
+          const targetDiv = event.target.closest('.nav-button').getAttribute('data-target');
+          
+          // Remove active class from all buttons
+          buttons.forEach(button => {
+              button.style.backgroundColor = ''; // Remove the grey background
+          });
+          
+          // Add active class to clicked button
+          event.target.closest('.nav-button').style.backgroundColor = 'rgba(150, 150, 150, 0.25)'; // Add transparent grey background
+          
+          // Hide all content divs
+          contentDivs.forEach(div => {
+              div.style.display = 'none';
+              div.style.opacity = '0';
+          });
+          
+          // Show the corresponding content div
+          const targetContentDiv = document.querySelector(`.${targetDiv}`);
+          targetContentDiv.style.display = 'block';
+          targetContentDiv.style.opacity = '1';
+      }
+  
+      // Add event listeners for each button
+      buttons.forEach(button => {
+          button.addEventListener('click', handleButtonClick);
+      });
+  
+      // Optional: Initialize the first button and div as active by default
+      document.querySelector('.nav-button').style.backgroundColor = 'rgba(150, 150, 150, 0.25)';
+      document.querySelector('.content-div').style.display = 'block';
+      document.querySelector('.content-div').style.opacity = '1';
+  </script>
   
     
     

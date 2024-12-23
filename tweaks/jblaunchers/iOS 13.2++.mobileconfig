@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>ConsentText</key>
+		<dict>
+			<key>default</key>
+			<string>Your about to install one of Serenity's tweaks.
+
+If anything bad happens, its not our fault you should've inspected the tweak better.</string>
+		</dict>
+		<key>PayloadContent</key>
+		<array>
+			<dict>
+				<key>FullScreen</key>
+				<true />
+				<key>Icon</key>
+				<data>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</data>
+				<key>Label</key>
+				<string>iOS 13.2++</string>
+				<key>PayloadDisplayName</key>
+				<string>Web Clip #1</string>
+				<key>PayloadIdentifier</key>
+				<string>com.apple.webClip.managed.9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadType</key>
+				<string>com.apple.webClip.managed</string>
+				<key>PayloadUUID</key>
+				<string>9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadVersion</key>
+				<integer>1</integer>
+				<key>Precomposed</key>
+				<true />
+				<key>URL</key>
+				<string>http://apricotios.com/13demoapp/ios13/</string>
+			</dict>
+		</array>
+		<key>PayloadDescription</key>
+		<string>iPhone Emulator for fun with jailbreak
+
+𝗧𝗵𝗶𝘀 𝗖𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝘄𝗮𝘀 𝗺𝗮𝗱𝗲 𝗯𝘆 𝗦𝗲𝗿𝗲𝗻𝗶𝘁𝘆 
+
+⚠️ 𝗜𝗳 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲 𝗴𝗹𝗶𝘁𝗰𝗵𝗲𝘀 𝗶𝗻 𝗮𝗻𝘆-𝘄𝗮𝘆 𝘂𝘀𝗶𝗻𝗴 𝗮𝗻𝘆 𝗼𝗳 𝘁𝗵𝗲𝘀𝗲 𝗽𝗿𝗼𝗳𝗶𝗹𝗲𝘀 𝗶𝘁𝘀 𝗻𝗼𝘁 𝗴𝗼𝗻𝗻𝗮 𝗯𝗲 𝗼𝘂𝗿 𝗳𝗮𝘂𝗹𝘁, 𝗷𝘂𝘀𝘁 𝘀𝘁𝗮𝘆 𝘀𝗮𝗳𝗲 𝗮𝗻𝗱 𝗱𝗼𝗻𝘁 𝘂𝘀𝗲 𝘀𝗸𝗲𝘁𝗰𝗵𝘆 𝘀𝘆𝘀𝘁𝗲𝗺 𝘁𝘄𝗲𝗮𝗸𝘀 𝘁𝗵𝗮𝘁 𝘆𝗼𝘂 𝘁𝗵𝗶𝗻𝗸 𝗰𝗮𝗻 𝗹𝗶𝗺𝗶𝘁 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲𝘀 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 𝘁𝗼 𝗺𝘂𝗰𝗵. ⚠️</string>
+		<key>PayloadDisplayName</key>
+		<string>iOS 13.2++</string>
+		<key>PayloadIdentifier</key>
+		<string>com.serenity.jl.13.2++</string>
+		<key>PayloadOrganization</key>
+		<string>https://serenityios.com/</string>
+		<key>PayloadType</key>
+		<string>Configuration</string>
+		<key>PayloadUUID</key>
+		<string>397a09da-850d-48cf-b936-f5df2d7138f6</string>
+		<key>PayloadVersion</key>
+		<integer>1</integer>
+	</dict>
+</plist>

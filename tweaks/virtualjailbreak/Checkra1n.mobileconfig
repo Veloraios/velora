@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>ConsentText</key>
+		<dict>
+			<key>default</key>
+			<string>Your about to install one of Serenity's tweaks.
+
+If anything bad happens, its not our fault you should've inspected the tweak better.</string>
+		</dict>
+		<key>PayloadContent</key>
+		<array>
+			<dict>
+				<key>FullScreen</key>
+				<true />
+				<key>Icon</key>
+				<data>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</data>
+				<key>Label</key>
+				<string>Checkra1n</string>
+				<key>PayloadDisplayName</key>
+				<string>Web Clip #1</string>
+				<key>PayloadIdentifier</key>
+				<string>com.apple.webClip.managed.b1890b42-b47c-4dad-b834-6cd66d766a86</string>
+				<key>PayloadType</key>
+				<string>com.apple.webClip.managed</string>
+				<key>PayloadUUID</key>
+				<string>b1890b42-b47c-4dad-b834-6cd66d766a86</string>
+				<key>PayloadVersion</key>
+				<integer>1</integer>
+				<key>Precomposed</key>
+				<true />
+				<key>URL</key>
+				<string>https://semijbapps.com/virtual-jailbreak/secure/checkra1n/</string>
+			</dict>
+		</array>
+		<key>PayloadDescription</key>
+		<string>Checkra1n iOS Jailbreak to install Cydia, this is not a real jailbreak, its just a virtual one.
+though; it still lets you install tweaks/themes/utilities.
+
+𝗧𝗵𝗶𝘀 𝗖𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝘄𝗮𝘀 𝗺𝗮𝗱𝗲 𝗯𝘆 𝗦𝗲𝗿𝗲𝗻𝗶𝘁𝘆 
+
+⚠️ 𝗜𝗳 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲 𝗴𝗹𝗶𝘁𝗰𝗵𝗲𝘀 𝗶𝗻 𝗮𝗻𝘆-𝘄𝗮𝘆 𝘂𝘀𝗶𝗻𝗴 𝗮𝗻𝘆 𝗼𝗳 𝘁𝗵𝗲𝘀𝗲 𝗽𝗿𝗼𝗳𝗶𝗹𝗲𝘀 𝗶𝘁𝘀 𝗻𝗼𝘁 𝗴𝗼𝗻𝗻𝗮 𝗯𝗲 𝗼𝘂𝗿 𝗳𝗮𝘂𝗹𝘁, 𝗷𝘂𝘀𝘁 𝘀𝘁𝗮𝘆 𝘀𝗮𝗳𝗲 𝗮𝗻𝗱 𝗱𝗼𝗻𝘁 𝘂𝘀𝗲 𝘀𝗸𝗲𝘁𝗰𝗵𝘆 𝘀𝘆𝘀𝘁𝗲𝗺 𝘁𝘄𝗲𝗮𝗸𝘀 𝘁𝗵𝗮𝘁 𝘆𝗼𝘂 𝘁𝗵𝗶𝗻𝗸 𝗰𝗮𝗻 𝗹𝗶𝗺𝗶𝘁 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲𝘀 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 𝘁𝗼 𝗺𝘂𝗰𝗵. ⚠️</string>
+		<key>PayloadDisplayName</key>
+		<string>Checkra1n</string>
+		<key>PayloadIdentifier</key>
+		<string>com.serenity.jb.checkra1n</string>
+		<key>PayloadOrganization</key>
+		<string>https://serenityios.com/</string>
+		<key>PayloadType</key>
+		<string>Configuration</string>
+		<key>PayloadUUID</key>
+		<string>397a09da-850d-48cf-b936-f5df2d7138f6</string>
+		<key>PayloadVersion</key>
+		<integer>1</integer>
+	</dict>
+</plist>

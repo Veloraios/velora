@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>ConsentText</key>
+		<dict>
+			<key>default</key>
+			<string>Your about to install one of Serenity's tweaks.
+
+If anything bad happens, its not our fault you should've inspected the tweak better.</string>
+		</dict>
+		<key>PayloadContent</key>
+		<array>
+			<dict>
+				<key>FullScreen</key>
+				<true />
+				<key>Icon</key>
+				<data>UklGRh4CAABXRUJQVlA4IBICAABwDgCdASqAAIAAPm02mUgkIyKhJxW4UIANiWlu3Qjsv8BRPewFUPhgpm3k2+hvYJGbhyItj9WFrcHTj6EJ2KKheEdpCuo4MitTtuaj9enQOQ9/eO151YnQ5Y/zK3oiL0CIotDkRaS42xLPDio1khgku6pxFzWxYirUi+kAAP78Q1An3UvL76rfN/xclkw5xdqSzqceX+7fjB3jVJylrVbqKJgBT+OJ/hi8tOR/RRpr+yfv/6AicSlzulDNofXN88n1pftLgKms87l3CTU7Vn02+EQMWOm6wvTtc0eNaGLL/e2s7+qbsf9o62BLD5lqu97H/m8u5MD7gme6yZOImcdezlmteqp9rDnHaSZStQFZE7Vdga7ZxxHejrrVKI5yHKl+z75iU91lnb2UUvxVEHg+cnef28EEE6tb/OeAGw4zY5tZCZOlyZW6eMmhravwcpJgqHNf6hNcuP43+NMhCpCC7s1uCoZZtdIKBzyQilYms8xuNQH2Ch/IbGLlWQKH2Imd1M9pnvgantHENDpRaAYpJvoheGRMS4yYZVdWtx2mw8vlhmWDB2qgAF+AP8vwv32nu2b8RbrsLIJt7ylxsF+/RnP9SCX/sCNSqeQfcbLP9iFl83ap3nepaH/x4WsWAUOz7Y/s+uQ1geFRAKyqpvyNo4SRMrcmOs4xhhs4a5yezSguU6MZX87E/DuikamkAAAAAA==</data>
+				<key>Label</key>
+				<string>Fake Update</string>
+				<key>PayloadDisplayName</key>
+				<string>Web Clip #1</string>
+				<key>PayloadIdentifier</key>
+				<string>com.apple.webClip.managed.9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadType</key>
+				<string>com.apple.webClip.managed</string>
+				<key>PayloadUUID</key>
+				<string>9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadVersion</key>
+				<integer>1</integer>
+				<key>Precomposed</key>
+				<true />
+				<key>URL</key>
+				<string>https://fakeupdate.net/mobile/apple/</string>
+			</dict>
+		</array>
+		<key>PayloadDescription</key>
+		<string>Fake Updates on your iDevice.
+
+𝗧𝗵𝗶𝘀 𝗖𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝘄𝗮𝘀 𝗺𝗮𝗱𝗲 𝗯𝘆 𝗦𝗲𝗿𝗲𝗻𝗶𝘁𝘆 
+
+⚠️ 𝗜𝗳 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲 𝗴𝗹𝗶𝘁𝗰𝗵𝗲𝘀 𝗶𝗻 𝗮𝗻𝘆-𝘄𝗮𝘆 𝘂𝘀𝗶𝗻𝗴 𝗮𝗻𝘆 𝗼𝗳 𝘁𝗵𝗲𝘀𝗲 𝗽𝗿𝗼𝗳𝗶𝗹𝗲𝘀 𝗶𝘁𝘀 𝗻𝗼𝘁 𝗴𝗼𝗻𝗻𝗮 𝗯𝗲 𝗼𝘂𝗿 𝗳𝗮𝘂𝗹𝘁, 𝗷𝘂𝘀𝘁 𝘀𝘁𝗮𝘆 𝘀𝗮𝗳𝗲 𝗮𝗻𝗱 𝗱𝗼𝗻𝘁 𝘂𝘀𝗲 𝘀𝗸𝗲𝘁𝗰𝗵𝘆 𝘀𝘆𝘀𝘁𝗲𝗺 𝘁𝘄𝗲𝗮𝗸𝘀 𝘁𝗵𝗮𝘁 𝘆𝗼𝘂 𝘁𝗵𝗶𝗻𝗸 𝗰𝗮𝗻 𝗹𝗶𝗺𝗶𝘁 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲𝘀 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 𝘁𝗼 𝗺𝘂𝗰𝗵. ⚠️</string>
+		<key>PayloadDisplayName</key>
+		<string>Fake Update</string>
+		<key>PayloadIdentifier</key>
+		<string>com.serenity.u.fakeupdate</string>
+		<key>PayloadOrganization</key>
+		<string>https://serenityios.com/</string>
+		<key>PayloadType</key>
+		<string>Configuration</string>
+		<key>PayloadUUID</key>
+		<string>397a09da-850d-48cf-b936-f5df2d7138f6</string>
+		<key>PayloadVersion</key>
+		<integer>1</integer>
+	</dict>
+</plist>

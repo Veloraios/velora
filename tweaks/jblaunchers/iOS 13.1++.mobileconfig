@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>ConsentText</key>
+		<dict>
+			<key>default</key>
+			<string>Your about to install one of Serenity's tweaks.
+
+If anything bad happens, its not our fault you should've inspected the tweak better.</string>
+		</dict>
+		<key>PayloadContent</key>
+		<array>
+			<dict>
+				<key>FullScreen</key>
+				<true />
+				<key>Icon</key>
+				<data>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</data>
+				<key>Label</key>
+				<string>iOS 13.1++</string>
+				<key>PayloadDisplayName</key>
+				<string>Web Clip #1</string>
+				<key>PayloadIdentifier</key>
+				<string>com.apple.webClip.managed.9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadType</key>
+				<string>com.apple.webClip.managed</string>
+				<key>PayloadUUID</key>
+				<string>9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadVersion</key>
+				<integer>1</integer>
+				<key>Precomposed</key>
+				<true />
+				<key>URL</key>
+				<string>http://apricotios.com/13demoapp/ios13/</string>
+			</dict>
+		</array>
+		<key>PayloadDescription</key>
+		<string>iPhone Emulator for fun with jailbreak
+
+𝗧𝗵𝗶𝘀 𝗖𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝘄𝗮𝘀 𝗺𝗮𝗱𝗲 𝗯𝘆 𝗦𝗲𝗿𝗲𝗻𝗶𝘁𝘆 
+
+⚠️ 𝗜𝗳 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲 𝗴𝗹𝗶𝘁𝗰𝗵𝗲𝘀 𝗶𝗻 𝗮𝗻𝘆-𝘄𝗮𝘆 𝘂𝘀𝗶𝗻𝗴 𝗮𝗻𝘆 𝗼𝗳 𝘁𝗵𝗲𝘀𝗲 𝗽𝗿𝗼𝗳𝗶𝗹𝗲𝘀 𝗶𝘁𝘀 𝗻𝗼𝘁 𝗴𝗼𝗻𝗻𝗮 𝗯𝗲 𝗼𝘂𝗿 𝗳𝗮𝘂𝗹𝘁, 𝗷𝘂𝘀𝘁 𝘀𝘁𝗮𝘆 𝘀𝗮𝗳𝗲 𝗮𝗻𝗱 𝗱𝗼𝗻𝘁 𝘂𝘀𝗲 𝘀𝗸𝗲𝘁𝗰𝗵𝘆 𝘀𝘆𝘀𝘁𝗲𝗺 𝘁𝘄𝗲𝗮𝗸𝘀 𝘁𝗵𝗮𝘁 𝘆𝗼𝘂 𝘁𝗵𝗶𝗻𝗸 𝗰𝗮𝗻 𝗹𝗶𝗺𝗶𝘁 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲𝘀 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 𝘁𝗼 𝗺𝘂𝗰𝗵. ⚠️</string>
+		<key>PayloadDisplayName</key>
+		<string>iOS 13.1++</string>
+		<key>PayloadIdentifier</key>
+		<string>com.serenity.jl.13.1++</string>
+		<key>PayloadOrganization</key>
+		<string>https://serenityios.com/</string>
+		<key>PayloadType</key>
+		<string>Configuration</string>
+		<key>PayloadUUID</key>
+		<string>397a09da-850d-48cf-b936-f5df2d7138f6</string>
+		<key>PayloadVersion</key>
+		<integer>1</integer>
+	</dict>
+</plist>

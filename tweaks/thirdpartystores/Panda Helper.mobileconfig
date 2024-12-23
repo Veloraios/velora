@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>ConsentText</key>
+		<dict>
+			<key>default</key>
+			<string>Your about to install one of Serenity's tweaks.
+
+If anything bad happens, its not our fault you should've inspected the tweak better.</string>
+		</dict>
+		<key>PayloadContent</key>
+		<array>
+			<dict>
+				<key>FullScreen</key>
+				<true />
+				<key>Icon</key>
+				<data>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</data>
+				<key>Label</key>
+				<string>Panda Helper</string>
+				<key>PayloadDisplayName</key>
+				<string>Web Clip #1</string>
+				<key>PayloadIdentifier</key>
+				<string>com.apple.webClip.managed.9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadType</key>
+				<string>com.apple.webClip.managed</string>
+				<key>PayloadUUID</key>
+				<string>9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadVersion</key>
+				<integer>1</integer>
+				<key>Precomposed</key>
+				<true />
+				<key>URL</key>
+				<string>https://www.pandahelperlite.com/?s=official</string>
+			</dict>
+		</array>
+		<key>PayloadDescription</key>
+		<string>Panda Helper is Jailbreak without jailbreak
+
+𝗧𝗵𝗶𝘀 𝗖𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝘄𝗮𝘀 𝗺𝗮𝗱𝗲 𝗯𝘆 𝗦𝗲𝗿𝗲𝗻𝗶𝘁𝘆 
+
+⚠️ 𝗜𝗳 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲 𝗴𝗹𝗶𝘁𝗰𝗵𝗲𝘀 𝗶𝗻 𝗮𝗻𝘆-𝘄𝗮𝘆 𝘂𝘀𝗶𝗻𝗴 𝗮𝗻𝘆 𝗼𝗳 𝘁𝗵𝗲𝘀𝗲 𝗽𝗿𝗼𝗳𝗶𝗹𝗲𝘀 𝗶𝘁𝘀 𝗻𝗼𝘁 𝗴𝗼𝗻𝗻𝗮 𝗯𝗲 𝗼𝘂𝗿 𝗳𝗮𝘂𝗹𝘁, 𝗷𝘂𝘀𝘁 𝘀𝘁𝗮𝘆 𝘀𝗮𝗳𝗲 𝗮𝗻𝗱 𝗱𝗼𝗻𝘁 𝘂𝘀𝗲 𝘀𝗸𝗲𝘁𝗰𝗵𝘆 𝘀𝘆𝘀𝘁𝗲𝗺 𝘁𝘄𝗲𝗮𝗸𝘀 𝘁𝗵𝗮𝘁 𝘆𝗼𝘂 𝘁𝗵𝗶𝗻𝗸 𝗰𝗮𝗻 𝗹𝗶𝗺𝗶𝘁 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲𝘀 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 𝘁𝗼 𝗺𝘂𝗰𝗵. ⚠️</string>
+		<key>PayloadDisplayName</key>
+		<string>Panda Helper</string>
+		<key>PayloadIdentifier</key>
+		<string>com.serenity.tps.pandahelper</string>
+		<key>PayloadOrganization</key>
+		<string>https://serenityios.com/</string>
+		<key>PayloadType</key>
+		<string>Configuration</string>
+		<key>PayloadUUID</key>
+		<string>397a09da-850d-48cf-b936-f5df2d7138f6</string>
+		<key>PayloadVersion</key>
+		<integer>1</integer>
+	</dict>
+</plist>

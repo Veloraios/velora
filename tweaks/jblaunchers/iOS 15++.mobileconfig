@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>ConsentText</key>
+		<dict>
+			<key>default</key>
+			<string>Your about to install one of Serenity's tweaks.
+
+If anything bad happens, its not our fault you should've inspected the tweak better.</string>
+		</dict>
+		<key>PayloadContent</key>
+		<array>
+			<dict>
+				<key>FullScreen</key>
+				<true />
+				<key>Icon</key>
+				<data>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</data>
+				<key>Label</key>
+				<string>iOS 15++</string>
+				<key>PayloadDisplayName</key>
+				<string>Web Clip #1</string>
+				<key>PayloadIdentifier</key>
+				<string>com.apple.webClip.managed.9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadType</key>
+				<string>com.apple.webClip.managed</string>
+				<key>PayloadUUID</key>
+				<string>9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadVersion</key>
+				<integer>1</integer>
+				<key>Precomposed</key>
+				<true />
+				<key>URL</key>
+				<string>http://apricotios.com/newDevJB/marronjbplusplus/kitchen-sink/k8/</string>
+			</dict>
+		</array>
+		<key>PayloadDescription</key>
+		<string>iPhone Emulator for fun with jailbreak
+
+𝗧𝗵𝗶𝘀 𝗖𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝘄𝗮𝘀 𝗺𝗮𝗱𝗲 𝗯𝘆 𝗦𝗲𝗿𝗲𝗻𝗶𝘁𝘆 
+
+⚠️ 𝗜𝗳 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲 𝗴𝗹𝗶𝘁𝗰𝗵𝗲𝘀 𝗶𝗻 𝗮𝗻𝘆-𝘄𝗮𝘆 𝘂𝘀𝗶𝗻𝗴 𝗮𝗻𝘆 𝗼𝗳 𝘁𝗵𝗲𝘀𝗲 𝗽𝗿𝗼𝗳𝗶𝗹𝗲𝘀 𝗶𝘁𝘀 𝗻𝗼𝘁 𝗴𝗼𝗻𝗻𝗮 𝗯𝗲 𝗼𝘂𝗿 𝗳𝗮𝘂𝗹𝘁, 𝗷𝘂𝘀𝘁 𝘀𝘁𝗮𝘆 𝘀𝗮𝗳𝗲 𝗮𝗻𝗱 𝗱𝗼𝗻𝘁 𝘂𝘀𝗲 𝘀𝗸𝗲𝘁𝗰𝗵𝘆 𝘀𝘆𝘀𝘁𝗲𝗺 𝘁𝘄𝗲𝗮𝗸𝘀 𝘁𝗵𝗮𝘁 𝘆𝗼𝘂 𝘁𝗵𝗶𝗻𝗸 𝗰𝗮𝗻 𝗹𝗶𝗺𝗶𝘁 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲𝘀 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 𝘁𝗼 𝗺𝘂𝗰𝗵. ⚠️</string>
+		<key>PayloadDisplayName</key>
+		<string>iOS 15++</string>
+		<key>PayloadIdentifier</key>
+		<string>com.serenity.jl.15++</string>
+		<key>PayloadOrganization</key>
+		<string>https://serenityios.com/</string>
+		<key>PayloadType</key>
+		<string>Configuration</string>
+		<key>PayloadUUID</key>
+		<string>397a09da-850d-48cf-b936-f5df2d7138f6</string>
+		<key>PayloadVersion</key>
+		<integer>1</integer>
+	</dict>
+</plist>

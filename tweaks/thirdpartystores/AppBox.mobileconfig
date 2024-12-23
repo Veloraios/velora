@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>ConsentText</key>
+		<dict>
+			<key>default</key>
+			<string>Your about to install one of Serenity's tweaks.
+
+If anything bad happens, its not our fault you should've inspected the tweak better.</string>
+		</dict>
+		<key>PayloadContent</key>
+		<array>
+			<dict>
+				<key>FullScreen</key>
+				<true />
+				<key>Icon</key>
+				<data>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</data>
+				<key>Label</key>
+				<string>AppBox</string>
+				<key>PayloadDisplayName</key>
+				<string>Web Clip #1</string>
+				<key>PayloadIdentifier</key>
+				<string>com.apple.webClip.managed.9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadType</key>
+				<string>com.apple.webClip.managed</string>
+				<key>PayloadUUID</key>
+				<string>9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadVersion</key>
+				<integer>1</integer>
+				<key>Precomposed</key>
+				<true />
+				<key>URL</key>
+				<string>https://app.appbox.click/</string>
+			</dict>
+		</array>
+		<key>PayloadDescription</key>
+		<string>AppBox is Jailbreak without jailbreak.
+
+𝗧𝗵𝗶𝘀 𝗖𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝘄𝗮𝘀 𝗺𝗮𝗱𝗲 𝗯𝘆 𝗦𝗲𝗿𝗲𝗻𝗶𝘁𝘆 
+
+⚠️ 𝗜𝗳 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲 𝗴𝗹𝗶𝘁𝗰𝗵𝗲𝘀 𝗶𝗻 𝗮𝗻𝘆-𝘄𝗮𝘆 𝘂𝘀𝗶𝗻𝗴 𝗮𝗻𝘆 𝗼𝗳 𝘁𝗵𝗲𝘀𝗲 𝗽𝗿𝗼𝗳𝗶𝗹𝗲𝘀 𝗶𝘁𝘀 𝗻𝗼𝘁 𝗴𝗼𝗻𝗻𝗮 𝗯𝗲 𝗼𝘂𝗿 𝗳𝗮𝘂𝗹𝘁, 𝗷𝘂𝘀𝘁 𝘀𝘁𝗮𝘆 𝘀𝗮𝗳𝗲 𝗮𝗻𝗱 𝗱𝗼𝗻𝘁 𝘂𝘀𝗲 𝘀𝗸𝗲𝘁𝗰𝗵𝘆 𝘀𝘆𝘀𝘁𝗲𝗺 𝘁𝘄𝗲𝗮𝗸𝘀 𝘁𝗵𝗮𝘁 𝘆𝗼𝘂 𝘁𝗵𝗶𝗻𝗸 𝗰𝗮𝗻 𝗹𝗶𝗺𝗶𝘁 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲𝘀 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 𝘁𝗼 𝗺𝘂𝗰𝗵. ⚠️</string>
+		<key>PayloadDisplayName</key>
+		<string>AppBox</string>
+		<key>PayloadIdentifier</key>
+		<string>com.serenity.tps.appbox</string>
+		<key>PayloadOrganization</key>
+		<string>https://serenityios.com/</string>
+		<key>PayloadType</key>
+		<string>Configuration</string>
+		<key>PayloadUUID</key>
+		<string>397a09da-850d-48cf-b936-f5df2d7138f6</string>
+		<key>PayloadVersion</key>
+		<integer>1</integer>
+	</dict>
+</plist>

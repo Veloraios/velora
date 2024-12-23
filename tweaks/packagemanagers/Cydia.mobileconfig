@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>ConsentText</key>
+		<dict>
+			<key>default</key>
+			<string>Your about to install one of Serenity's tweaks.
+
+If anything bad happens, its not our fault you should've inspected the tweak better.</string>
+		</dict>
+		<key>PayloadContent</key>
+		<array>
+			<dict>
+				<key>FullScreen</key>
+				<true />
+				<key>Icon</key>
+				<data>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</data>
+				<key>Label</key>
+				<string>Cydi</string>
+				<key>PayloadDisplayName</key>
+				<string>Webclip #1</string>
+				<key>PayloadIdentifier</key>
+				<string>com.apple.webClip.managed.b1890b42-b47c-4dad-b834-6cd66d766a86</string>
+				<key>PayloadType</key>
+				<string>com.apple.webClip.managed</string>
+				<key>PayloadUUID</key>
+				<string>b1890b42-b47c-4dad-b834-6cd66d766a86</string>
+				<key>PayloadVersion</key>
+				<integer>1</integer>
+				<key>Precomposed</key>
+				<true />
+				<key>URL</key>
+				<string>https://files.iextras.org/cydia_new_app/cydia_source/</string>
+			</dict>
+		</array>
+		<key>PayloadDescription</key>
+		<string>Package Manager letting you install Emulators/Tweaks/Themes etc. this is the lite version of cydia.
+
+𝗧𝗵𝗶𝘀 𝗖𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝘄𝗮𝘀 𝗺𝗮𝗱𝗲 𝗯𝘆 𝗦𝗲𝗿𝗲𝗻𝗶𝘁𝘆 
+
+⚠️ 𝗜𝗳 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲 𝗴𝗹𝗶𝘁𝗰𝗵𝗲𝘀 𝗶𝗻 𝗮𝗻𝘆-𝘄𝗮𝘆 𝘂𝘀𝗶𝗻𝗴 𝗮𝗻𝘆 𝗼𝗳 𝘁𝗵𝗲𝘀𝗲 𝗽𝗿𝗼𝗳𝗶𝗹𝗲𝘀 𝗶𝘁𝘀 𝗻𝗼𝘁 𝗴𝗼𝗻𝗻𝗮 𝗯𝗲 𝗼𝘂𝗿 𝗳𝗮𝘂𝗹𝘁, 𝗷𝘂𝘀𝘁 𝘀𝘁𝗮𝘆 𝘀𝗮𝗳𝗲 𝗮𝗻𝗱 𝗱𝗼𝗻𝘁 𝘂𝘀𝗲 𝘀𝗸𝗲𝘁𝗰𝗵𝘆 𝘀𝘆𝘀𝘁𝗲𝗺 𝘁𝘄𝗲𝗮𝗸𝘀 𝘁𝗵𝗮𝘁 𝘆𝗼𝘂 𝘁𝗵𝗶𝗻𝗸 𝗰𝗮𝗻 𝗹𝗶𝗺𝗶𝘁 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲𝘀 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 𝘁𝗼 𝗺𝘂𝗰𝗵. ⚠️</string>
+		<key>PayloadDisplayName</key>
+		<string>Cydia</string>
+		<key>PayloadIdentifier</key>
+		<string>com.serenity.pm.cydia</string>
+		<key>PayloadOrganization</key>
+		<string>https://serenityios.com/</string>
+		<key>PayloadType</key>
+		<string>Configuration</string>
+		<key>PayloadUUID</key>
+		<string>397a09da-850d-48cf-b936-f5df2d7138f6</string>
+		<key>PayloadVersion</key>
+		<integer>1</integer>
+	</dict>
+</plist>

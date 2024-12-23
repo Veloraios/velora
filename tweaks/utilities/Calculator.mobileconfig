@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>ConsentText</key>
+		<dict>
+			<key>default</key>
+			<string>Your about to install one of Serenity's tweaks.
+
+If anything bad happens, its not our fault you should've inspected the tweak better.</string>
+		</dict>
+		<key>PayloadContent</key>
+		<array>
+			<dict>
+				<key>FullScreen</key>
+				<true />
+				<key>Icon</key>
+				<data>UklGRuoLAABXRUJQVlA4TN0LAAAvf8AfADWHgrZtmIQ/7v0BiIgJYNIwum72HSLyyk66z/6vspR+fa/u4u7u7u7u7u7u7u7u7u7u7nrXfffvmHN+I2cSKqtcB3epSE7Q0uUb7pbIbUmmmoSWbSfTQUl7ElxqnRZbKdFBb0u1yXBwdzjJtMjtsKlwp3J3ayc5SGXtL/cfuBU6OJRU7lYSuglebvtNboe7u8ZA2jaZgvs3+0Js20iSxAI2/3j3nrb6PwF0Y1tbZFchDHRP95CYmZmZmZmZmZmZ+g5ne2d+0acAukoZTBJy2VZdyENy5X2ePHkdhTgARSDr9wUuYyLKg2GqA7ilROSxyS4zxaLHnACTye99Cch7QQiiJNumnX3us23biG3bdnL13kn+v+rlnL0l3LZ1RlK+vI+Fn6mkgrZt27Zt27a7x7anmf5PQGRGLjkKHAQlFgmIT1w4+OvCL6CISTz6pBEqpkRKQPNvPZvecoVW2HlgyiNNwhCaEGh+SP4ypMG1T8ZBC8SmZ7IlFBFIBY4Kj2yw3RSci0H/ZIkHkBIpw1EK1oD+8Odc0YQDOe1GUUSHY1d0hhfAEBHBGw0XJAZwdcIV3HrjVh2DkDqZkAUavvc9AoPu1je4lThneEREITMKpkiSa7ixIPaWEBH5nIgEp04ZlqygiEgzoAiMhaPxxufSQ0JEGjAMp3ApKkMToCDlgfE5DibPDYYgbp3CBPkzPhfGzw/UCD913aH91D2yQdLNRi4kX0rSIjcYjZpnHD99tAgKmVMIyTX+9xQSahEUfkgRoOGZco+AWgUlXuMl1DLcHUlBKVUBpVQpB0nkBAuRVIhAcPEUlAAUXDwFMrQTEgU3oMMAjjWCFHaSEZ7whCU9zXm7YBASERnclIHmzEReMkgkTpSECZcdkCv+ovLMYu2liSpzC3myz6xOZBI2aKiuYDWtPr2BbUCvU1WutPEQsAD/YtFqyfq2x/u3DlW+gSfA4gAkAC9YOhtwm+8amT7N41fd3yYMvs8u2jgUGPsbFKqrTSNYdBvRhrdlI1sM68FykA6YeKlhM0cz27K2KPZz58pGDmBwMElktNr8vNs0vLpnxq8+/c/k/LrH8Hp1rc7SuKBQSMDD1a4Nh9XQxmjvx4J4BjiiSYtpw5rIGNV6VkYICihIXqKx94fCNR78uk9TKw2XRckQDHAURiQbxkRWZ5viARHBXaXJKbL/3Li5A0RkZyiJ/XbcS1zU2MdDK1yb/BOe2vfDRjIgrVskEwmH93IVr0C7kI1AHsKyLokIBcbLtTe8usoZp/+aHkOtMTMjEEcoMEMGaO+Q+FYrEyDSgFdkAtFnK7vcXAyhAKz1XrvbVFm4a6R2O6qSEOtQSNkwpMkkPmrQ3B0g8v7viKQ+VqusRLrtH/U9qYgwRY21oXd5sg3AoEGDG5FvvWYFRCFHyUS+1WEKky5L6HFYPZ9t0FWBbAEwJk6TXm1ZorJZBxExIw1g75AEP2eNITQz0Xit32MoTKfa7LaKRBEKcKNuOYcytncG1owUEcHUrNkJbL3ZD0BEEpB8+asEJo+hFasdWoiCgUIm9GvBLHJ0e1sHiIjCBq/YWOSfy5ZOQZcZ9Dwv9+peBrepDLjLlxzgYIjAgLCuAE1ilxWW3bBp8xQywgXTLGuWFWz6uswBGF0Gkjryfexrwv7pf8bdaNqPk94iM4Q/XiQ4EMK4XOjCfPV6fXRvUKtBHvBMCOFdoXRvdr1e//PCF5kkZEQRWbr4l8G32YEf9+aIwrX4H/2qZ/hjWtbQG3HCEBJEN4dFqU41Zg1ZpQq6QELCC1JXcapH/zeg8pWpLkB2J1mSpHanVXGw0u+2cNJ3xFQ9aPJ3xMCb3OrTs4m993eQYEHJYjEYDA4kBslgMVgMXiCxDcGAjm0pwr9Tx7+niP6RrWAUdisBEjQIiqgsKKKSaAckE5ElefMxUkhINFeNThBRBFCOIgBVCtEOso4QgaQLSShnpUpARL147F8uJVAWxIBO87+QJyAIZiCHiHwtOJIhdZcwWZHawBUeIuGQdJQnxatQZSWHOyR2JptQpA78qDq90G67qddZcafDmrpL49nib0wkjsACLlfF6tGGsyieeQi1b4VodQIXvN27LWuPZIP3WlfCcLDZEYmSVpuZn/QducunuX98HfhxKUZAq832JL5biehaSPg01YZFN99hTZZndtqqNk+Aic9EnZo++B1ZnvlnsRxMEzM4mGRB0myx168qEY1zzq8/G3SbkzTw7z4g4KlmFMMTmWe2l2ofA4PQgf0sMttshbAOEJETLJFYpakln6ZoPKRP83Q+rLUoGMEADxUrX5Hd1qctjogIpnLkFNl9vDNTBYjUj5O7/078ilK4xhndpl6weCYhAaRVIxHNZcgKiCDNbyMQg4vAGkMoAivb2fQYPs56qs1em4AMoUiULn3ZOySRvEbNBIg0xSAmk/jWhimG0KyIpts9p5gUrg97yrA5JB0KTDGQkU3+IiBK2fAZUfBb1hhyMssMvM1Oi9tUWO4qXBvzGesMPoAB6dOPkf2vA0SaOUsQRbI6ZIoh3Nlsu/sUC1e4Pvwpw+aU4PCiLQsmMX/k7gARUlbXZiMJLkYKX1Xsra5mOtV+r1lEimCsU4rsBMN7/etNiohgqlBOghHUs1JzSKR+nNL3a7IaoXCNQfMYWpHqkYUoQYHIt2kzsrzjrEAmQMYuzckycyRLpgMiwjvV5+aWaaH2P5YU0CHJUJ2YPlAW5XfM5prlQGY+6MwNbbIov2MPrMI8QGYJocN24y6Fa0Gu+1XXiMe0lOFfMmACBF1r1chqwU7nzF1ZCbJSFnCkx5MDepHM6RxGnWgTHbLaULZNrPrzI9PV4MCPa7PbVH5c6TaNLge1KUO/LMQQFBQsGWj/8my3hGBAUldYZaLCVZ5K43IhnEPCtyYQ6RNf6i6Ndz+tGPSY1eeysNlab4HChQRYQooEC6JwSChCyQ0KRJiINzzyiIkmIiG0IPvdIonVhlYZpX2BSsEhoQCASlMAQKUxbAOwg4wUGhJNVol1HqQiIpIKEQBS1QKQrbUSNgm7Ee1bti74eC08ksWiW8ekytUtYWQFgr/NQiT13BarHtRZmmy4PF5tbi5X8rlslUXB1gIDjrOKU0NqWx1bR1Jlh9bcqtrmtLBZESSEa+Pe4ry66lfd63Yl9LsqzJO5MYFtLSjgpuzUsSLbhnazamfUn1CZrJTBRmC3PHXaq/OrXtdI1Tjn1zcrekDZ/sartZB4uezo13PKouptPy/kACJCgbFm6z27NB5c4VqU6Z8nd/MbJHinXVTrO+ZizBRDdCxX9nmCxkOfuiA5wcEkMMBausyimgPnj+hiCAXirXfa33NWt6nnL1z+pkORql5s0cZSlyjmwFFVtzufRjynxDN5DKXe4tgrhALgzGXVFvjE8vD5JKHb8d8x15lONd/uBOSenmxm9V1tBCkcTuy/G/cROxNNNvrMioDD1a4Fqm3mXPmWdInhPtfFUWMf0+pKvRUBOBi4cDVyqmvZ3i1NYghXVJ1a8OoKy/Wpemjq8I+/CYB9GC7OWP3KpqYZt/BQDNG7JO7bUW9J80NpPs3bZLnfzLiTWRDcwQAvligfBapD3rAdeQuJSL+TJ3s9Qws6ogW5vq7/dYHD+fg3RQvgmA9ZExFUtJapQWyZSN6yKrY5o3otKh14BdL/z5e5HPWavOvHSHxks1f3dT6sS/2+3n1WVJCCRoBTia8oFh0ooMWvPi35+BKq7dfmKFkO18QMtPZEMt/fmnPTA27zJn7FTPkJH/uR0OWouljj8L33f1ZERATdTDFIzOkpmueCVGEAqyENsiArqTRgkbsMoyP7D1bERmGXbJAi9Cdl9HcS351I1CRtKjKudUFzTMGtU4bjZJ4BESTepVoBAYnx3TcyESvgMBIzv8Fcp3Ar8RTt8CJlQqSqRqVVVaWQ9MW2mCIx15duAIsVgHISwGS5f+nEnD8lLq3gZ7A4eA46LKH5/OtbTuFe4lPis09jFIlfJnDQzzjuPh+eklgr+ifgjbkGY1A0ftu53pjDP7HWPCUa/hwc7ZTEI48MAA==</data>
+				<key>Label</key>
+				<string>Calculator</string>
+				<key>PayloadDisplayName</key>
+				<string>Web Clip #1</string>
+				<key>PayloadIdentifier</key>
+				<string>com.apple.webClip.managed.9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadType</key>
+				<string>com.apple.webClip.managed</string>
+				<key>PayloadUUID</key>
+				<string>9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadVersion</key>
+				<integer>1</integer>
+				<key>Precomposed</key>
+				<true />
+				<key>URL</key>
+				<string>https://lake-e.github.io/iPad-Calculator/index.html</string>
+			</dict>
+		</array>
+		<key>PayloadDescription</key>
+		<string>Have an iPad and dont like the calculators with ads? Use this as a solution, it works just like an ios one.
+
+𝗧𝗵𝗶𝘀 𝗖𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝘄𝗮𝘀 𝗺𝗮𝗱𝗲 𝗯𝘆 𝗦𝗲𝗿𝗲𝗻𝗶𝘁𝘆 
+
+⚠️ 𝗜𝗳 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲 𝗴𝗹𝗶𝘁𝗰𝗵𝗲𝘀 𝗶𝗻 𝗮𝗻𝘆-𝘄𝗮𝘆 𝘂𝘀𝗶𝗻𝗴 𝗮𝗻𝘆 𝗼𝗳 𝘁𝗵𝗲𝘀𝗲 𝗽𝗿𝗼𝗳𝗶𝗹𝗲𝘀 𝗶𝘁𝘀 𝗻𝗼𝘁 𝗴𝗼𝗻𝗻𝗮 𝗯𝗲 𝗼𝘂𝗿 𝗳𝗮𝘂𝗹𝘁, 𝗷𝘂𝘀𝘁 𝘀𝘁𝗮𝘆 𝘀𝗮𝗳𝗲 𝗮𝗻𝗱 𝗱𝗼𝗻𝘁 𝘂𝘀𝗲 𝘀𝗸𝗲𝘁𝗰𝗵𝘆 𝘀𝘆𝘀𝘁𝗲𝗺 𝘁𝘄𝗲𝗮𝗸𝘀 𝘁𝗵𝗮𝘁 𝘆𝗼𝘂 𝘁𝗵𝗶𝗻𝗸 𝗰𝗮𝗻 𝗹𝗶𝗺𝗶𝘁 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲𝘀 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 𝘁𝗼 𝗺𝘂𝗰𝗵. ⚠️</string>
+		<key>PayloadDisplayName</key>
+		<string>Calculator</string>
+		<key>PayloadIdentifier</key>
+		<string>com.serenity.u.calculator</string>
+		<key>PayloadOrganization</key>
+		<string>https://serenityios.com/</string>
+		<key>PayloadType</key>
+		<string>Configuration</string>
+		<key>PayloadUUID</key>
+		<string>397a09da-850d-48cf-b936-f5df2d7138f6</string>
+		<key>PayloadVersion</key>
+		<integer>1</integer>
+	</dict>
+</plist>

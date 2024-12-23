@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>ConsentText</key>
+		<dict>
+			<key>default</key>
+			<string>Your about to install one of Serenity's tweaks.
+
+If anything bad happens, its not our fault you should've inspected the tweak better.</string>
+		</dict>
+		<key>PayloadContent</key>
+		<array>
+			<dict>
+				<key>FullScreen</key>
+				<true />
+				<key>Icon</key>
+				<data>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</data>
+				<key>Label</key>
+				<string>Nexara</string>
+				<key>PayloadDisplayName</key>
+				<string>Web Clip #1</string>
+				<key>PayloadIdentifier</key>
+				<string>com.apple.webClip.managed.9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadType</key>
+				<string>com.apple.webClip.managed</string>
+				<key>PayloadUUID</key>
+				<string>9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadVersion</key>
+				<integer>1</integer>
+				<key>Precomposed</key>
+				<true />
+				<key>URL</key>
+				<string>https://apps.senumy.com/kfd/</string>
+			</dict>
+		</array>
+		<key>PayloadDescription</key>
+		<string>Nexara is Jailbreak without jailbreak (well not in this situation)
+
+𝗧𝗵𝗶𝘀 𝗖𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝘄𝗮𝘀 𝗺𝗮𝗱𝗲 𝗯𝘆 𝗦𝗲𝗿𝗲𝗻𝗶𝘁𝘆 
+
+⚠️ 𝗜𝗳 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲 𝗴𝗹𝗶𝘁𝗰𝗵𝗲𝘀 𝗶𝗻 𝗮𝗻𝘆-𝘄𝗮𝘆 𝘂𝘀𝗶𝗻𝗴 𝗮𝗻𝘆 𝗼𝗳 𝘁𝗵𝗲𝘀𝗲 𝗽𝗿𝗼𝗳𝗶𝗹𝗲𝘀 𝗶𝘁𝘀 𝗻𝗼𝘁 𝗴𝗼𝗻𝗻𝗮 𝗯𝗲 𝗼𝘂𝗿 𝗳𝗮𝘂𝗹𝘁, 𝗷𝘂𝘀𝘁 𝘀𝘁𝗮𝘆 𝘀𝗮𝗳𝗲 𝗮𝗻𝗱 𝗱𝗼𝗻𝘁 𝘂𝘀𝗲 𝘀𝗸𝗲𝘁𝗰𝗵𝘆 𝘀𝘆𝘀𝘁𝗲𝗺 𝘁𝘄𝗲𝗮𝗸𝘀 𝘁𝗵𝗮𝘁 𝘆𝗼𝘂 𝘁𝗵𝗶𝗻𝗸 𝗰𝗮𝗻 𝗹𝗶𝗺𝗶𝘁 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲𝘀 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 𝘁𝗼 𝗺𝘂𝗰𝗵. ⚠️</string>
+		<key>PayloadDisplayName</key>
+		<string>Nexara</string>
+		<key>PayloadIdentifier</key>
+		<string>com.serenity.tps.nexara</string>
+		<key>PayloadOrganization</key>
+		<string>https://serenityios.com/</string>
+		<key>PayloadType</key>
+		<string>Configuration</string>
+		<key>PayloadUUID</key>
+		<string>397a09da-850d-48cf-b936-f5df2d7138f6</string>
+		<key>PayloadVersion</key>
+		<integer>1</integer>
+	</dict>
+</plist>

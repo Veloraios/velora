@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>ConsentText</key>
+		<dict>
+			<key>default</key>
+			<string>Your about to install one of Serenity's tweaks.
+
+If anything bad happens, its not our fault you should've inspected the tweak better.</string>
+		</dict>
+		<key>PayloadContent</key>
+		<array>
+			<dict>
+				<key>FullScreen</key>
+				<true />
+				<key>Icon</key>
+				<data>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</data>
+				<key>Label</key>
+				<string>Acutus</string>
+				<key>PayloadDisplayName</key>
+				<string>Web Clip #1</string>
+				<key>PayloadIdentifier</key>
+				<string>com.apple.webClip.managed.9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadType</key>
+				<string>com.apple.webClip.managed</string>
+				<key>PayloadUUID</key>
+				<string>9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadVersion</key>
+				<integer>1</integer>
+				<key>Precomposed</key>
+				<true />
+				<key>URL</key>
+				<string>https://acutus.fun/</string>
+			</dict>
+		</array>
+		<key>PayloadDescription</key>
+		<string>Acutus is Jailbreak without jailbreak.
+
+𝗧𝗵𝗶𝘀 𝗖𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝘄𝗮𝘀 𝗺𝗮𝗱𝗲 𝗯𝘆 𝗦𝗲𝗿𝗲𝗻𝗶𝘁𝘆 
+
+⚠️ 𝗜𝗳 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲 𝗴𝗹𝗶𝘁𝗰𝗵𝗲𝘀 𝗶𝗻 𝗮𝗻𝘆-𝘄𝗮𝘆 𝘂𝘀𝗶𝗻𝗴 𝗮𝗻𝘆 𝗼𝗳 𝘁𝗵𝗲𝘀𝗲 𝗽𝗿𝗼𝗳𝗶𝗹𝗲𝘀 𝗶𝘁𝘀 𝗻𝗼𝘁 𝗴𝗼𝗻𝗻𝗮 𝗯𝗲 𝗼𝘂𝗿 𝗳𝗮𝘂𝗹𝘁, 𝗷𝘂𝘀𝘁 𝘀𝘁𝗮𝘆 𝘀𝗮𝗳𝗲 𝗮𝗻𝗱 𝗱𝗼𝗻𝘁 𝘂𝘀𝗲 𝘀𝗸𝗲𝘁𝗰𝗵𝘆 𝘀𝘆𝘀𝘁𝗲𝗺 𝘁𝘄𝗲𝗮𝗸𝘀 𝘁𝗵𝗮𝘁 𝘆𝗼𝘂 𝘁𝗵𝗶𝗻𝗸 𝗰𝗮𝗻 𝗹𝗶𝗺𝗶𝘁 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲𝘀 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 𝘁𝗼 𝗺𝘂𝗰𝗵. ⚠️</string>
+		<key>PayloadDisplayName</key>
+		<string>Acutus</string>
+		<key>PayloadIdentifier</key>
+		<string>com.serenity.tps.acutus</string>
+		<key>PayloadOrganization</key>
+		<string>https://serenityios.com/</string>
+		<key>PayloadType</key>
+		<string>Configuration</string>
+		<key>PayloadUUID</key>
+		<string>397a09da-850d-48cf-b936-f5df2d7138f6</string>
+		<key>PayloadVersion</key>
+		<integer>1</integer>
+	</dict>
+</plist>

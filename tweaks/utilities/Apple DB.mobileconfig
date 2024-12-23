@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>ConsentText</key>
+		<dict>
+			<key>default</key>
+			<string>Your about to install one of Serenity's tweaks.
+
+If anything bad happens, its not our fault you should've inspected the tweak better.</string>
+		</dict>
+		<key>PayloadContent</key>
+		<array>
+			<dict>
+				<key>FullScreen</key>
+				<true />
+				<key>Icon</key>
+				<data>UklGRgAFAABXRUJQVlA4IPQEAADQFgCdASpkAGoAPm0wlEckIyIhKnMLYIANiWMAtvwO0vmPzvSpKx/dp8x+HoyIFZA8t34YoJhBGYPyAeWAFCxkIQGPDs35MZrWp4RXo9zDc84xLYFS4ZZ2R4BkyBZQCE2ENpN8EzxDxT4Mm5QMwNXkJA+3wCZOxR1qT6MAYgl8DWriiTVAyWmFSBCgb0cXnUvANO2fGIZ2bMTYabnqbA3jbYkl/1YQi44AjUMLnEQI/3jdl1fOhmfaRRF0+VbsAAD+7B0d/UCRnbVP8Ps++/KiryWdU+vGWVAIcLQZlI43IkqMcDVHyd7d+HahZ3bpuLhe8FdGzyitIMifqNpwwvHUNWbksPGeC16cWZ2B+pcbm2axdewxXpn85SuXW9IS5jYNLWpmiymF1eeURh09XWqvszkBPbnVG7KzTJdlY8YrrhxFcCsm4HDAtguuCXldXjv4OZpKsu7seCnC3bgWPCJvcbsfpIjZNAli6iHQBmsP4E9aFzC4wFc50X93bqeTU4sEUdM1/AvcGainhnufTaE0Pl4UzLd9ZmvcMbDk1k5Yq228v/qB9jYplDHe8Jf021otWKLl9lJesL2E7aOCEhy6PZy4ZgxesgrgCrb/ILSzWAXEk9FNeW3JEQ2wD5aAoTB9LUDsXoRblWwYWi3Nw91hhCf+czQavXzqH+p6U4bULElxJV2f71LcsPbHvmQz8bYKv1H54YqjaG6jyQ3HOATPbg4M2a27CrCP+m7FjAn6ZEsx5DbBsorEwA1TTF/yQenYvL3XuyULGu4tiTwFwrbhY8sy/POuTdVjBQBfbkmZMp4tjxOP8ijwCWrDEf1mCRGSxZ9Y32LJuR5nddBrJNw53/k/suO1TvpZUesB8VCQl3DGCG2To7jiBvLWJ7wkpO/ejGpnQ3m12f7wgi3YDwPTg8oBalniwWUsVuXA0rZzfCGfDGTptOc3JpH7qrHXgjWdcLikMO+B4NpW1MQKYOHVZaeEEQuJd1K5aWTwPMBR5fwL4ho9JuVswPXZqQ+i+hPRso6BeEAW816clu1ujLk94D6fkwAfKq3Q6unMtY/NiFgNgVQH3y7BHcch5rLkjBfrTilShjyMGvb2eua9ZvOj77B9N8N8MzXcN6JNBZ09ajYlB3nfv+EMnf8YTWJJgEDBVO6bSAtKlVijG0dsRyqVIwo4789Fiat3O8994ozHbejN6l3gEBaGkXCagb6xDbJXln3H3dD0hQxV4KfdUG0Az/u9usPvJbYBsZrbHGKX979wolzjSG2j4nJ5xIjyHOmDUnDtfw6/xH2pVSQcvNQGRz86YTPgoROMHyfjQ8lmdDlvssYb8xK9cRj2bdAIAiIn3r4hiqzJ5VyNwmYEkDU1cACUOT2ssz34fRcA2nExCb3OI1LjAoz/i9/FMT8u37vqK/XxLEI+n72Fgo+k32BDXgFRRd/5UU4s3C4nDimCWikQDES8USw0AV24f6JlH+5JESUL6qCbPNit+peGTMIlkcEu47FxBPQ/N8GBLwnZrNXR/kH4BiggPb9+7W2vNdg8kmPgNrQDh9WqwATMZNyFmtO7U0ufGNzEqUolYHB8NMc15EifzI6E85C+dxeEDMQi/AG/BVuzTDv0OJ2cnnvAaAEtjEtf4AHQqTVmC4MQIxfzDD48v4y2TpjHJb0bOmykSYOiCjl+KwM8FvlyW8nC/VAQAA==</data>
+				<key>Label</key>
+				<string>Apple DB</string>
+				<key>PayloadDisplayName</key>
+				<string>Web Clip #1</string>
+				<key>PayloadIdentifier</key>
+				<string>com.apple.webClip.managed.9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadType</key>
+				<string>com.apple.webClip.managed</string>
+				<key>PayloadUUID</key>
+				<string>9bfe9a9c-09c9-4aa4-99cd-267ce9e362cc</string>
+				<key>PayloadVersion</key>
+				<integer>1</integer>
+				<key>Precomposed</key>
+				<true />
+				<key>URL</key>
+				<string>https://appledb.dev/</string>
+			</dict>
+		</array>
+		<key>PayloadDescription</key>
+		<string>View Jailbreakable Versions/iOS Information
+
+𝗧𝗵𝗶𝘀 𝗖𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝘄𝗮𝘀 𝗺𝗮𝗱𝗲 𝗯𝘆 𝗦𝗲𝗿𝗲𝗻𝗶𝘁𝘆 
+
+⚠️ 𝗜𝗳 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲 𝗴𝗹𝗶𝘁𝗰𝗵𝗲𝘀 𝗶𝗻 𝗮𝗻𝘆-𝘄𝗮𝘆 𝘂𝘀𝗶𝗻𝗴 𝗮𝗻𝘆 𝗼𝗳 𝘁𝗵𝗲𝘀𝗲 𝗽𝗿𝗼𝗳𝗶𝗹𝗲𝘀 𝗶𝘁𝘀 𝗻𝗼𝘁 𝗴𝗼𝗻𝗻𝗮 𝗯𝗲 𝗼𝘂𝗿 𝗳𝗮𝘂𝗹𝘁, 𝗷𝘂𝘀𝘁 𝘀𝘁𝗮𝘆 𝘀𝗮𝗳𝗲 𝗮𝗻𝗱 𝗱𝗼𝗻𝘁 𝘂𝘀𝗲 𝘀𝗸𝗲𝘁𝗰𝗵𝘆 𝘀𝘆𝘀𝘁𝗲𝗺 𝘁𝘄𝗲𝗮𝗸𝘀 𝘁𝗵𝗮𝘁 𝘆𝗼𝘂 𝘁𝗵𝗶𝗻𝗸 𝗰𝗮𝗻 𝗹𝗶𝗺𝗶𝘁 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲𝘀 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 𝘁𝗼 𝗺𝘂𝗰𝗵. ⚠️</string>
+		<key>PayloadDisplayName</key>
+		<string>Apple DB</string>
+		<key>PayloadIdentifier</key>
+		<string>com.serenity.u.appledb</string>
+		<key>PayloadOrganization</key>
+		<string>https://serenityios.com/</string>
+		<key>PayloadType</key>
+		<string>Configuration</string>
+		<key>PayloadUUID</key>
+		<string>397a09da-850d-48cf-b936-f5df2d7138f6</string>
+		<key>PayloadVersion</key>
+		<integer>1</integer>
+	</dict>
+</plist>

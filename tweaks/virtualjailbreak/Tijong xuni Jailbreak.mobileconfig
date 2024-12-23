@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>ConsentText</key>
+		<dict>
+			<key>default</key>
+			<string>Your about to install one of Serenity's tweaks.
+
+If anything bad happens, its not our fault you should've inspected the tweak better.</string>
+		</dict>
+		<key>PayloadContent</key>
+		<array>
+			<dict>
+				<key>FullScreen</key>
+				<true />
+				<key>Icon</key>
+				<data>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</data>
+				<key>Label</key>
+				<string>Tijong JB</string>
+				<key>PayloadDisplayName</key>
+				<string>Web Clip #1</string>
+				<key>PayloadIdentifier</key>
+				<string>com.apple.webClip.managed.b1890b42-b47c-4dad-b834-6cd66d766a86</string>
+				<key>PayloadType</key>
+				<string>com.apple.webClip.managed</string>
+				<key>PayloadUUID</key>
+				<string>b1890b42-b47c-4dad-b834-6cd66d766a86</string>
+				<key>PayloadVersion</key>
+				<integer>1</integer>
+				<key>Precomposed</key>
+				<true />
+				<key>URL</key>
+				<string>https://semijbapps.com/virtual-jailbreak/secure/tijong/</string>
+			</dict>
+		</array>
+		<key>PayloadDescription</key>
+		<string>Tijong Jailbreak to install Sileo, this is not a real jailbreak, its just a virtual one.
+though; it still lets you install tweaks/themes/utilities.
+
+𝗧𝗵𝗶𝘀 𝗖𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝘄𝗮𝘀 𝗺𝗮𝗱𝗲 𝗯𝘆 𝗦𝗲𝗿𝗲𝗻𝗶𝘁𝘆 
+
+⚠️ 𝗜𝗳 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲 𝗴𝗹𝗶𝘁𝗰𝗵𝗲𝘀 𝗶𝗻 𝗮𝗻𝘆-𝘄𝗮𝘆 𝘂𝘀𝗶𝗻𝗴 𝗮𝗻𝘆 𝗼𝗳 𝘁𝗵𝗲𝘀𝗲 𝗽𝗿𝗼𝗳𝗶𝗹𝗲𝘀 𝗶𝘁𝘀 𝗻𝗼𝘁 𝗴𝗼𝗻𝗻𝗮 𝗯𝗲 𝗼𝘂𝗿 𝗳𝗮𝘂𝗹𝘁, 𝗷𝘂𝘀𝘁 𝘀𝘁𝗮𝘆 𝘀𝗮𝗳𝗲 𝗮𝗻𝗱 𝗱𝗼𝗻𝘁 𝘂𝘀𝗲 𝘀𝗸𝗲𝘁𝗰𝗵𝘆 𝘀𝘆𝘀𝘁𝗲𝗺 𝘁𝘄𝗲𝗮𝗸𝘀 𝘁𝗵𝗮𝘁 𝘆𝗼𝘂 𝘁𝗵𝗶𝗻𝗸 𝗰𝗮𝗻 𝗹𝗶𝗺𝗶𝘁 𝘆𝗼𝘂𝗿 𝗱𝗲𝘃𝗶𝗰𝗲𝘀 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 𝘁𝗼 𝗺𝘂𝗰𝗵. ⚠️</string>
+		<key>PayloadDisplayName</key>
+		<string>Tijong xuni Jailbreak</string>
+		<key>PayloadIdentifier</key>
+		<string>com.serenity.jb.tijong</string>
+		<key>PayloadOrganization</key>
+		<string>https://serenityios.com/</string>
+		<key>PayloadType</key>
+		<string>Configuration</string>
+		<key>PayloadUUID</key>
+		<string>397a09da-850d-48cf-b936-f5df2d7138f6</string>
+		<key>PayloadVersion</key>
+		<integer>1</integer>
+	</dict>
+</plist>
