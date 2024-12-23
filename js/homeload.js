@@ -461,11 +461,12 @@ const setupSearch = async () => {
     });
 };
 
-// Initialize on page load
+
 window.onload = async () => {
     const repoData = await fetchData('https://wuxu1.github.io/wuxu-complete-plus.json');
     if (repoData) {
         loadApps(repoData);
         setupSearch();
     }
+
 };

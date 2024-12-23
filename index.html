@@ -617,150 +617,212 @@ overlay.addEventListener('click', function(event) {
         closeOverlay();
     }
 });
-
-
 </script>
-
-
-
 
 <script>
-// Flag to track delete mode
-let isDeleteMode = false;
-
-// Function to prompt for a new repository URL
-function promptSource() {
-  const sourceURL = prompt("Enter the repository URL");
-  if (sourceURL) {
-    fetchRepoInfo(sourceURL);  // Fetch repository data when URL is provided
+  // Flag to track delete mode
+  let isDeleteMode = false;
+  
+  // Function to prompt for a new repository URL
+  function promptSource() {
+    const sourceURL = prompt("Enter the repository URL");
+    if (sourceURL) {
+      fetchRepoInfo(sourceURL);  // Fetch repository data when URL is provided
+    }
   }
-}
-
-// Function to toggle the visibility of the delete (X) button
-function toggleDeleteButton() {
-  isDeleteMode = !isDeleteMode; // Toggle delete mode
-  const repoDivs = document.querySelectorAll('.repo-item');
-
-  repoDivs.forEach(repoDiv => {
-    const deleteButton = repoDiv.querySelector('.delete-btn');
-    deleteButton.style.display = isDeleteMode ? 'block' : 'none'; // Show or hide delete button
-  });
-}
-
-// Function to fetch repository info based on URL
-async function fetchRepoInfo(url) {
-  try {
-    const normalizedURL = url.replace(/\/$/, ""); // Normalize URL by removing trailing slash
-
-    // Check if the repository has already been added (from localStorage)
+  
+  // Function to toggle the visibility of the delete (trash) button
+  function toggleDeleteButton() {
+    isDeleteMode = !isDeleteMode; // Toggle delete mode
+    const repoDivs = document.querySelectorAll('.repo-item');
+  
+    repoDivs.forEach(repoDiv => {
+      const deleteButton = repoDiv.querySelector('.trash-btn');
+      deleteButton.style.display = isDeleteMode ? 'block' : 'none'; // Show or hide trash button
+    });
+  
+    // Toggle visibility of the green button (enabled button)
+    const greenButtons = document.querySelectorAll('.green-button');
+    greenButtons.forEach(btn => {
+      btn.style.display = isDeleteMode ? 'none' : 'block';
+    });
+  }
+  
+  // Function to fetch repository info based on URL
+  async function fetchRepoInfo(url) {
+    try {
+      const normalizedURL = url.replace(/\/$/, ""); // Normalize URL by removing trailing slash
+  
+      // Check if the repository has already been added (from localStorage)
+      const repos = getReposFromLocalStorage();
+      if (repos.some(repo => repo.url === normalizedURL)) {
+        return; // Do nothing if the repo already exists
+      }
+  
+      // Fetch repository details (simulated fetch here)
+      const response = await fetch(normalizedURL);
+  
+      // Check if the response is okay (status 200)
+      if (!response.ok) {
+        return; // Do nothing if the response is invalid
+      }
+  
+      // Assuming the repository data comes in JSON format
+      const data = await response.json();
+      const repoName = data.name || "Undefined Name in repo";
+      const repoId = data.identifier || "Unknown Identifier";
+      const iconURL = data.iconURL || "https://via.placeholder.com/30"; // Default placeholder icon
+  
+      // Create a new repo object
+      const newRepo = {
+        url: normalizedURL,
+        name: repoName,
+        iconURL: iconURL,
+        repoId: repoId,
+      };
+  
+      // Add the new repository to localStorage and render it
+      addRepoToLocalStorage(newRepo);
+      renderRepo(newRepo);
+    } catch (error) {
+      console.error('Error fetching repo info:', error);
+    }
+  }
+  
+  // Function to render a repository div
+  function renderRepo(repo) {
+    const repoDiv = document.createElement('div');
+    repoDiv.classList.add('repo-item'); // Add class for easy selection
+    repoDiv.style.marginBottom = '15px';
+    repoDiv.style.padding = '10px';
+    repoDiv.style.width = '100%';
+    repoDiv.style.height = '80px';
+    repoDiv.style.borderBottom = '1px solid rgba(255, 255, 255, 0.2)';
+    repoDiv.style.position = 'relative';
+    repoDiv.dataset.url = repo.url; // Store URL in data-url attribute
+  
+    repoDiv.innerHTML = `
+      <img src="${repo.iconURL}" alt="${repo.name}" style="width: 60px; height: 60px; border-radius: 15px; margin-left: 0px;">
+      <strong style="position: absolute; font-weight: 1; color: white; left: 75px; top: 15px;">${repo.name}</strong>
+      <p style="font-size: 14px; color: rgba(255, 255, 255, 0.7); font-family: 'apple', sans-serif; bottom: 20px; left: 75px; position: absolute;">${repo.repoId}</p>
+      <button class="green-button" onclick="toggleGreenButton(this)" style="position: absolute; right: 11px; top: 11px; background: transparent; border: #ffffff40 1px solid; font-size: 12px; font-weight: 1; border-radius: 15px; height: 20px; width: 20px; color: white;">
+        <img src="images/home/checkmark.png" style="width: 15px; height: 15px; margin: 2px 0 0 2px; display: none;">
+      </button>
+      <button class="trash-btn" onclick="removeRepo(this)" style="position: absolute; right: 10px; top: 10px; background: transparent; font-size: 12px; font-weight: 1; border: none; height: 25px; width: 25px; color: white; display: none;">
+        <img src="images/home/trash.png" style="width: 20px; height: 20px;">
+      </button>
+    `;
+  
+    // Append the div to the repo-list container
+    const repoList = document.getElementById('repo-list');
+    if (repoList) {
+      repoList.appendChild(repoDiv);
+    }
+  
+    // Check localStorage to restore green button state
+    restoreGreenButtonState(repoDiv);
+  }
+  
+  // Function to add a repository to localStorage
+  function addRepoToLocalStorage(repo) {
+    const repos = getReposFromLocalStorage(); // Get current repositories list from localStorage
+    repos.push(repo); // Add the new repository to the list
+    saveReposToLocalStorage(repos); // Save updated list to localStorage
+  }
+  
+  // Function to save repositories to localStorage
+  function saveReposToLocalStorage(repos) {
+    localStorage.setItem('repos', JSON.stringify(repos)); // Save repositories to localStorage
+  }
+  
+  // Function to get repositories from localStorage
+  function getReposFromLocalStorage() {
+    const repos = localStorage.getItem('repos');
+    return repos ? JSON.parse(repos) : []; // Return the list or empty array if none found
+  }
+  
+  // Function to remove a repository from the list
+  function removeRepo(button) {
+    const repoDiv = button.parentElement;
+    const repoURL = repoDiv.dataset.url; // Get the URL from data-url
+  
+    // Remove the repository URL from the list in localStorage
     const repos = getReposFromLocalStorage();
-    if (repos.some(repo => repo.url === normalizedURL)) {
-      alert("This repository has already been added.");
-      return;
-    }
-
-    // Fetch repository details (simulated fetch here)
-    const response = await fetch(normalizedURL);
-    if (!response.ok) {
-      alert("Invalid URL/Not a Repo we have support for yet.");
-      return;
-    }
-
-    const data = await response.json(); // Assuming the response is in JSON format
-    const repoName = data.name;
-    const repoId = data.identifier;
-    const iconURL = data.iconURL;
-
-    // Create a new repo object
-    const newRepo = {
-      url: normalizedURL,
-      name: repoName || "Undefined Name in repo lol💀💀",
-      iconURL: iconURL || "https://via.placeholder.com/30", // Default placeholder icon
-      repoId: repoId || "dont mind this, dev is having fun",
-    };
-
-    // Add the new repository to localStorage and render it
-    addRepoToLocalStorage(newRepo);
-    renderRepo(newRepo);
-  } catch (error) {
-    console.error('Error fetching repo info:', error);
-    alert('Error fetching repository information.');
-  }
-}
-
-// Function to render a repository div
-function renderRepo(repo) {
-  const repoDiv = document.createElement('div');
-  repoDiv.classList.add('repo-item'); // Add class for easy selection
-  repoDiv.style.marginBottom = '15px';
-  repoDiv.style.padding = '10px';
-  repoDiv.style.width = '100%';
-  repoDiv.style.height = '80px';
-  repoDiv.style.borderBottom = '1px solid rgba(255, 255, 255, 0.2)';
-  repoDiv.style.position = 'relative';
-  repoDiv.dataset.url = repo.url; // Store URL in data-url attribute
-
-  repoDiv.innerHTML = `
-    <img src="${repo.iconURL}" alt="${repo.name}" style="width: 60px; height: 60px; border-radius: 15px; margin-left: 0px;">
-    <strong style="position: absolute; font-weight: 1; color: white; left: 75px; top: 15px;">${repo.name}</strong>
-    <p style="font-size: 14px; color: rgba(255, 255, 255, 0.7); font-family: 'apple', sans-serif; bottom: 20px; left: 75px; position: absolute;">${repo.repoId}</p>
-    <button class="delete-btn" onclick="removeRepo(this)" style="position: absolute; right: 10px; top: 10px; background: red; font-size: 12px; font-weight: 1; border-radius: 15px; height: 25px; width: 60px; border: none; color: white; display: none;">REMOVE</button>
-  `;
+    const updatedRepos = repos.filter(repo => repo.url !== repoURL); // Remove the specific repo
+    saveReposToLocalStorage(updatedRepos); // Save updated list to localStorage
   
-  // Append the div to the repo-list container
-  const repoList = document.getElementById('repo-list');
-  if (repoList) {
-    repoList.appendChild(repoDiv);
+    // Remove the repo div from the DOM
+    repoDiv.remove();
   }
-}
-
-// Function to add a repository to localStorage
-function addRepoToLocalStorage(repo) {
-  const repos = getReposFromLocalStorage(); // Get current repositories list from localStorage
-  repos.push(repo); // Add the new repository to the list
-  saveReposToLocalStorage(repos); // Save updated list to localStorage
-}
-
-// Function to save repositories to localStorage
-function saveReposToLocalStorage(repos) {
-  localStorage.setItem('repos', JSON.stringify(repos)); // Save repositories to localStorage
-}
-
-// Function to get repositories from localStorage
-function getReposFromLocalStorage() {
-  const repos = localStorage.getItem('repos');
-  return repos ? JSON.parse(repos) : []; // Return the list or empty array if none found
-}
-
-// Function to remove a repository from the list
-function removeRepo(button) {
-  const repoDiv = button.parentElement;
-  const repoURL = repoDiv.dataset.url; // Get the URL from data-url
-
-  // Remove the repository URL from the list in localStorage
-  const repos = getReposFromLocalStorage();
-  const updatedRepos = repos.filter(repo => repo.url !== repoURL); // Remove the specific repo
-  saveReposToLocalStorage(updatedRepos); // Save updated list to localStorage
-
-  // Remove the repo div from the DOM
-  repoDiv.remove();
-}
-
-// Function to load repositories from localStorage when the page loads
-function loadReposFromLocalStorage() {
-  const repos = getReposFromLocalStorage();
-  repos.forEach(renderRepo); // Render each repository from localStorage
-}
-
-// Ensure repositories are loaded when the page is fully loaded
-document.addEventListener('DOMContentLoaded', loadReposFromLocalStorage);
-</script>
-
-
-
-
-
   
+  // Function to toggle green button state (enabled/disabled)
+  function toggleGreenButton(button) {
+    // If a button is already enabled, disable it first
+    const enabledButton = document.querySelector('.green-button[style*="rgb(100, 200, 100)"]');
+    if (enabledButton && enabledButton !== button) {
+      // Disable the previously enabled button
+      const checkmark = enabledButton.querySelector('img');
+      enabledButton.style.backgroundColor = 'transparent';
+      enabledButton.style.border = '#ffffff40 1px solid'; // Restore the border
+      checkmark.style.display = 'none'; // Hide checkmark
+    }
+  
+    const isEnabled = button.style.backgroundColor === 'rgb(100, 200, 100)';  // Adjusted shade of green
+    const checkmark = button.querySelector('img');
+  
+    if (isEnabled) {
+      button.style.backgroundColor = 'transparent';
+      button.style.border = '#ffffff40 1px solid'; // Restore the border
+      checkmark.style.display = 'none'; // Hide checkmark
+    } else {
+      button.style.backgroundColor = 'rgb(100, 200, 100)'; // Slightly darker green
+      button.style.border = 'none'; // Remove border
+      checkmark.style.display = 'block'; // Show checkmark
+    }
+  
+    saveGreenButtonState(button.closest('.repo-item'));
+  }
+  
+  // Function to restore the green button state from localStorage
+  function restoreGreenButtonState(repoDiv) {
+    const button = repoDiv.querySelector('.green-button');
+    const checkmark = button.querySelector('img');
+    const repoURL = repoDiv.dataset.url;
+    const repos = getReposFromLocalStorage();
+    const repo = repos.find(repo => repo.url === repoURL);
+    if (repo && repo.isGreenEnabled) {
+      button.style.backgroundColor = 'rgb(100, 200, 100)'; // Slightly darker green
+      button.style.border = 'none'; // Remove border
+      checkmark.style.display = 'block'; // Show checkmark
+    } else {
+      button.style.backgroundColor = 'transparent'; // No green
+      button.style.border = '#ffffff40 1px solid'; // Restore border
+      checkmark.style.display = 'none'; // Hide checkmark
+    }
+  }
+  
+  // Function to save the green button state in localStorage
+  function saveGreenButtonState(repoDiv) {
+    const button = repoDiv.querySelector('.green-button');
+    const checkmark = button.querySelector('img');
+    const repoURL = repoDiv.dataset.url;
+    const repos = getReposFromLocalStorage();
+    const repo = repos.find(repo => repo.url === repoURL);
+    if (repo) {
+      repo.isGreenEnabled = button.style.backgroundColor === 'rgb(100, 200, 100)'; // Check for darker green
+      saveReposToLocalStorage(repos);
+    }
+  }
+  
+  // Ensure repositories are loaded when the page is fully loaded
+  document.addEventListener('DOMContentLoaded', loadReposFromLocalStorage);
+  
+  // Function to load repositories from localStorage when the page loads
+  function loadReposFromLocalStorage() {
+    const repos = getReposFromLocalStorage();
+    repos.forEach(renderRepo); // Render each repository from localStorage
+  }
+  </script>
 
   <div id="search-bar-container">
 
@@ -1387,4 +1449,4 @@ window.onresize = function() {
     });
     </script>
 </body>
-</html>
+</html> 
