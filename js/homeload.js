@@ -406,7 +406,6 @@ const bytesToMB = (bytes) => {
     return (bytes / (1024 * 1024)).toFixed(2); // Convert bytes to MB and limit to 2 decimal places
 };
 
-// Setup search functionality
 const setupSearch = async () => {
     const searchBar = document.getElementById('search-bar');
     const resultsContainer = document.createElement('div');
@@ -426,7 +425,7 @@ const setupSearch = async () => {
             const filteredApps = repoData.apps.filter(app => app.name.toLowerCase().includes(searchTerm));
 
             if (filteredApps.length > 0) {
-                overlay.style.display = 'block'; 
+                overlay.style.display = 'block';  // Show the overlay
                 resultsContainer.style.display = 'block'; 
                 document.body.classList.add('no-scroll'); 
 
@@ -454,12 +453,29 @@ const setupSearch = async () => {
                 resultsContainer.innerHTML = '<p>No results found</p>';
             }
         } else {
-            overlay.style.display = 'none'; 
+            overlay.style.display = 'none'; // Hide overlay immediately if no results
             resultsContainer.style.display = 'none'; 
             document.body.classList.remove('no-scroll'); 
         }
     });
+
+    // Close overlay when clicking on the background (overlay)
+    overlay.addEventListener('click', () => {
+        // Hide the overlay with a delay to simulate a fade-out effect
+        overlay.style.transition = 'background 0s ease'; // Optional transition effect
+        setTimeout(() => {
+            overlay.style.display = 'none'; // Hide overlay after a brief delay
+            resultsContainer.style.display = 'none'; // Hide the results container
+            document.body.classList.remove('no-scroll');
+        }, 0); // Delay should match the transition time
+    });
+
+    // Prevent the overlay from being closed when clicking inside the results container
+    resultsContainer.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent click from bubbling up to the overlay
+    });
 };
+
 
 
 window.onload = async () => {

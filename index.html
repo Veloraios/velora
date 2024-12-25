@@ -111,7 +111,7 @@ img {
           font-family: 'SFPro', Arial, sans-serif;
           background-color: #131416;
           color: white;
-      
+     
           display: flex;
           flex-direction: column;
           min-height: 100vh;
@@ -424,6 +424,7 @@ img.icon {
   cursor: pointer;
   transition: background 0.3s;
   width: 100%; 
+  border-radius: 10px;
   position: relative; 
   overflow: hidden;
 }
@@ -479,8 +480,12 @@ img.icon {
   background: rgba(0, 0, 0, 0.5); 
   display: none; 
   z-index: 10000; 
+  transition: background 0s ease;
 }
 
+.no-scroll {
+    overflow-y: hidden; /* Prevent scrolling when overlay is visible */
+}
 
 .tab-container {
 
@@ -563,6 +568,36 @@ left: calc(130px * 2 + 2px);
     
 </head>
 <body>
+
+  <div id="storageModal" style="display: none; position: fixed; z-index: 9999999999; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+    <div style="background-color: #191A1C; color: white; border-radius: 10px; width: 450px; height: 200px; left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%);">
+      <h3 style="left: 10px; position: absolute; font-weight: 1; top: 10px;">Local Storage</h3>
+      <p id="storageDetails" style="color: white; font-size: 16px; font-family: 'apple', sans-serif; left: 10px; position: absolute; top: 36px; opacity: 50%;"></p>
+      <div style="width: 95%; height: 10px; background-color: #555; border-radius: 5px; top: 70px; left: 50%; transform: translateX(-50%); position: absolute;">
+        <div id="progress" style="height: 100%; background-color: #4caf50; width: 0%; border-radius: 5px;"></div>
+      </div>
+      <button onclick="localStorage.clear()" style="background-color: #131416; border: none; color: white; position: absolute; height: 40px;  border-radius: 15px; top: 80px; font-size: 16px; font-family: 'apple', sans-serif; ">
+        <span style="position: absolute; left: 50px; top: 50%; transform: translateY(-50%);">Clear Storage</span>
+        <img src="images/settingspage/folder_fill_badge_minus.png" style="left: 10px; position: absolute; width: 30px; height: 30px; top: 50%; transform: translateY(-50%);" alt="">
+      
+      </button>
+      <button onclick="closeStorageModal()" style="background-color: #f44336; border: none; color: white; position: absolute; height: 40px;  border-radius: 15px; top: 130px; font-size: 16px; font-family: 'apple', sans-serif;">Close</button>
+    </div>
+  </div>
+  
+  <script>
+  // JavaScript to show the modal
+  function showStorageModal() {
+    document.getElementById('storageModal').style.display = 'block';
+  }
+  
+  // JavaScript to close the modal
+  function closeStorageModal() {
+    document.getElementById('storageModal').style.display = 'none';
+  }
+  </script>
+
+  
 
   <div onclick="closeOverlay(event)" class="overlay" style="background-color: rgba(0, 0, 0, 0.65); width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 100000000000000000000; opacity: 0; transition: opacity 0.5s ease-in-out;">
     <div style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 350px; border-radius: 15px; max-width: 400px; background-color: rgba(22, 25, 28, 0.65); position: fixed; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);" onclick="event.stopPropagation()">
@@ -905,148 +940,306 @@ window.onresize = function() {
     <div class="content active" id="home-page" style="overflow-x: hidden;">
       
     </div>
-    <div class="content" id="categories-page" style="overflow-x: hidden; overflow-y: auto; height: 100vh;">
+    <div class="content" id="categories-page" style="overflow-x: hidden; overflow-y: auto; ">
       <!-- Header Section -->
       <div style="display: flex; align-items: center; position: relative; height: 60px;">
           <h1 style="font-size: 24px; margin: 0;">What's New?</h1>
           <img src="images/settingspage/plus.png" alt="plus icon" style="position: absolute; right: 20px; width: 30px; height: 30px; top: 50%; transform: translateY(-50%);">
       </div>
-
+  
       <div style="height: 225px; width: 100vw; display: flex; align-items: center; overflow-x: auto; padding: 0; box-sizing: border-box;">
-        <div style="border-radius: 10px; overflow: hidden; flex-shrink: 0;">
-          <img src="images/library/IMG_2971.png" style="height: auto; max-height: 200px; width: auto; max-width: 100%;" alt="">
-        </div>
-        <div style="border-radius: 10px; overflow: hidden; flex-shrink: 0; margin-left: 10px;">
-          <img src="images/library/IMG_2970.png" style="height: auto; max-height: 200px; width: auto; max-width: 100%;" alt="">
-        </div>
-      
-        <div style="border-radius: 10px; width: 400px; overflow: hidden; flex-shrink: 0; margin-left: 10px;">
-          
-        </div>
+          <div style="border-radius: 10px; overflow: hidden; flex-shrink: 0;">
+              <img src="images/library/IMG_2971.png" style="height: auto; max-height: 200px; width: auto; max-width: 100%;" alt="">
+          </div>
+          <div style="border-radius: 10px; overflow: hidden; flex-shrink: 0; margin-left: 10px;">
+              <img src="images/library/IMG_2970.png" style="height: auto; max-height: 200px; width: auto; max-width: 100%;" alt="">
+          </div>
+          <div style="border-radius: 10px; width: 400px; overflow: hidden; flex-shrink: 0; margin-left: 10px;"></div>
       </div>
-
+  
+      <!-- Buttons Section -->
+     
+      <div id="navButtonParadise" style="display: flex; overflow-x: auto; width: 100%; position: absolute; margin-top: 0px; left: 50%; transform: translateX(-50%); white-space: nowrap;">
+          <button id="systemTweakButton" style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px; display: flex; align-items: center; justify-content: flex-start;" class="nav-button" data-section="system-tweaks">
+              <img src="images/library/gear.png" alt="systemtweaks" style="width: 30px; height: 30px; margin-left: 10px;">
+              <span style="font-size: 19px; margin-left: 10px; font-family: apple, sans-serif;">System Tweaks</span>
+          </button>
+          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px; display: flex; align-items: center; justify-content: flex-start;" class="nav-button" data-section="themes">
+              <img src="images/library/paintbrush_fill.png" alt="themes" style="width: 30px; height: 30px; margin-left: 10px;">
+              <span style="font-size: 19px; margin-left: 10px; font-family: apple, sans-serif;">Themes</span>
+          </button>
+          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-section="virtual-jailbreaks">
+              <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 17px; transform: translateY(-50%); font-family: apple, sans-serif;">Virtual Jailbreaks</span>
+              <img src="images/library/ant_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+          </button>
+          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-section="package-managers">
+              <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 16px; transform: translateY(-50%); font-family: apple, sans-serif;">Package Managers</span>
+              <img src="images/library/cube_box_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+          </button>
+          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-section="third-party-store">
+              <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">3rd Party Stores</span>
+              <img src="images/library/app_badge_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+          </button>
+          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-section="jb-launchers">
+              <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">JB Launchers</span>
+              <img src="images/library/logo_apple.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+          </button>
+          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-section="emulators">
+              <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">Emulators</span>
+              <img src="images/library/gamecontroller_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+          </button>
+          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-section="shortcut-tweaks">
+              <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">Shortcut Tweaks</span>
+              <img src="images/library/sparkles.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+          </button>
+          <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-section="utilities">
+              <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">Utilities</span>
+              <img src="images/library/hammer_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
+          </button>
+      </div>
       
+
+      <!-- Content Sections -->
+      <div id="system-tweaks" class="content-div" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+          <p>This is the System Tweaks content.</p>
+      </div>
+      
+      <div id="themes" class="content-div" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+          <p>This is the Themes content.</p>
+      </div>
+      
+      <div id="virtual-jailbreaks" class="content-div" style="display: none;  min-height: 100vh; opacity: 0; margin-top: 70px; transition: opacity 0.3s ease-in-out; height: auto; width: 100%;">
+          <p>This is the Virtual Jailbreaks content.</p>
+          <div id="mobileconfig-info" style="box-sizing: border-box; width: 100%; height: auto;"></div> <!-- Content will go here -->
+      </div>
+      
+      <div id="package-managers" class="content-div" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+          <p>This is the Package Managers content.</p>
+      </div>
   
-          <!-- Buttons Section -->
-          <div style="display: flex; overflow-x: auto; width: 100%; position: absolute; margin-top: 0px; left: 50%; transform: translateX(-50%); white-space: nowrap;" >
-            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px; display: flex; align-items: center; justify-content: flex-start;" class="nav-button" data-target="system-tweaks">
-                <img src="images/library/gear.png" alt="systemtweaks" style="width: 30px; height: 30px; margin-left: 10px;">
-                <span style="font-size: 19px; margin-left: 10px; font-family: apple, sans-serif;">System Tweaks</span>
-            </button>
-            
-            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px; display: flex; align-items: center; justify-content: flex-start;" class="nav-button" data-target="themes">
-                <img src="images/library/paintbrush_fill.png" alt="themes" style="width: 30px; height: 30px; margin-left: 10px;">
-                <span style="font-size: 19px; margin-left: 10px; font-family: apple, sans-serif;">Themes</span>
-            </button>
-            
-            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-target="virtual-jailbreaks">
-                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 17px; transform: translateY(-50%); font-family: apple, sans-serif;">Virtual Jailbreaks</span>
-                <img src="images/library/ant_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
-            </button>
-            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-target="package-managers">
-                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 16px; transform: translateY(-50%); font-family: apple, sans-serif;">Package Managers</span>
-                <img src="images/library/cube_box_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
-            </button>
-            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-target="third-party-store">
-                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">3rd Party Stores</span>
-                <img src="images/library/app_badge_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
-            </button>
-            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-target="jb-launchers">
-                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">JB Launchers</span>
-                <img src="images/library/logo_apple.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
-            </button>
-            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-target="emulators">
-                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">Emulators</span>
-                <img src="images/library/gamecontroller_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
-            </button>
-            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-target="shortcut-tweaks">
-                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">Shortcut Tweaks</span>
-                <img src="images/library/sparkles.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
-            </button>
-            <button style="color: white; width: 210px; height: 45px; border-radius: 30px; margin-right: 10px; flex: 0 0 190px;" class="nav-button" data-target="utilities">
-                <span style="color: white; position: absolute; top: 50%; left: 50px; font-size: 19px; transform: translateY(-50%); font-family: apple, sans-serif;">Utilities</span>
-                <img src="images/library/hammer_fill.png" alt="systemtweaks" style="width: 30px; height: 30px; position: absolute; top: 50%; left: 10px; transform: translateY(-50%);">
-            </button>
-        </div>
+      <div id="third-party-store" class="content-div" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+          <p>This is the 3rd Party Store content.</p>
+      </div>
   
+      <div id="jb-launchers" class="content-div" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+          <p>This is the JB Launchers content.</p>
+      </div>
+  
+      <div id="emulators" class="content-div" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+          <p>This is the Emulators content.</p>
+      </div>
+  
+      <div id="shortcut-tweaks" class="content-div" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+          <p>This is the Shortcut Tweaks content.</p>
+      </div>
+  
+      <div id="utilities" class="content-div" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
+          <p>This is the Utilities content.</p>
+      </div>
+  
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get all buttons and content divs
+            const buttons = document.querySelectorAll('.nav-button');
+            const contentDivs = document.querySelectorAll('.content-div');
     
-<div class="content-div system-tweaks" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-  <p>This is the System Tweaks content.</p>
-</div>
-
-<div class="content-div themes" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-  <p>This is the Themes content.</p>
-</div>
-
-<div class="content-div virtual-jailbreaks" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-  <p>This is the Virtual Jailbreaks content.</p>
-</div>
-
-<div class="content-div package-managers" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-  <p>This is the Package Managers content.</p>
-</div>
-
-<div class="content-div third-party-store" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-  <p>This is the 3rd Party Store content.</p>
-</div>
-
-<div class="content-div jb-launchers" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-  <p>This is the JB Launchers content.</p>
-</div>
-
-<div class="content-div emulators" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-  <p>This is the Emulators content.</p>
-</div>
-
-<div class="content-div shortcut-tweaks" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-  <p>This is the Shortcut Tweaks content.</p>
-</div>
-
-<div class="content-div utilities" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-  <p>This is the Utilities content.</p>
-</div>
-
+            // Function to handle button click and switch content
+            function handleButtonClick(event) {
+                const targetSection = event.target.closest('.nav-button').getAttribute('data-section');
+    
+                // Remove active class from all buttons (only inside #navButtonParadise)
+                if (event.target.closest('#navButtonParadise')) {
+                    buttons.forEach(button => {
+                        button.style.backgroundColor = ''; // Remove the grey background
+                    });
+                    event.target.closest('.nav-button').style.backgroundColor = 'rgba(150, 150, 150, 0.25)'; // Add transparent grey background
+                }
+    
+                // Hide all content divs
+                contentDivs.forEach(div => {
+                    div.style.display = 'none';
+                    div.style.opacity = '0';
+                });
+    
+                // Show the corresponding content div based on target
+                const targetContentDiv = document.getElementById(targetSection);
+                if (targetContentDiv) {
+                    targetContentDiv.style.display = 'block';
+                    setTimeout(() => {
+                        targetContentDiv.style.opacity = '1';
+                    }, 10);
+                } else {
+                    console.error(`No content div found for target: ${targetSection}`);
+                }
+            }
+    
+            // Add event listeners for each button
+            buttons.forEach(button => {
+                button.addEventListener('click', handleButtonClick);
+            });
+    
+            // Optional: Initialize the first button and div as active by default
+            const firstButton = document.querySelector('.nav-button');
+            firstButton.style.backgroundColor = 'rgba(150, 150, 150, 0.25)';
+            const firstDiv = document.querySelector('.content-div');
+            firstDiv.style.display = 'block';
+            firstDiv.style.opacity = '1';
+    
+            // Function to fetch and parse the .mobileconfig file
+            function fetchMobileConfig(filePath, button) {
+                // Fetch the .mobileconfig file
+                fetch(filePath)
+                    .then(response => response.text())
+                    .then(data => {
+                        // Parse the response as XML
+                        const parser = new DOMParser();
+                        const xmlDoc = parser.parseFromString(data, "text/xml");
+    
+                        // Initialize variables for Payload Identifier, Payload UUID, and Payload Description
+                        let label = 'No Label Found';
+                        let payloadIdentifier = '';
+                        let payloadUUID = '';
+                        let payloadDescription = '';
+                        let iconBase64 = '';
+    
+                        // Fetch the necessary keys from the XML
+                        const keys = xmlDoc.getElementsByTagName('key');
+                        for (let i = 0; i < keys.length; i++) {
+                            if (keys[i].textContent === 'Label' && keys[i].nextElementSibling) {
+                                label = keys[i].nextElementSibling.textContent;
+                            }
+                            if (keys[i].textContent === 'PayloadIdentifier' && keys[i].nextElementSibling) {
+                                payloadIdentifier = keys[i].nextElementSibling.textContent;
+                            }
+                            if (keys[i].textContent === 'PayloadUUID' && keys[i].nextElementSibling) {
+                                payloadUUID = keys[i].nextElementSibling.textContent;
+                            }
+                            if (keys[i].textContent === 'PayloadDescription' && keys[i].nextElementSibling) {
+                                payloadDescription = keys[i].nextElementSibling.textContent;
+                            }
+                            if (keys[i].textContent === 'Icon' && keys[i].nextElementSibling) {
+                                iconBase64 = keys[i].nextElementSibling.textContent;
+                            }
+                        }
+    
+                        // Store the PayloadIdentifier and PayloadUUID for later use
+                        button.setAttribute('data-payload-identifier', payloadIdentifier);
+                        button.setAttribute('data-payload-uuid', payloadUUID);
+                        button.setAttribute('data-payload-description', payloadDescription);
+    
+                        // Now update the button with the correct label and icon
+                        const labelElement = button.querySelector('.label');
+                        labelElement.textContent = label;
+    
+                        // Update the icon if available
+                        const iconElement = button.querySelector('.icon');
+                        if (iconBase64) {
+                            iconElement.src = `data:image/png;base64,${iconBase64}`;
+                        }
+    
+                        // Function to create and show the fullscreen div
+                        function showFullscreenDiv() {
+                            const fullscreenDiv = document.createElement('div');
+                            fullscreenDiv.style.position = 'fixed';
+                            fullscreenDiv.style.top = '0';
+                            fullscreenDiv.style.left = '0';
+                            fullscreenDiv.style.width = '100%';
+                            fullscreenDiv.style.height = '100%';
+                            fullscreenDiv.style.backgroundColor = '#131416';
+                            fullscreenDiv.style.zIndex = '9999999999999999999999999999999999999999999';
+                            fullscreenDiv.style.color = 'white';
+                            fullscreenDiv.style.overflow = 'auto';
+                            fullscreenDiv.style.display = 'flex';
+                            fullscreenDiv.style.flexDirection = 'column';
+                            fullscreenDiv.style.padding = '20px';
+                            
+                            // Close button (Chevron)
+                            const closeButton = `
+                                <img src="images/home/chevron_left.png" alt="Close" 
+                                    style="position: absolute; top: 20px; left: 20px; cursor: pointer; width: 30px; height: 30px;" />
+                            `;
+                            fullscreenDiv.innerHTML = closeButton;
+                            fullscreenDiv.innerHTML += `
+                                <div>
+                                    <p><strong>ID:</strong> [id]</p>
+                                    <p><strong>UUID:</strong> [uuid]</p>
+                                    <p><strong>Description:</strong> [des]</p>
+                                     <img class="icon" src="" alt="Icon" style="width: 80px; height: 80px; border-radius: 15px; margin-left: 0px;">
+                                </div>
+                            `;
+    
+                            // Replace placeholders with actual values
+                            fullscreenDiv.innerHTML = fullscreenDiv.innerHTML
+                                .replace('[id]', payloadIdentifier)
+                                .replace('[uuid]', payloadUUID)
+                                .replace('[des]', payloadDescription);
+    
+                            // Event listener for close button
+                            fullscreenDiv.querySelector('img').addEventListener('click', () => {
+                                fullscreenDiv.remove();
+                            });
+    
+                            // Append to body
+                            document.body.appendChild(fullscreenDiv);
+                        }
+    
+                        // Attach the event listener to the button
+                        button.addEventListener('click', (e) => {
+                            showFullscreenDiv();
+                        });
+    
+                    })
+                    .catch(error => console.error('Error fetching mobileconfig file:', error));
+            }
+    
+            const mobileConfigFiles = [
+                'tweaks/virtualjailbreak/Checkra1n Mirror.mobileconfig',
+                'tweaks/virtualjailbreak/Checkra1n.mobileconfig',
+                'tweaks/virtualjailbreak/Cheyote.mobileconfig',
+                'tweaks/virtualjailbreak/Fugu17.mobileconfig',
+                'tweaks/virtualjailbreak/HacksNow.mobileconfig',
+                'tweaks/virtualjailbreak/Palera1n.mobileconfig',
+                'tweaks/virtualjailbreak/Tijong xuni Jailbreak.mobileconfig',
+                'tweaks/virtualjailbreak/Tymax.mobileconfig',
+                'tweaks/virtualjailbreak/Unc0ver Black JB.mobileconfig',
+                'tweaks/virtualjailbreak/Unc0ver JB.mobileconfig',
+                'tweaks/virtualjailbreak/Xina Jailbreak.mobileconfig'
+            ];
+    
+            function createMobileConfigButtons() {
+                const virtualJailbreaksDiv = document.getElementById('virtual-jailbreaks');
+                
+                mobileConfigFiles.forEach((filePath, index) => {
+                    const button = document.createElement('button');
+                    button.classList.add('nav-button');
+                    button.setAttribute('data-section', 'virtual-jailbreaks');
+                    button.innerHTML = `
+                        <img class="icon" src="" alt="Icon" style="width: 80px; height: 80px; border-radius: 15px; margin-left: 0px;">
+                        <p class="label" style="position: absolute; left: 100px; top: 20px; color: white; font-weight: 1; font-size: 16px;">Loading...</p>
+                        
+                        <img class="chevron" src="images/home/chevron.png" alt="Chevron" style="position: absolute; right: 10px; width: 30px; top: 50%; transform: translateY(-50%); height: 30px; opacity: 0.5; pointer-events: none;">
+                    `;
+                    
+                    // Fetch and update the button with the data from the mobileconfig file
+                    fetchMobileConfig(filePath, button);
+                    
+                    button.addEventListener('click', handleButtonClick);
+                    virtualJailbreaksDiv.appendChild(button);
+                });
+            }
+    
+            // Create buttons for each mobileconfig file when the page loads
+            createMobileConfigButtons();
+        });
+    </script>
+    
+    
+    
+      
+      
   </div>
   
-  <script>
-      // Get all buttons and content divs
-      const buttons = document.querySelectorAll('.nav-button');
-      const contentDivs = document.querySelectorAll('.content-div');
-  
-      // Function to handle button click and switch content
-      function handleButtonClick(event) {
-          const targetDiv = event.target.closest('.nav-button').getAttribute('data-target');
-          
-          // Remove active class from all buttons
-          buttons.forEach(button => {
-              button.style.backgroundColor = ''; // Remove the grey background
-          });
-          
-          // Add active class to clicked button
-          event.target.closest('.nav-button').style.backgroundColor = 'rgba(150, 150, 150, 0.25)'; // Add transparent grey background
-          
-          // Hide all content divs
-          contentDivs.forEach(div => {
-              div.style.display = 'none';
-              div.style.opacity = '0';
-          });
-          
-          // Show the corresponding content div
-          const targetContentDiv = document.querySelector(`.${targetDiv}`);
-          targetContentDiv.style.display = 'block';
-          targetContentDiv.style.opacity = '1';
-      }
-  
-      // Add event listeners for each button
-      buttons.forEach(button => {
-          button.addEventListener('click', handleButtonClick);
-      });
-  
-      // Optional: Initialize the first button and div as active by default
-      document.querySelector('.nav-button').style.backgroundColor = 'rgba(150, 150, 150, 0.25)';
-      document.querySelector('.content-div').style.display = 'block';
-      document.querySelector('.content-div').style.opacity = '1';
-  </script>
+ 
   
     
     
@@ -1113,11 +1306,11 @@ window.onresize = function() {
         window.onresize = adjustTopbarHeight;
         </script>
         
-        <div id="generalPage" style="background-color: #131416; height: 100%; width: 100%; top: 0; left: 0; position: fixed; display: none; z-index: 10000000;">
+        <div id="overlay6" style="background-color: #131416; height: 100%; width: 100%; top: 0; left: 0; position: fixed; display: none; z-index: 10000000;">
           <div style="width: 95%; height: 100%; overflow-y: auto; position: relative; left: 50%; transform: translateX(-50%);" id="scrollGeneral">
         
             <!-- Chevron Icon -->
-            <img src="images/home/chevron_left.png" style="left: 0px; top: 10px; width: 30px; height: 30px; position: absolute;" alt="">
+            <img src="images/home/chevron_left.png" id="closeGeneral" style="left: 0px; top: 10px; width: 30px; height: 30px; position: absolute;" alt="">
         
             <!-- General Heading -->
             <h1 style="font-size: 20px; font-family: 'apple'; color: white; font-weight: 1; margin-top: 70px;">General</h1>
@@ -1188,25 +1381,203 @@ window.onresize = function() {
  <!-- App Settings Title -->
  <h1 style="font-size: 17.5px; opacity: 50%; font-family: 'apple'; color: white; font-weight: 1; margin-top: 10px;">App Cache</h1>
 
- <button style="width: 100%; background-color: #191A1C; margin-top: 5px; height: 45px; margin-left: auto; margin-right: auto; border-radius: 10px;">
+ <button onclick="showStorageModal()" style="width: 100%; background-color: #191A1C; margin-top: 5px; height: 45px; margin-left: auto; margin-right: auto; border-radius: 10px;">
   <img src="images/settingspage/doc_chart.png" style="left: 15px; position: absolute; top: 50%; transform: translateY(-50%); width: 30px; height: 30px;" alt="">
   <span style="color: white; font-size: 17.5px; font-weight: 1; display: block; position: absolute; left: 50px; top: 50%; transform: translateY(-50%);">Manage Storage</span>
   <img src="images/home/chevron.png" style="position: absolute; top: 50%; transform: translateY(-50%); right: 7.5px; width: 30px; height: 30px; opacity: 50%;" alt="">
 </button>
-<button style="width: 100%; background-color: #191A1C; margin-top: 5px; height: 45px; margin-left: auto; margin-right: auto; border-radius: 10px;">
+
+
+
+<script>
+  // Function to show the storage modal
+ function showStorageModal() {
+     const modal = document.getElementById('storageModal');
+     modal.style.display = 'flex';  // Show the modal
+ 
+     // Calculate localStorage usage
+     calculateStorageUsage();
+ }
+ 
+ // Function to close the modal
+ function closeStorageModal() {
+     const modal = document.getElementById('storageModal');
+     modal.style.display = 'none';  // Hide the modal
+ }
+ 
+ // Function to calculate localStorage usage and update the progress bar
+ function calculateStorageUsage() {
+     const totalStorage = 5 * 1024 * 1024; // LocalStorage max size is usually 5MB, expressed in bytes
+     let usedStorage = 0;
+ 
+     // Iterate over localStorage items to calculate the used storage
+     for (let i = 0; i < localStorage.length; i++) {
+         const key = localStorage.key(i);
+         const value = localStorage.getItem(key);
+         usedStorage += key.length + value.length;  // Count characters of both key and value (each char is 1 byte)
+     }
+ 
+     // Update the storage details and progress bar
+     const storageDetails = document.getElementById('storageDetails');
+     storageDetails.textContent = `Used Storage: ${usedStorage} bytes / 5MB`;  // Max storage is 5MB, displayed in MB
+ 
+     // Calculate percentage and update progress bar width
+     const percentage = (usedStorage / totalStorage) * 100;
+     const progress = document.getElementById('progress');
+     progress.style.width = `${percentage}%`;
+ }
+ </script>
+ 
+ 
+<button id="exportStorage" style="width: 100%; background-color: #191A1C; margin-top: 5px; height: 45px; margin-left: auto; margin-right: auto; border-radius: 10px;">
   <img src="images/settingspage/arrow_up_circle.png" style="left: 15px; position: absolute; top: 50%; transform: translateY(-50%); width: 30px; height: 30px;" alt="">
   <span style="color: white; font-size: 17.5px; font-weight: 1; display: block; position: absolute; left: 50px; top: 50%; transform: translateY(-50%);">Export Cache</span>
   <img src="images/home/chevron.png" style="position: absolute; top: 50%; transform: translateY(-50%); right: 7.5px; width: 30px; height: 30px; opacity: 50%;" alt="">
 </button>
-<button style="width: 100%; background-color: #191A1C; margin-top: 5px; height: 45px; margin-left: auto; margin-right: auto; border-radius: 10px;">
+<button id="importStorage" style="width: 100%; background-color: #191A1C; margin-top: 5px; height: 45px; margin-left: auto; margin-right: auto; border-radius: 10px; position: relative; overflow: hidden;">
   <img src="images/settingspage/arrow_down_circle.png" style="left: 15px; position: absolute; top: 50%; transform: translateY(-50%); width: 30px; height: 30px;" alt="">
   <span style="color: white; font-size: 17.5px; font-weight: 1; display: block; position: absolute; left: 50px; top: 50%; transform: translateY(-50%);">Import Cache</span>
   <img src="images/home/chevron.png" style="position: absolute; top: 50%; transform: translateY(-50%); right: 7.5px; width: 30px; height: 30px; opacity: 50%;" alt="">
+
+  <!-- Invisible file input overlaying the button -->
+  <input type="file" id="fileInput" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;" />
 </button>
-<h1 style="font-size: 17.5px; opacity: 50%; font-family: 'apple'; color: white; font-weight: 1; margin-top: 10px;">Other</h1>
+
+
+
+<script>
+ // No need to call the file input click explicitly here
+document.getElementById('fileInput').addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            try {
+                const jsonData = JSON.parse(e.target.result);
+                
+                // Clear current localStorage
+                localStorage.clear();
+                
+                // Import the new data into localStorage
+                for (const key in jsonData) {
+                    if (jsonData.hasOwnProperty(key)) {
+                        localStorage.setItem(key, jsonData[key]);
+                    }
+                }
+
+                alert('localStorage data has been updated!');
+            } catch (error) {
+                console.error('Invalid JSON format:', error);
+                alert('Failed to parse the JSON file.');
+            }
+        };
+
+        reader.readAsText(file);
+    }
+});
+
+
+</script>
+
+<script>
+ document.getElementById('exportStorage').addEventListener('click', () => {
+    // Get the localStorage data as a JSON string
+    const storageData = JSON.stringify(localStorage);
+
+    // Create a Blob from the storage data and create a link to download the file
+    const blob = new Blob([storageData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'localStorage.json'; // File name to save as
+    document.body.appendChild(a);
+    a.click();
+
+    // Cleanup the URL object
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+});
+
+
+</script>
+
+<script>
+  let erudaLoaded = false;
+
+  function toggleEruda() {
+    if (!erudaLoaded) {
+      // Load the Eruda script if it hasn't been loaded yet
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/eruda';
+      document.body.appendChild(script);
+      script.onload = function () {
+        eruda.init();
+        erudaLoaded = true;
+        console.log('Eruda Loaded!');
+      };
+    } else {
+      // Toggle the Eruda console visibility
+      if (window.eruda) {
+        if (window.eruda._isShow) {
+          window.eruda.hide();
+        } else {
+          window.eruda.show();
+        }
+      }
+    }
+  }
+
+  // Add CSS to ensure Eruda is always on top
+  const style = document.createElement('style');
+  style.innerHTML = `
+    .eruda {
+      z-index: 9999 !important;  /* Always on top */
+    }
+  `;
+  document.head.appendChild(style);
+</script>
+
+
           </div>
         </div>
-          
+
+        <script>
+          // Wait for the DOM to load before executing any code
+          document.addEventListener("DOMContentLoaded", function() {
+        
+            const overlay = document.getElementById('overlay6');
+            const privacyPolicy = document.getElementById('generalPage');
+            const settingsPage = document.getElementById('settings-page');
+            const closeButton = document.getElementById('closeGeneral'); // Get the close button
+            
+            // Function to show the overlay with fade-in effect
+            function showOverlay() {
+              overlay.style.display = 'block'; // Make the overlay visible
+              settingsPage.style.overflow = 'hidden'; // Prevent scrolling on the main page
+              setTimeout(() => {
+                overlay.style.opacity = '1'; // Fade in
+              }, 10); // Small delay to allow display change
+            }
+        
+            // Function to hide the overlay with fade-out effect
+            function hideOverlay() {
+              overlay.style.opacity = '0'; // Fade out
+              setTimeout(() => {
+                overlay.style.display = 'none'; // Hide the overlay after the animation
+                settingsPage.style.overflow = 'auto'; // Restore scrolling on the main page
+              }, 300); // Match the duration of the fade-out animation
+            }
+        
+            // Show the overlay when clicking on #privacyPolicy
+            privacyPolicy.addEventListener('click', showOverlay);
+        
+            // Hide the overlay when clicking on the #closeGeneral button
+            closeButton.addEventListener('click', hideOverlay);
+          });
+        </script>
+        
+        
           
           
           <script>
@@ -1325,7 +1696,7 @@ window.onresize = function() {
           </script>
           
         
-        <button style="margin-left: auto; margin-right: auto; background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; left: 50%; transform: translateX(-50%); position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+        <button id="generalPage" style="margin-left: auto; margin-right: auto; background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; left: 50%; transform: translateX(-50%); position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
             <img src="images/settingspage/gear.png" style="width: 30px; height: 30px; position: absolute; left: 10px; display: block;">
             <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">General</span>
             <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
@@ -1371,11 +1742,109 @@ window.onresize = function() {
             <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
         </button>
         
-        <button style="margin-left: auto; margin-right: auto; background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+        <button id="privacyPolicy" style="margin-left: auto; margin-right: auto; background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
             <img src="images/settingspage/hand.png" style="width: 27px; height: 27px; position: absolute; left: 12px; display: block;">
             <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Privacy Policy</span>
             <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
         </button>
+
+        <div id="overlay1" style="width: 100%; height: 100%; display: none;   transition: opacity 0.3s ease;  top: 0; left: 0; position: fixed; background-color: rgba(0, 0, 0, 0.65); z-index: 10000000000000000000000000000;">
+          <div style="width: 92%; height: 600px; max-width: 450px; background-color: rgba(22, 25, 28, 0.65); backdrop-filter: blur(15px); border-radius: 15px; -webkit-backdrop-filter: blur(15px); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); overflow: hidden;">
+              <div style="overflow-y: auto; padding: 10px; max-height: 100%; box-sizing: border-box;">
+                  <div style="display: flex; align-items: center;">
+                      <img src="images/settingspage/hand.png" style="width: 50px; height: 50px; opacity: 50%;" alt="">
+                      <div style="margin-left: 10px;">
+                          <h1 style="color: white; font-weight: 1; margin-top: 5px; display: inline;">Privacy Policy</h1>
+                          <h1 style="color: white; font-family: 'apple', sans-serif; opacity: 50%; margin-top: -2px; position: relative; ">Effective Date: 24.12.2024</h1>
+                      </div>
+                  </div>
+                  <p style="opacity: 70%; color: white; font-family: 'apple', sans-serif; font-size: 13px; word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap; line-height: 1.6;">
+At Serenity, we prioritize your privacy. This Privacy Policy outlines the types of information we may collect when you use our service, how we handle and store that information, and your rights regarding your data. By using Serenity, you agree to the practices described in this policy.
+
+1. Information We Collect
+We do not collect personal information such as names, emails, or device identifiers. However, when you use Serenity, you may upload files such as .ipa files or mobileconfig files, which may be stored temporarily. These files are used solely for the purpose of signing or installation and are deleted after a certain period.
+                    
+2. How We Collect Data
+Data is collected in the following ways:
+                    
+Through APIs: We use APIs to interact with your uploaded files (e.g., signing .ipa files).
+Local Storage: Your app data and temporary files may be saved locally on your device for user convenience.
+
+3. Third-Party Services
+Serenity uses third-party APIs for file signing, but we do not directly control or collect any data from these services. You should review the privacy policies of these third-party services to understand how they handle data.
+                    
+4. Data Storage & Security
+We take reasonable steps to ensure the security of any files you upload, but we do not store personal information. Files uploaded via the app are stored temporarily and deleted after a short period for security and privacy reasons.
+                    
+Local Storage: Any data saved locally (e.g., temporary files) is stored on your device and is not shared or transmitted to external servers unless specified in the app functionality.
+
+5. Data Sharing
+We do not share your data with third parties. The files you upload are processed through APIs and deleted once they are no longer needed.
+                    
+6. Cookies and Tracking Technologies
+Serenity does not use cookies, tracking technologies, or advertising networks to collect user data.
+                    
+7. User Rights
+Since we do not collect personal information, users do not have specific rights over personal data. However, you may download and save files stored locally on your device. All uploaded files are deleted automatically after processing.
+                    
+8. Use of Our Service
+Serenity is available for use by individuals of all ages, provided they understand and agree to the terms of the service. While the app is accessible to all, we do not knowingly collect data from children under the age of 13.
+                    
+9. Data Deletion
+All files uploaded to Serenity are processed and deleted after a set period. The app does not retain user files unless stored locally on your device for your convenience.
+                    
+10. International Use
+Serenity is available at serenityios.com. While we do not specifically target users in regions governed by privacy laws (e.g., GDPR, CCPA), we recommend that users understand the privacy implications of using third-party APIs, as Serenity itself does not collect personal data.
+                    
+11. Changes to This Privacy Policy
+We reserve the right to update or change this Privacy Policy at any time. When we do, we will update the "Effective Date" at the top of this page. We encourage you to review this Privacy Policy periodically to stay informed about how we are protecting your data.
+
+12. Contact Us
+If you have any questions or concerns regarding this Privacy Policy or your use of Serenity, please contact us at Telegram/TikTok/Discord, You can find our Socials in the Settings.
+                  </p>
+              </div>
+          </div>
+      </div>
+
+      <script>
+        // Wait for the DOM to load before executing any code
+        document.addEventListener("DOMContentLoaded", function() {
+      
+          const overlay = document.getElementById('overlay1');
+          const privacyPolicy = document.getElementById('privacyPolicy');
+          const settingsPage = document.getElementById('settings-page');
+          
+          // Function to show the overlay with fade-in effect
+          function showOverlay() {
+            overlay.style.display = 'block'; // Make the overlay visible
+            settingsPage.style.overflow = 'hidden'; // Prevent scrolling on the main page
+            setTimeout(() => {
+              overlay.style.opacity = '1'; // Fade in
+            }, 10); // Small delay to allow display change
+          }
+      
+          // Function to hide the overlay with fade-out effect
+          function hideOverlay() {
+            overlay.style.opacity = '0'; // Fade out
+            setTimeout(() => {
+              overlay.style.display = 'none'; // Hide the overlay after the animation
+              settingsPage.style.overflow = 'auto'; // Restore scrolling on the main page
+            }, 300); // Match the duration of the fade-out animation
+          }
+      
+          // Show the overlay when clicking on #privacyPolicy
+          privacyPolicy.addEventListener('click', showOverlay);
+      
+          // Hide the overlay when clicking on the transparent background outside the overlay content
+          overlay.addEventListener('click', function(event) {
+            if (event.target === overlay) {
+              hideOverlay();
+            }
+          });
+        });
+      </script>
+      
+      
         
         <button style="margin-left: auto; margin-right: auto; background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
             <img src="images/settingspage/globe.png" style="width: 30px; height: 30px; position: absolute; left: 10px; display: block;">
@@ -1387,7 +1856,7 @@ window.onresize = function() {
 
         <button onclick="window.open('https://ko-fi.com/serenityios', '_blank')" style="margin-left: auto; margin-right: auto; background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
           <img src="images/settingspage/gift_fill.png" style="width: 30px; height: 28.5px; position: absolute; left: 10px; display: block;">
-          <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Donate <span style="color: white; font-size: 12px; opacity: 50%;">(To keep up this App)</span></span>
+          <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Donate </span>
           <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
       </button>
 
@@ -1397,26 +1866,217 @@ window.onresize = function() {
    
 
         
-        <button style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px; margin-left: auto; margin-right: auto;">
+        <button id="requestOverlay" style="background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px; margin-left: auto; margin-right: auto;">
 
           <img src="images/settingspage/rectangle_stack_fill_badge_plus.png" style="width: 26px; height: 27px; position: absolute; left: 10px; display: block;">
           
-          <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Request App/Tweak</span>
+          <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Request App/Tweak </span>
           
           <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
+        </button>
+
+
+        <div id="overlay5" style="width: 100%; height: 100%; display: none; transition: opacity 0.3s ease; top: 0; left: 0; position: fixed; background-color: rgba(0, 0, 0, 0.65); z-index: 1000000000000000000000000000000000;">
+          <div style="width: 450px; height: 400px; background-color: rgba(22, 25, 28, 0.65); backdrop-filter: blur(15px); border-radius: 15px; -webkit-backdrop-filter: blur(15px); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); overflow: hidden; padding: 0;">
+             <h1 style="color: white; position: absolute; top: 20px; left: 27.5px; font-weight: 1;">Request App/Tweak</h1>
+             <h1 style="color: white; position: absolute; font-size: 14.5px; opacity: 50%; top: 40px; font-family: 'apple', sans-serif; left: 27.5px;">Request an App or Tweak or Suggest/Report Something.</h1>
+            
+            <form id="contactForm" style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0; margin: 0; position: absolute; top: 0; bottom: 0;">
+
+      
+                  <!-- Dropdown -->
+                  <select id="category" name="category" style="padding-left: 10px; background-color: #191A1C; color: white; border: none; border-radius: 15px; width: 90%; height: 40px; margin-bottom: 15px; outline: none; position: absolute; top: 80px;"> 
+                    <option value="App" >  App</option>
+                    <option value="Tweak">  Tweak</option>
+                    <option value="Report a Problem">  Report a Problem</option>
+                    <option value="Other" >  Other</option>
+                </select>
+                
+      
+                  <!-- Textbox -->
+                  <textarea id="message" name="message" placeholder="Type Here..." style="background-color: black; color: white; font-family: 'apple', sans-serif; border: 1px solid #191A1C; border-radius: 15px; width: 90%; height: 150px; resize: none; margin-bottom: 20px; outline: none; position: absolute; top: 140px; padding-left: 10px; padding-top: 10px;"></textarea>
+
+                  <!-- Submit Button -->
+                  <button type="submit" style="background-color: white; color: black; border: none; border-radius: 15px; width: 90%; height: 50px; position: absolute; top: 310px; cursor: pointer; font-size: 16px;">
+                <img src="images/settingspage/paperplane.png" style="left: 10px; width: 25px; height: 25px; position: absolute; top: 50%; transform: translateY(-50%);" alt="">
+                    <span style="position: absolute; left: 40px; top: 50%; transform: translateY(-50%);">Submit</span>
+                  
+                  </button>
+              </form>
+          </div>
+      </div>
+      
+      <script>
+          document.getElementById('contactForm').addEventListener('submit', function(event) {
+              event.preventDefault();
+      
+              // Collect form data
+              const category = document.getElementById('category').value;
+              const message = document.getElementById('message').value;
+      
+              // Prepare data to send to Discord webhook
+              const data = {
+                  content: `**Category**: ${category}\n**Message**: ${message}`
+              };
+      
+              // Replace with your actual Discord webhook URL
+              const discordWebhookUrl = "https://discord.com/api/webhooks/1321151307129552936/YBUcwFFMu2ukfiGB-nyTvfIsTSqLOrTXaNyRXk8i_1UTJcmZlI54ECk3xhHodGGRftya";
+      
+              // Send POST request to Discord webhook
+              fetch(discordWebhookUrl, {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(data)
+              })
+              .then(response => {
+                  if (response.ok) {
+                      
+                      // Optionally reset form
+                      document.getElementById('contactForm').reset();
+                      // Close the overlay
+                      document.getElementById('overlay5').style.display = 'none';
+                  } else {
+                      alert('Error submitting form.');
+                  }
+              })
+              .catch(error => {
+                  alert('Error: ' + error);
+              });
+          });
+      </script>
+      
+      
+      
+
+          <script>
+            // Wait for the DOM to load before executing any code
+            document.addEventListener("DOMContentLoaded", function() {
           
-      </button>
-      <button style="margin-left: auto; margin-right: auto; background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+              const overlay = document.getElementById('overlay5');
+              const privacyPolicy = document.getElementById('requestOverlay');
+              const settingsPage = document.getElementById('settings-page');
+              
+              // Function to show the overlay with fade-in effect
+              function showOverlay() {
+                overlay.style.display = 'block'; // Make the overlay visible
+                settingsPage.style.overflow = 'hidden'; // Prevent scrolling on the main page
+                setTimeout(() => {
+                  overlay.style.opacity = '1'; // Fade in
+                }, 10); // Small delay to allow display change
+              }
+          
+              // Function to hide the overlay with fade-out effect
+              function hideOverlay() {
+                overlay.style.opacity = '0'; // Fade out
+                setTimeout(() => {
+                  overlay.style.display = 'none'; // Hide the overlay after the animation
+                  settingsPage.style.overflow = 'auto'; // Restore scrolling on the main page
+                }, 300); // Match the duration of the fade-out animation
+              }
+          
+              // Show the overlay when clicking on #privacyPolicy
+              privacyPolicy.addEventListener('click', showOverlay);
+          
+              // Hide the overlay when clicking on the transparent background outside the overlay content
+              overlay.addEventListener('click', function(event) {
+                if (event.target === overlay) {
+                  hideOverlay();
+                }
+              });
+            });
+          </script>
+          
+          
+      
+      <button id="creditsOverlay" style="margin-left: auto; margin-right: auto; background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
         <img src="images/settingspage/person_2_fill.png" style="width: 30px; height: 28.5px; position: absolute; left: 10px; display: block;">
         <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Credits</span>
         <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
     </button>
+
+    <div id="overlay4" style="width: 100%; height: 100%; display: none; transition: opacity 0.3s ease; top: 0; left: 0; position: fixed; background-color: rgba(0, 0, 0, 0.65); z-index: 10000000000000000000000000000;">
+      <div style="width: 450px; height: 600px; background-color: rgba(22, 25, 28, 0.65); backdrop-filter: blur(15px); border-radius: 15px; -webkit-backdrop-filter: blur(15px); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); overflow: hidden;">
+       <img src="images/settingspage/person_2_fill.png" style="left: 10px; position: absolute; top: 15px; width: 55px; height: 55px; opacity: 65%;" alt="">
+        <h1 style="left: 75px; position: absolute; font-size: 18px; top: 20px; font-weight: 1; color: white;">Credits</h1>
+        <h1 style="left: 75px; position: absolute; font-size: 14px; opacity: 50%; top: 45px; font-family: 'apple', sans-serif; color: white;">Made with Love By:</h1>
+        <button style="position: absolute; left: 50%; top: 80px; transform: translate(-50%); margin: 0; padding: 0; display: flex; align-items: center;">
+          <img src="https://cdn.discordapp.com/avatars/1129106944012079204/958106d60b1694d7aafc9fdba2921f34?size=1024" style="position: absolute; left: 10px; width: 72px; height: 72px; border-radius: 15px;" alt="">
+          <h1 style="margin-left: 100px; top: 15px; position: absolute; font-weight: 1;">Dog Military Armor</h1>
+          <h1 style="margin-left: 100px; top: 45px; position: absolute; opacity: 50%; font-size: 16px; font-family: 'apple', sans-serif; text-align: left;">Founder (Made Everything)</h1>
+        </button>
+
+        <h1 style="left: 20px; position: absolute; opacity: 50%; color: white; font-family: 'apple', sans-serif; font-size: 14px; top: 185px;">Backends</h1>
+
+        <button style="position: absolute; left: 50%; top: 210px; transform: translate(-50%); margin: 0; padding: 0; display: flex; align-items: center;">
+          <img src="https://pbs.twimg.com/profile_images/1607513868359565312/z9Dzmkaw_400x400.jpg" style="position: absolute; left: 10px; width: 72px; height: 72px; border-radius: 15px;" alt="">
+          <h1 style="margin-left: 100px; top: 15px; position: absolute; font-weight: 1;">NabzClan Signing API</h1>
+          <h1 style="margin-left: 100px; top: 45px; position: absolute; opacity: 50%; font-size: 16px; font-family: 'apple', sans-serif;">Made Signing Work</h1>
+        </button>
+        <button style="position: absolute; left: 50%; top: 310px; transform: translate(-50%); margin: 0; padding: 0; display: flex; align-items: center;">
+          <img src="https://styles.redditmedia.com/t5_5l7rfe/styles/communityIcon_wkfzcddd8t881.png" style="position: absolute; left: 10px; width: 72px; height: 72px; border-radius: 15px;" alt="">
+          <h1 style="margin-left: 100px; top: 15px; position: absolute; font-weight: 1;">Starfiles Upload API</h1>
+          <h1 style="margin-left: 100px; top: 45px; position: absolute; opacity: 50%; font-size: 16px; font-family: 'apple', sans-serif;">iPA Customisation & No URL for Signing needed</h1>
+        </button>
+        <h1 style="left: 20px; position: absolute; opacity: 50%; color: white; font-family: 'apple', sans-serif; font-size: 14px; top: 415px;">Advisors</h1>
+        <button style="position: absolute; left: 50%; top: 445px; transform: translate(-50%); margin: 0; padding: 0; display: flex; align-items: center;">
+          <img src="https://raw.githubusercontent.com/Veloraios/ipa-signer/refs/heads/main/Screenshot%202024-12-24%20162305.png" style="position: absolute; left: 10px; width: 72px; height: 72px; border-radius: 15px;" alt="">
+          <h1 style="margin-left: 100px; top: 15px; position: absolute; font-weight: 1;">[UTC]Sun</h1>
+          <h1 style="margin-left: 100px; top: 45px; position: absolute; opacity: 50%; font-size: 16px; font-family: 'apple', sans-serif;">Top Advisor (A Reason for More Features)</h1>
+        </button>
+       
+        
+      </div>
+    </div>
+    
+  
+  
+  
+
+  <script>
+    // Wait for the DOM to load before executing any code
+    document.addEventListener("DOMContentLoaded", function() {
+  
+      const overlay = document.getElementById('overlay4');
+      const privacyPolicy = document.getElementById('creditsOverlay');
+      const settingsPage = document.getElementById('settings-page');
       
+      // Function to show the overlay with fade-in effect
+      function showOverlay() {
+        overlay.style.display = 'block'; // Make the overlay visible
+        settingsPage.style.overflow = 'hidden'; // Prevent scrolling on the main page
+        setTimeout(() => {
+          overlay.style.opacity = '1'; // Fade in
+        }, 10); // Small delay to allow display change
+      }
+  
+      // Function to hide the overlay with fade-out effect
+      function hideOverlay() {
+        overlay.style.opacity = '0'; // Fade out
+        setTimeout(() => {
+          overlay.style.display = 'none'; // Hide the overlay after the animation
+          settingsPage.style.overflow = 'auto'; // Restore scrolling on the main page
+        }, 300); // Match the duration of the fade-out animation
+      }
+  
+      // Show the overlay when clicking on #privacyPolicy
+      privacyPolicy.addEventListener('click', showOverlay);
+  
+      // Hide the overlay when clicking on the transparent background outside the overlay content
+      overlay.addEventListener('click', function(event) {
+        if (event.target === overlay) {
+          hideOverlay();
+        }
+      });
+    });
+  </script>
       
+    
 
         <h1 style=" display: block; position: absolute; margin-top: 60px; color: white; opacity: 50%; text-align: center; align-items: center; font-family: 'apple', sans-serif; font-size: 14px;"></h1>
    
-     <div style="height: 125px; width: 100%; background: transparent; display: block; margin-top: 10px;"></div>
+     <div style="height: 85px; width: 100%; background: transparent; display: block; margin-top: 10px;"></div>
     
     
     
