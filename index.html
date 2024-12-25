@@ -570,7 +570,7 @@ left: calc(130px * 2 + 2px);
 <body>
 
   <div id="storageModal" style="display: none; position: fixed; z-index: 9999999999; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
-    <div style="background-color: #191A1C; color: white; border-radius: 10px; width: 450px; height: 200px; left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%);">
+    <div style="background-color: #191A1C; color: white; border-radius: 10px; width: 450px; max-width: 95%; height: 200px; left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%);">
       <h3 style="left: 10px; position: absolute; font-weight: 1; top: 10px;">Local Storage</h3>
       <p id="storageDetails" style="color: white; font-size: 16px; font-family: 'apple', sans-serif; left: 10px; position: absolute; top: 36px; opacity: 50%;"></p>
       <div style="width: 95%; height: 10px; background-color: #555; border-radius: 5px; top: 70px; left: 50%; transform: translateX(-50%); position: absolute;">
@@ -1310,13 +1310,13 @@ window.onresize = function() {
           <div style="width: 95%; height: 100%; overflow-y: auto; position: relative; left: 50%; transform: translateX(-50%);" id="scrollGeneral">
         
             <!-- Chevron Icon -->
-            <img src="images/home/chevron_left.png" id="closeGeneral" style="left: 0px; top: 10px; width: 30px; height: 30px; position: absolute;" alt="">
+            <img src="images/home/chevron_left.png" id="closeGeneral" style="left: 0px; top: 70px; width: 30px; height: 30px; position: absolute;" alt="">
         
             <!-- General Heading -->
-            <h1 style="font-size: 20px; font-family: 'apple'; color: white; font-weight: 1; margin-top: 70px;">General</h1>
+            <h1 style="font-size: 20px; font-family: 'apple'; color: white; font-weight: 1; margin-top: 150px;">General</h1>
             
             <!-- Description Text -->
-            <h1 style="font-size: 14px; opacity: 50%; font-family: 'apple'; color: white; font-weight: 1; margin-top: 30px;">Here you can Manage Important Settings.</h1>
+            <h1 style="font-size: 14px; opacity: 50%; font-family: 'apple'; color: white; font-weight: 1; margin-top: 10px;">Here you can Manage Important Settings.</h1>
         
             <!-- Settings Box -->
             <div style="width: 100%; background-color: #191A1C; border-radius: 8px; font-family: 'Apple', sans-serif; margin-top: 40px;">
@@ -1877,7 +1877,7 @@ If you have any questions or concerns regarding this Privacy Policy or your use 
 
 
         <div id="overlay5" style="width: 100%; height: 100%; display: none; transition: opacity 0.3s ease; top: 0; left: 0; position: fixed; background-color: rgba(0, 0, 0, 0.65); z-index: 1000000000000000000000000000000000;">
-          <div style="width: 450px; height: 400px; background-color: rgba(22, 25, 28, 0.65); backdrop-filter: blur(15px); border-radius: 15px; -webkit-backdrop-filter: blur(15px); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); overflow: hidden; padding: 0;">
+          <div style="width: 450px; height: 400px; max-width: 95%; background-color: rgba(22, 25, 28, 0.65); backdrop-filter: blur(15px); border-radius: 15px; -webkit-backdrop-filter: blur(15px); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); overflow: hidden; padding: 0;">
              <h1 style="color: white; position: absolute; top: 20px; left: 27.5px; font-weight: 1;">Request App/Tweak</h1>
              <h1 style="color: white; position: absolute; font-size: 14.5px; opacity: 50%; top: 40px; font-family: 'apple', sans-serif; left: 27.5px;">Request an App or Tweak or Suggest/Report Something.</h1>
             
@@ -1885,7 +1885,7 @@ If you have any questions or concerns regarding this Privacy Policy or your use 
 
       
                   <!-- Dropdown -->
-                  <select id="category" name="category" style="padding-left: 10px; background-color: #191A1C; color: white; border: none; border-radius: 15px; width: 90%; height: 40px; margin-bottom: 15px; outline: none; position: absolute; top: 80px;"> 
+                  <select id="category" name="category" style="padding-left: 10px; background-color: #191A1C; color: white; border: none; border-radius: 15px; width: 90%; height: 40px; margin-bottom: 10px; outline: none; position: absolute; top: 90px;"> 
                     <option value="App" >  App</option>
                     <option value="Tweak">  Tweak</option>
                     <option value="Report a Problem">  Report a Problem</option>
@@ -1997,36 +1997,37 @@ If you have any questions or concerns regarding this Privacy Policy or your use 
     </button>
 
     <div id="overlay4" style="width: 100%; height: 100%; display: none; transition: opacity 0.3s ease; top: 0; left: 0; position: fixed; background-color: rgba(0, 0, 0, 0.65); z-index: 10000000000000000000000000000;">
-      <div style="width: 450px; height: 600px; background-color: rgba(22, 25, 28, 0.65); backdrop-filter: blur(15px); border-radius: 15px; -webkit-backdrop-filter: blur(15px); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); overflow: hidden;">
-       <img src="images/settingspage/person_2_fill.png" style="left: 10px; position: absolute; top: 15px; width: 55px; height: 55px; opacity: 65%;" alt="">
-        <h1 style="left: 75px; position: absolute; font-size: 18px; top: 20px; font-weight: 1; color: white;">Credits</h1>
-        <h1 style="left: 75px; position: absolute; font-size: 14px; opacity: 50%; top: 45px; font-family: 'apple', sans-serif; color: white;">Made with Love By:</h1>
+      <div style="width: 450px; max-width: 95%; max-height: 90%; height: 600px; background-color: rgba(22, 25, 28, 0.65); backdrop-filter: blur(15px); border-radius: 15px; -webkit-backdrop-filter: blur(15px); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); overflow: hidden;">
+       <div style="overflow-y: auto; height: 100%;">
+        <img src="images/settingspage/person_2_fill.png" style="left: 10px; position: absolute; top: 15px; width: 55px; height: 55px; opacity: 65%;" alt="">
+        <h1 style="left: 75px; position: absolute; font-size: 18px; top: 20px; font-weight: 1; color: white; text-align: left;">Credits</h1>
+        <h1 style="left: 75px; position: absolute; text-align: left; font-size: 14px; opacity: 50%; top: 45px; font-family: 'apple', sans-serif; color: white;">Made with Love By:</h1>
         <button style="position: absolute; left: 50%; top: 80px; transform: translate(-50%); margin: 0; padding: 0; display: flex; align-items: center;">
           <img src="https://cdn.discordapp.com/avatars/1129106944012079204/958106d60b1694d7aafc9fdba2921f34?size=1024" style="position: absolute; left: 10px; width: 72px; height: 72px; border-radius: 15px;" alt="">
-          <h1 style="margin-left: 100px; top: 15px; position: absolute; font-weight: 1;">Dog Military Armor</h1>
-          <h1 style="margin-left: 100px; top: 45px; position: absolute; opacity: 50%; font-size: 16px; font-family: 'apple', sans-serif; text-align: left;">Founder (Made Everything)</h1>
+          <h1 style="margin-left: 100px; top: 15px; position: absolute; text-align: left; font-weight: 1;">Dog Military Armor</h1>
+          <h1 style="margin-left: 100px; top: 45px; position: absolute; text-align: left; opacity: 50%; font-size: 16px; font-family: 'apple', sans-serif; text-align: left;">Founder (Made Everything)</h1>
         </button>
 
-        <h1 style="left: 20px; position: absolute; opacity: 50%; color: white; font-family: 'apple', sans-serif; font-size: 14px; top: 185px;">Backends</h1>
+        <h1 style="left: 20px; position: absolute; opacity: 50%; text-align: left; color: white; font-family: 'apple', sans-serif; font-size: 14px; top: 185px;">Backends</h1>
 
         <button style="position: absolute; left: 50%; top: 210px; transform: translate(-50%); margin: 0; padding: 0; display: flex; align-items: center;">
           <img src="https://pbs.twimg.com/profile_images/1607513868359565312/z9Dzmkaw_400x400.jpg" style="position: absolute; left: 10px; width: 72px; height: 72px; border-radius: 15px;" alt="">
-          <h1 style="margin-left: 100px; top: 15px; position: absolute; font-weight: 1;">NabzClan Signing API</h1>
-          <h1 style="margin-left: 100px; top: 45px; position: absolute; opacity: 50%; font-size: 16px; font-family: 'apple', sans-serif;">Made Signing Work</h1>
+          <h1 style="margin-left: 100px; top: 15px; position: absolute; font-weight: 1; text-align: left;">NabzClan Signing API</h1>
+          <h1 style="margin-left: 100px; top: 45px; position: absolute; opacity: 50%; font-size: 16px; text-align: left; font-family: 'apple', sans-serif;">Made Signing Work</h1>
         </button>
         <button style="position: absolute; left: 50%; top: 310px; transform: translate(-50%); margin: 0; padding: 0; display: flex; align-items: center;">
           <img src="https://styles.redditmedia.com/t5_5l7rfe/styles/communityIcon_wkfzcddd8t881.png" style="position: absolute; left: 10px; width: 72px; height: 72px; border-radius: 15px;" alt="">
-          <h1 style="margin-left: 100px; top: 15px; position: absolute; font-weight: 1;">Starfiles Upload API</h1>
-          <h1 style="margin-left: 100px; top: 45px; position: absolute; opacity: 50%; font-size: 16px; font-family: 'apple', sans-serif;">iPA Customisation & No URL for Signing needed</h1>
+          <h1 style="margin-left: 100px; text-align: left; top: 15px; position: absolute; font-weight: 1;">Starfiles Upload API</h1>
+          <h1 style="margin-left: 100px; text-align: left; top: 45px; position: absolute; opacity: 50%; font-size: 16px; font-family: 'apple', sans-serif;">iPA Customisation & No URL for Signing needed</h1>
         </button>
         <h1 style="left: 20px; position: absolute; opacity: 50%; color: white; font-family: 'apple', sans-serif; font-size: 14px; top: 415px;">Advisors</h1>
         <button style="position: absolute; left: 50%; top: 445px; transform: translate(-50%); margin: 0; padding: 0; display: flex; align-items: center;">
           <img src="https://raw.githubusercontent.com/Veloraios/ipa-signer/refs/heads/main/Screenshot%202024-12-24%20162305.png" style="position: absolute; left: 10px; width: 72px; height: 72px; border-radius: 15px;" alt="">
-          <h1 style="margin-left: 100px; top: 15px; position: absolute; font-weight: 1;">[UTC]Sun</h1>
-          <h1 style="margin-left: 100px; top: 45px; position: absolute; opacity: 50%; font-size: 16px; font-family: 'apple', sans-serif;">Top Advisor (A Reason for More Features)</h1>
+          <h1 style="margin-left: 100px; text-align: left; top: 15px; position: absolute; font-weight: 1;">[UTC]Sun</h1>
+          <h1 style="margin-left: 100px; text-align: left; top: 45px; position: absolute; opacity: 50%; font-size: 16px; font-family: 'apple', sans-serif;">Top Advisor (A Reason for More Features)</h1>
         </button>
        
-        
+       </div>
       </div>
     </div>
     
