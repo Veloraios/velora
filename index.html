@@ -1001,238 +1001,50 @@ window.onresize = function() {
 
       <!-- Content Sections -->
       <div id="system-tweaks" class="content-div" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-          <p>This is the System Tweaks content.</p>
+         
       </div>
       
       <div id="themes" class="content-div" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-          <p>This is the Themes content.</p>
+         
       </div>
       
       <div id="virtual-jailbreaks" class="content-div" style="display: none;  min-height: 100vh; opacity: 0; margin-top: 70px; transition: opacity 0.3s ease-in-out; height: auto; width: 100%;">
-          <p>This is the Virtual Jailbreaks content.</p>
+        
           <div id="mobileconfig-info" style="box-sizing: border-box; width: 100%; height: auto;"></div> <!-- Content will go here -->
       </div>
       
       <div id="package-managers" class="content-div" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-          <p>This is the Package Managers content.</p>
+         
       </div>
   
       <div id="third-party-store" class="content-div" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-          <p>This is the 3rd Party Store content.</p>
+       
       </div>
   
       <div id="jb-launchers" class="content-div" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-          <p>This is the JB Launchers content.</p>
+          
       </div>
   
       <div id="emulators" class="content-div" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-          <p>This is the Emulators content.</p>
+         
       </div>
   
       <div id="shortcut-tweaks" class="content-div" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-          <p>This is the Shortcut Tweaks content.</p>
+         
       </div>
   
       <div id="utilities" class="content-div" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out; margin-top: 70px;">
-          <p>This is the Utilities content.</p>
+        
       </div>
   
-      <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Get all buttons and content divs
-            const buttons = document.querySelectorAll('.nav-button');
-            const contentDivs = document.querySelectorAll('.content-div');
-    
-            // Function to handle button click and switch content
-            function handleButtonClick(event) {
-                const targetSection = event.target.closest('.nav-button').getAttribute('data-section');
-    
-                // Remove active class from all buttons (only inside #navButtonParadise)
-                if (event.target.closest('#navButtonParadise')) {
-                    buttons.forEach(button => {
-                        button.style.backgroundColor = ''; // Remove the grey background
-                    });
-                    event.target.closest('.nav-button').style.backgroundColor = 'rgba(150, 150, 150, 0.25)'; // Add transparent grey background
-                }
-    
-                // Hide all content divs
-                contentDivs.forEach(div => {
-                    div.style.display = 'none';
-                    div.style.opacity = '0';
-                });
-    
-                // Show the corresponding content div based on target
-                const targetContentDiv = document.getElementById(targetSection);
-                if (targetContentDiv) {
-                    targetContentDiv.style.display = 'block';
-                    setTimeout(() => {
-                        targetContentDiv.style.opacity = '1';
-                    }, 10);
-                } else {
-                    console.error(`No content div found for target: ${targetSection}`);
-                }
-            }
-    
-            // Add event listeners for each button
-            buttons.forEach(button => {
-                button.addEventListener('click', handleButtonClick);
-            });
-    
-            // Optional: Initialize the first button and div as active by default
-            const firstButton = document.querySelector('.nav-button');
-            firstButton.style.backgroundColor = 'rgba(150, 150, 150, 0.25)';
-            const firstDiv = document.querySelector('.content-div');
-            firstDiv.style.display = 'block';
-            firstDiv.style.opacity = '1';
-    
-            // Function to fetch and parse the .mobileconfig file
-            function fetchMobileConfig(filePath, button) {
-                // Fetch the .mobileconfig file
-                fetch(filePath)
-                    .then(response => response.text())
-                    .then(data => {
-                        // Parse the response as XML
-                        const parser = new DOMParser();
-                        const xmlDoc = parser.parseFromString(data, "text/xml");
-    
-                        // Initialize variables for Payload Identifier, Payload UUID, and Payload Description
-                        let label = 'No Label Found';
-                        let payloadIdentifier = '';
-                        let payloadUUID = '';
-                        let payloadDescription = '';
-                        let iconBase64 = '';
-    
-                        // Fetch the necessary keys from the XML
-                        const keys = xmlDoc.getElementsByTagName('key');
-                        for (let i = 0; i < keys.length; i++) {
-                            if (keys[i].textContent === 'Label' && keys[i].nextElementSibling) {
-                                label = keys[i].nextElementSibling.textContent;
-                            }
-                            if (keys[i].textContent === 'PayloadIdentifier' && keys[i].nextElementSibling) {
-                                payloadIdentifier = keys[i].nextElementSibling.textContent;
-                            }
-                            if (keys[i].textContent === 'PayloadUUID' && keys[i].nextElementSibling) {
-                                payloadUUID = keys[i].nextElementSibling.textContent;
-                            }
-                            if (keys[i].textContent === 'PayloadDescription' && keys[i].nextElementSibling) {
-                                payloadDescription = keys[i].nextElementSibling.textContent;
-                            }
-                            if (keys[i].textContent === 'Icon' && keys[i].nextElementSibling) {
-                                iconBase64 = keys[i].nextElementSibling.textContent;
-                            }
-                        }
-    
-                        // Store the PayloadIdentifier and PayloadUUID for later use
-                        button.setAttribute('data-payload-identifier', payloadIdentifier);
-                        button.setAttribute('data-payload-uuid', payloadUUID);
-                        button.setAttribute('data-payload-description', payloadDescription);
-    
-                        // Now update the button with the correct label and icon
-                        const labelElement = button.querySelector('.label');
-                        labelElement.textContent = label;
-    
-                        // Update the icon if available
-                        const iconElement = button.querySelector('.icon');
-                        if (iconBase64) {
-                            iconElement.src = `data:image/png;base64,${iconBase64}`;
-                        }
-    
-                        // Function to create and show the fullscreen div
-                        function showFullscreenDiv() {
-                            const fullscreenDiv = document.createElement('div');
-                            fullscreenDiv.style.position = 'fixed';
-                            fullscreenDiv.style.top = '0';
-                            fullscreenDiv.style.left = '0';
-                            fullscreenDiv.style.width = '100%';
-                            fullscreenDiv.style.height = '100%';
-                            fullscreenDiv.style.backgroundColor = '#131416';
-                            fullscreenDiv.style.zIndex = '9999999999999999999999999999999999999999999';
-                            fullscreenDiv.style.color = 'white';
-                            fullscreenDiv.style.overflow = 'auto';
-                            fullscreenDiv.style.display = 'flex';
-                            fullscreenDiv.style.flexDirection = 'column';
-                            fullscreenDiv.style.padding = '20px';
-                            
-                            // Close button (Chevron)
-                            const closeButton = `
-                                <img src="images/home/chevron_left.png" alt="Close" 
-                                    style="position: absolute; top: 20px; left: 20px; cursor: pointer; width: 30px; height: 30px;" />
-                            `;
-                            fullscreenDiv.innerHTML = closeButton;
-                            fullscreenDiv.innerHTML += `
-                                <div>
-                                    <p><strong>ID:</strong> [id]</p>
-                                    <p><strong>UUID:</strong> [uuid]</p>
-                                    <p><strong>Description:</strong> [des]</p>
-                                     <img class="icon" src="" alt="Icon" style="width: 80px; height: 80px; border-radius: 15px; margin-left: 0px;">
-                                </div>
-                            `;
-    
-                            // Replace placeholders with actual values
-                            fullscreenDiv.innerHTML = fullscreenDiv.innerHTML
-                                .replace('[id]', payloadIdentifier)
-                                .replace('[uuid]', payloadUUID)
-                                .replace('[des]', payloadDescription);
-    
-                            // Event listener for close button
-                            fullscreenDiv.querySelector('img').addEventListener('click', () => {
-                                fullscreenDiv.remove();
-                            });
-    
-                            // Append to body
-                            document.body.appendChild(fullscreenDiv);
-                        }
-    
-                        // Attach the event listener to the button
-                        button.addEventListener('click', (e) => {
-                            showFullscreenDiv();
-                        });
-    
-                    })
-                    .catch(error => console.error('Error fetching mobileconfig file:', error));
-            }
-    
-            const mobileConfigFiles = [
-                'tweaks/virtualjailbreak/Checkra1n Mirror.mobileconfig',
-                'tweaks/virtualjailbreak/Checkra1n.mobileconfig',
-                'tweaks/virtualjailbreak/Cheyote.mobileconfig',
-                'tweaks/virtualjailbreak/Fugu17.mobileconfig',
-                'tweaks/virtualjailbreak/HacksNow.mobileconfig',
-                'tweaks/virtualjailbreak/Palera1n.mobileconfig',
-                'tweaks/virtualjailbreak/Tijong xuni Jailbreak.mobileconfig',
-                'tweaks/virtualjailbreak/Tymax.mobileconfig',
-                'tweaks/virtualjailbreak/Unc0ver Black JB.mobileconfig',
-                'tweaks/virtualjailbreak/Unc0ver JB.mobileconfig',
-                'tweaks/virtualjailbreak/Xina Jailbreak.mobileconfig'
-            ];
-    
-            function createMobileConfigButtons() {
-                const virtualJailbreaksDiv = document.getElementById('virtual-jailbreaks');
-                
-                mobileConfigFiles.forEach((filePath, index) => {
-                    const button = document.createElement('button');
-                    button.classList.add('nav-button');
-                    button.setAttribute('data-section', 'virtual-jailbreaks');
-                    button.innerHTML = `
-                        <img class="icon" src="" alt="Icon" style="width: 80px; height: 80px; border-radius: 15px; margin-left: 0px;">
-                        <p class="label" style="position: absolute; left: 100px; top: 20px; color: white; font-weight: 1; font-size: 16px;">Loading...</p>
-                        
-                        <img class="chevron" src="images/home/chevron.png" alt="Chevron" style="position: absolute; right: 10px; width: 30px; top: 50%; transform: translateY(-50%); height: 30px; opacity: 0.5; pointer-events: none;">
-                    `;
-                    
-                    // Fetch and update the button with the data from the mobileconfig file
-                    fetchMobileConfig(filePath, button);
-                    
-                    button.addEventListener('click', handleButtonClick);
-                    virtualJailbreaksDiv.appendChild(button);
-                });
-            }
-    
-            // Create buttons for each mobileconfig file when the page loads
-            createMobileConfigButtons();
-        });
-    </script>
-    
+   <script src="js/navtweak.js"></script>
+   <script src="js/vj.js"></script>
+   <script src="js/tps.js"></script>
+   <script src="js/jl.js"></script>
+   <script src="js/u.js"></script>
+   <script src="js/e.js"></script>
+   <script src="js/pm.js"></script>
+
     
     
       

@@ -479,7 +479,7 @@ const setupSearch = async () => {
 
 
 window.onload = async () => {
-    const repoData = await fetchData('https://wuxu1.github.io/wuxu-complete-plus.json');
+    const repoData = await fetchData('https://quarksources.github.io/quantumsource++.json');
     if (repoData) {
         loadApps(repoData);
         setupSearch();
