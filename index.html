@@ -1467,6 +1467,7 @@ document.getElementById('fileInput').addEventListener('change', (event) => {
                 }
 
                 alert('localStorage data has been updated!');
+                window.location.reload()
             } catch (error) {
                 console.error('Invalid JSON format:', error);
                 alert('Failed to parse the JSON file.');
