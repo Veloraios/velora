@@ -100,8 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Create close button
                     const closeButton = `
-                        <img src="images/home/chevron_left.png" alt="Close" 
-                            style="position: absolute; top: 20px; left: 20px; z-index: 21; cursor: pointer; width: 30px; height: 30px; filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));" />
+                      <img src="images/home/chevron_left.png" alt="Close" 
+                            style="position: absolute; top: 50px; left: 20px; z-index: 21; cursor: pointer; width: 30px; height: 30px; filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));" />
                     `;
 
                     fullscreenDiv.innerHTML = closeButton;

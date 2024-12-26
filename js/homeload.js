@@ -99,8 +99,10 @@ const openModal = (app) => {
         : 'Version Date: Unknown');
 
     // Fallback if description or subtitle is missing
-    const description = app.localizedDescription || 'No description available';
+    const description = app.localizedDescription || app.description || 'No description available';
     const subtitle = app.subtitle || 'No subtitle available';
+    
+    
 
     // Find the latest version if no version exists
     let version = app.version || 'Unknown version';
@@ -129,16 +131,46 @@ function formatDate(dateString) {
     return date.toLocaleDateString('en-US', options);
   }
   
-  // Add the latestVersionDate property to the app object
-  app.latestVersionDate = (() => {
+ // Add the latestVersionDate property to the app object
+app.latestVersionDate = (() => {
     // Extract the latest version's date (based on the most recent date)
-    const latestVersion = app.versions.reduce((latest, current) => {
-      return new Date(current.date) > new Date(latest.date) ? current : latest;
-    }, app.versions[0]);
+    const latestVersion = app.versions && app.versions.length > 0
+      ? app.versions.reduce((latest, current) => {
+          return new Date(current.date) > new Date(latest.date) ? current : latest;
+        }, app.versions[0])
+      : null;
   
-    // Format and return the date of the latest version
-    return formatDate(latestVersion.date);
+    // If the latest version date is defined, format and return it
+    if (latestVersion && latestVersion.date) {
+      return formatDate(latestVersion.date);
+    } else if (app.versionDate) {
+      // Fallback to app.versionDate if latestVersion date is undefined
+      return formatDate(app.versionDate);
+    } else if (app.fullDate) {
+      // If both versionDate and fullDate are defined, return fullDate
+      return formatDate(app.fullDate);
+    } else {
+      // If none are defined, return a default message
+      return "Date not defined";
+    }
   })();
+
+  // Add the formattedBundle property to the app object
+app.formattedBundle = (() => {
+    // Check for each property in order and return the first defined one
+    const bundle = app.bundleIdentifier || app.bundleID;
+  
+    // If a bundle is found, return it, otherwise return the fallback message
+    return bundle || "undefined bundle id";
+  })();
+
+ 
+
+
+
+
+
+  
   
   // Now you can use app.latestVersionDate wherever you need to display the latest version date
   console.log("Latest version date:", app.latestVersionDate); // This will output something like "October 9, 2024"
@@ -153,19 +185,30 @@ function formatSize(bytes) {
     return `${mb.toFixed(2)} MB`; // Convert to MB
   }
   
-  // Assuming `app` is your app object, add the latestSize property to the app object
-  app.latestSize = (() => {
+ // Assuming `app` is your app object, add the latestSize property to the app object
+app.latestSize = (() => {
     // Extract the latest version's size
-    const latestVersion = app.versions.reduce((latest, current) => {
-      return new Date(current.date) > new Date(latest.date) ? current : latest;
-    }, app.versions[0]);
+    const latestVersion = app.versions && app.versions.length > 0
+      ? app.versions.reduce((latest, current) => {
+          return new Date(current.date) > new Date(latest.date) ? current : latest;
+        }, app.versions[0])
+      : null;
   
-    // Format and return the size of the latest version
-    return formatSize(latestVersion.size);
+    // If there's a latest version and its size is defined, format and return the size
+    if (latestVersion && latestVersion.size) {
+      return formatSize(latestVersion.size);
+    } else if (app.size) {
+      // Fallback to app.size if latestVersion size is undefined
+      return formatSize(app.size);
+    } else {
+      // If neither is defined, return a default message
+      return "Size not defined";
+    }
   })();
   
+  
   // Now you can use `app.latestSize` wherever needed
-  const formattedDescription = app.localizedDescription
+  const formattedDescription = description
     .replace(/\*\*(.*?)\*\*/g, '<span style="font-weight: bold;">$1</span>')  // Bold replacement
     .replace(/\n/g, '<br>')  // Newline replacement
     .replace('${app.latestSize}', app.latestSize);  // Insert the latest size in the description
@@ -180,14 +223,14 @@ function formatSize(bytes) {
             : null);
 
     let modalHtml = `
-    <div id="modal" style="left: 0; display: block; width: 100vw; height: 100vh; background-color: #131416; position: fixed; top: 0; z-index: 1000000000000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
+      <div id="modal" style="left: 0; display: block; width: 100vw; height: 100vh; background-color: #131416; position: fixed; top: 0; z-index: 1000000000000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
         <div style="position: relative; width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto; flex-direction: column; padding-top: 200px; padding-bottom: 20px; box-sizing: border-box;">
             
             <!-- Image Wrapper (App Icon) -->
             <div class="image-wrapper" style="width: 100%; height: 200px; background-image: url('${app.iconURL}'); background-size: 3500% 3500%; background-position: bottom right; top: -48px; position: absolute; background-repeat: no-repeat;"></div>
 
             <!-- Back Button -->
-            <img src="images/home/chevron_left.png" style="width: 40px; height: 40px; filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3)); position: absolute; top: 40px; left: 15px; display: block;" id="back">
+            <img src="images/home/chevron_left.png" style="width: 35px; height: 35px; filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3)); position: absolute; top: 40px; left: 15px; display: block;" id="back">
 
             <!-- App Icon -->
             <img src="${app.iconURL}" alt="${app.name}" style="width: 70px; left: 15px; border-radius: 15px; position: absolute; display: block; top: 150px; height: 70px; margin-top: 20px;">
@@ -206,29 +249,29 @@ function formatSize(bytes) {
                 <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); filter: drop-shadow(0 0 8px rgba(0, 0, 0, 1));">SIGN</span>
             </button>
 
-  <div style="display: flex; overflow-y: hidden; flex-direction: row; flex-wrap: nowrap; overflow-x: auto; margin-top: 70px; background: transparent; border-top: #ffffff40 1px solid; border-bottom: #ffffff40 1px solid; height: 85px; margin-left: 15px; margin-right: 15px;">
-    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 85px; min-width: 140px; max-width: 158px; margin-left: 5px; background: transparent; position: relative;">
+ <div style="display: flex; overflow-x: auto; overflow-y: hidden; flex-direction: row; margin-top: 70px; background: transparent; border-top: #ffffff40 1px solid; border-bottom: #ffffff40 1px solid; height: 85px; padding-left: 5px; padding-right: 5px;">
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 85px; min-width: 140px; background: transparent; position: relative;">
         <h1 style="color: white; font-size: 16px; font-weight: 1;">Bundle ID</h1>
-        <h1 style="color: white; font-size: 13px; font-family: 'apple', sans-serif;">${app.bundleIdentifier}</h1>
+        <h1 style="color: white; font-size: 13px; font-family: 'apple', sans-serif;">${app.formattedBundle}</h1>
         <!-- Vertical line between divs -->
         <div style="position: absolute; right: -5px; top: 50%; transform: translateY(-50%); height: 60%; width: 1px; background-color: rgba(255, 255, 255, 0.25);"></div>
     </div>
 
-    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 85px; min-width: 140px; max-width: 158px; margin-left: 5px; background: transparent; position: relative;">
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 85px; min-width: 140px; background: transparent; position: relative;">
         <h1 style="color: white; font-size: 16px; font-weight: 1;">Size</h1>
         <h1 style="color: white; font-size: 13px; font-family: 'apple', sans-serif;">${app.latestSize}</h1>
         <!-- Vertical line between divs -->
         <div style="position: absolute; right: -5px; top: 50%; transform: translateY(-50%); height: 60%; width: 1px; background-color: rgba(255, 255, 255, 0.25);"></div>
     </div>
 
-    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 85px; min-width: 140px; max-width: 158px; margin-left: 5px; background: transparent; position: relative;">
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 85px; min-width: 140px; background: transparent; position: relative;">
         <h1 style="color: white; font-size: 16px; font-weight: 1;">Developer</h1>
         <h1 style="color: white; font-size: 13px; font-family: 'apple', sans-serif;">${app.developerName}</h1>
         <!-- Vertical line between divs -->
         <div style="position: absolute; right: -5px; top: 50%; transform: translateY(-50%); height: 60%; width: 1px; background-color: rgba(255, 255, 255, 0.25);"></div>
     </div>
 
-    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 85px; min-width: 140px; max-width: 158px; margin-left: 5px; background: transparent; position: relative;">
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 85px; min-width: 140px; background: transparent; position: relative;">
         <h1 style="color: white; font-size: 16px; font-weight: 1;">Last Updated</h1>
         <h1 style="color: white; font-size: 13px; font-family: 'apple', sans-serif;">${app.latestVersionDate}</h1>
         <!-- Vertical line between divs -->
@@ -238,57 +281,8 @@ function formatSize(bytes) {
 
 
 
- <!-- Screenshots Section -->
-<div style="display: flex; flex-direction: row; flex-wrap: nowrap; overflow-x: auto; margin-top: 20px; margin-left: 15px; margin-right: 15px;">
-    ${app.screenshotURLs.map(url =>
-        `<img src="${url}" alt="Screenshot" style="max-width: 100%; object-fit: contain; height: auto; max-height: 400px; margin-right: 10px; border-radius: 10px;" onclick=" 
-            var modal = document.createElement('div');
-            modal.style.position = 'fixed';
-            modal.style.top = '0';
-            modal.style.left = '0';
-            modal.style.width = '100%';
-            modal.style.height = '100%';
-            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-            modal.style.display = 'flex';
-            modal.style.justifyContent = 'center';
-            modal.style.alignItems = 'center';
-            modal.style.zIndex = '100000000099';
-            modal.style.opacity = '0'; // Start with hidden modal
-            modal.style.transition = 'opacity 0.3s ease-in-out'; // Fade-in transition
-            
-            setTimeout(function() {
-                modal.style.opacity = '1'; // Fade in after a short delay
-            }, 0);
+<div id="ss"></div>
 
-            var img = document.createElement('img');
-            img.src = '${url}';
-            img.style.maxWidth = '90%';
-            img.style.maxHeight = '90%';
-            img.style.objectFit = 'contain';
-            img.style.margin = 'auto';
-            img.style.borderRadius = '15px';
-            
-            var closeBtn = document.createElement('img');
-            closeBtn.src = 'https://icon-library.com/images/cancel-icon-transparent/cancel-icon-transparent-3.jpg'; // Use the image for the close button
-            closeBtn.style.position = 'absolute';
-            closeBtn.style.top = '20px';
-            closeBtn.style.right = '20px';
-            closeBtn.style.width = '30px'; // Adjust size of the close button image if needed
-            closeBtn.style.height = '30px'; // Adjust height if needed
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.onclick = function() { 
-                modal.style.opacity = '0'; // Fade out before removing
-                setTimeout(function() {
-                    document.body.removeChild(modal);
-                }, 300); // Wait for fade-out animation before removing the modal
-            };
-            
-            modal.appendChild(closeBtn);
-            modal.appendChild(img);
-            document.body.appendChild(modal);
-        ">`
-    ).join('')}
-</div>
 
             <div style="color: white; font-size: 16px; font-family: 'apple', sans-serif; margin-top: 50px; margin-left: 15px; margin-right: 15px;">
                 ${formattedDescription}
@@ -365,6 +359,66 @@ function formatSize(bytes) {
         </div>
     </div>
     `;
+
+    // Check if app.screenshotURLs exists
+if (app.screenshotURLs && app.screenshotURLs.length > 0) {
+    const screenshotGallery = `
+        <div style="display: flex; flex-direction: row; flex-wrap: nowrap; overflow-x: auto; margin-top: 20px; padding-left: 5px; padding-right: 5px;">
+            ${app.screenshotURLs.map(url =>
+                `<img src="${url}" alt="Screenshot" style="max-width: 100%; object-fit: contain; height: auto; max-height: 400px; margin-right: 10px; border-radius: 10px;" onclick=" 
+                    var modal = document.createElement('div');
+                    modal.style.position = 'fixed';
+                    modal.style.top = '0';
+                    modal.style.left = '0';
+                    modal.style.width = '100%';
+                    modal.style.height = '100%';
+                    modal.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                    modal.style.display = 'flex';
+                    modal.style.justifyContent = 'center';
+                    modal.style.alignItems = 'center';
+                    modal.style.zIndex = '100000000099';
+                    modal.style.opacity = '0';
+                    modal.style.transition = 'opacity 0.3s ease-in-out';
+                    
+                    setTimeout(function() {
+                        modal.style.opacity = '1';
+                    }, 0);
+
+                    var img = document.createElement('img');
+                    img.src = '${url}';
+                    img.style.maxWidth = '90%';
+                    img.style.maxHeight = '90%';
+                    img.style.objectFit = 'contain';
+                    img.style.margin = 'auto';
+                    img.style.borderRadius = '15px';
+                    
+                    var closeBtn = document.createElement('img');
+                    closeBtn.src = 'https://icon-library.com/images/cancel-icon-transparent/cancel-icon-transparent-3.jpg';
+                    closeBtn.style.position = 'absolute';
+                    closeBtn.style.top = '40px';
+                    closeBtn.style.right = '20px';
+                    closeBtn.style.width = '30px';
+                    closeBtn.style.height = '30px';
+                    closeBtn.style.cursor = 'pointer';
+                    closeBtn.onclick = function() { 
+                        modal.style.opacity = '0';
+                        setTimeout(function() {
+                            document.body.removeChild(modal);
+                        }, 300);
+                    };
+                    
+                    modal.appendChild(closeBtn);
+                    modal.appendChild(img);
+                    document.body.appendChild(modal);
+                ">`
+            ).join('')}
+        </div>
+    `;
+    
+    // Inject the screenshot gallery HTML into the #ss div in modalHtml
+    modalHtml = modalHtml.replace('<div id="ss"></div>', `<div id="ss">${screenshotGallery}</div>`);
+}
+
 
     // Insert modal HTML into the DOM
     document.body.insertAdjacentHTML('beforeend', modalHtml);
@@ -479,7 +533,7 @@ const setupSearch = async () => {
 
 
 window.onload = async () => {
-    const repoData = await fetchData('https://quarksources.github.io/quantumsource++.json');
+    const repoData = await fetchData('https://repository.apptesters.org/');
     if (repoData) {
         loadApps(repoData);
         setupSearch();

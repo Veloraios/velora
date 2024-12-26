@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     fullscreenDiv.style.overflow = 'auto';
                     fullscreenDiv.style.display = 'flex';
                     fullscreenDiv.style.flexDirection = 'column';
+                    fullscreenDiv.style.opacity = '0'; // Start with full opacity 0 for fade-in
 
                     // Helper function to get the color of the middle pixel of the image
                     function getMiddlePixelColor(img) {
@@ -99,13 +100,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     // Create close button
-                    const closeButton = `
+                    const closeButton = ` 
                         <img src="images/home/chevron_left.png" alt="Close" 
-                            style="position: absolute; top: 20px; left: 20px; z-index: 21; cursor: pointer; width: 30px; height: 30px; filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));" />
+                            style="position: absolute; top: 50px; left: 20px; z-index: 21; cursor: pointer; width: 30px; height: 30px; filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));" />
                     `;
 
                     fullscreenDiv.innerHTML = closeButton;
-                    fullscreenDiv.innerHTML += `
+                    fullscreenDiv.innerHTML += ` 
                         <div style="position: relative; width: 100%; height: 200px; ">
                             <div style="width: 100%; height: 100%;  position: absolute; display: flex; background-repeat: no-repeat; background-image: none;" id="imageWrapper">
                                <div style="overflow-x: hidden;">
@@ -158,11 +159,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Event listener for close button
                     fullscreenDiv.querySelector('img').addEventListener('click', () => {
-                        fullscreenDiv.remove();
+                        // Fade out the fullscreen div before removing it
+                        fullscreenDiv.style.opacity = '0';
+                        setTimeout(() => {
+                            fullscreenDiv.remove();
+                        }, 300); // Wait for fade-out animation to complete
                     });
 
-                    // Append to body
+                    // Append to body and trigger fade-in effect
                     document.body.appendChild(fullscreenDiv);
+                    setTimeout(() => {
+                        fullscreenDiv.style.opacity = '1'; // Fade in after the div is added
+                    }, 10);
                 }
 
                 // Attach the event listener to the button
@@ -228,11 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const mobileConfigFiles = [
         'tweaks/emulators/Eclipse.mobileconfig',
-       
         'tweaks/emulators/Aurora.mobileconfig'
-       
-       
-       
     ];
 
     function createMobileConfigButtons() {
