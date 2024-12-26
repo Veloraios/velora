@@ -532,11 +532,30 @@ const setupSearch = async () => {
 
 
 
-window.onload = async () => {
-    const repoData = await fetchData('https://repository.apptesters.org/');
-    if (repoData) {
-        loadApps(repoData);
-        setupSearch();
-    }
 
+window.onload = async () => {
+    // Get the repositories from localStorage
+    const repos = JSON.parse(localStorage.getItem('repos'));
+
+    if (repos && repos.length > 0) {
+        // Find the repository that has isGreenEnabled set to true (the one with the green check)
+        const selectedRepo = repos.find(repo => repo.isGreenEnabled);
+
+        if (selectedRepo) {
+            const repoURL = selectedRepo.url;  // Use the selected repo's URL
+
+            // Fetch data from the repository URL
+            const repoData = await fetchData(repoURL);
+
+            if (repoData) {
+                loadApps(repoData);  // Call the function to load the apps with fetched data
+                setupSearch();       // Set up the search functionality
+            }
+        } else {
+            console.log('No repository with a green check found.');
+        }
+    } else {
+        console.log('No repositories found in localStorage.');
+    }
 };
+
