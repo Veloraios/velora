@@ -606,9 +606,12 @@ left: calc(130px * 2 + 2px);
       <img onclick="promptSource(); event.stopPropagation()" src="images/settingspage/plus.png" style="right: 10px; top: 10px; position: absolute; opacity: 65%; width: 25px; height: 25px;" alt="refresh">
 
       <h1 style="color: white; opacity: 65%; font-size: 17px; position: absolute; left: 15px; top: 10px; font-weight: 1;">Sources</h1>
-      <div style="height: 1px; width: 100%; background-color: rgba(255, 255, 255, 0.2); position: absolute; top: 40px;"></div>
+      <h1 style="opacity: 1; font-family: 'apple'; font-size: 14px; top: 30px; position: absolute; left: 15px;"><span style="opacity: 50%;">No Repositiories?</span> <a href="repos.html"><span style="color: lightblue; text-decoration-line: underline; opacity: 1;"> Find them Here.</span></a></h1>
+      <div style="height: 1px; width: 100%; background-color: rgba(255, 255, 255, 0.2); position: absolute; top: 60px;"></div>
 
-      <div id="repo-list" style="position: absolute; top: 41px; bottom: 10px; overflow-y: auto;  width: 100%;"></div>
+      <div id="repo-list" style="position: absolute; top: 61px; bottom: 10px; overflow-y: auto;  width: 100%;"></div>
+     
+      
   </div>
 </div>
 
@@ -805,6 +808,9 @@ function toggleGreenButton(button) {
   button.style.border = 'none';
   checkmark.style.display = 'block';
   repo.isGreenEnabled = true;  // Mark as checked
+
+
+
   
   saveReposToLocalStorage(repos); // Save updated state
   updateRepoButtons(repos); // Update UI
@@ -861,13 +867,30 @@ document.addEventListener('DOMContentLoaded', () => {
   
     <!-- Serenity Header -->
     <div style="height: 50px; width: 100%;">
-      <h1 style="font-size: 25px; font-weight: 1; left: 40px; position: absolute; color: white;">Serenity</h1>
+      <h1 style="font-size: 25px; font-weight: 1; left: 30px; position: absolute; color: white;">What's New?</h1>
       <img src="images/settingspage/plus.png" style="height: 35px; width: 35px; right: 40px; position: absolute;" onclick="showOverlay()" alt="Settings">
     </div>
+    <div style="height: 250px; width: 100%; background: transparent; position: relative; overflow-x: auto; overflow-y: hidden; white-space: nowrap;">
+      <div style="width: 400px; height: 100%; border-radius: 15px; margin-left: 30px; background-color: red; display: inline-block;">
+      </div>
+      <div style="width: 400px; height: 100%; border-radius: 15px; margin-left: 10px; background-color: blue; display: inline-block;">
+      </div>
+      <div style="width: 400px; height: 100%; border-radius: 15px; margin-left: 10px; background-color: green; display: inline-block;">
+      </div>
+      <div style="width: 400px; height: 100%; border-radius: 15px; margin-left: 10px; background-color: yellow; display: inline-block;">
+      </div>
+      <div style="width: 400px; height: 100%; border-radius: 15px; margin-left: 10px; background-color: purple; display: inline-block;">
+      </div>
+      <div style="width: 400px; height: 100%; border-radius: 15px; margin-right: 30px; margin-left: 10px; background-color: orange; display: inline-block;">
+      </div>
+    </div>
+
+    <span style=" left: 30px; position: relative; opacity: 65%; font-family: 'apple'; margin-top: 10px; color: lightblue;">See All Past News</span>
+    
   
-    <!-- Space below Serenity -->
-    <div style="height: 200px; width: 1px; background: transparent;"></div>
   
+  
+    
     <!-- Search Bar Wrapper -->
     <div class="search-bar-wrapper" style="position: relative;">
       <input type="text" id="search-bar" class="search-bar" placeholder="Search for Apps...">
@@ -875,6 +898,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
     </div>
 </div>
+  
 
 <!-- JavaScript -->
 <script>
@@ -1050,17 +1074,14 @@ window.onresize = function() {
     
     <div class="content" id="ipa-signer-page">
 
-        <div style="top: -48px; left: 0; right: 0; width: 100%; height: 100px; background-color: rgba(28, 28, 28, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); position: fixed; display: block; margin: 0; padding: 0;">
-        </div>
+     <h1 style="top: 30px; left: 20px; font-size: 30px; position: absolute; font-weight: 1;">Signer</h1>
 
-        <div style="display: block; width: 90%; height: 100%;" id="signWrapper"></div>
-        <h1>Sign</h1>
-
-        <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support me on Ko-fi', '#72a4f2', 'I2I317R8E8');kofiwidget2.draw();</script> 
-       
-    </div>
+      
         
     </div>
+
+    <script type="module" src="index.js"></script>
+
     <div class="content" id="settings-page">
      
       <h1 id="settingsHeader" style="margin-bottom: 25px; margin-left: 10px; font-weight: 1; font-size: 25px;">Settings</h1>
