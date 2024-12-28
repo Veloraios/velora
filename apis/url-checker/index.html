@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Redirect Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label, input, button {
+            margin-bottom: 10px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>URL Redirect Checker</h1>
+    
+    <label for="url-input">Enter a URL:</label>
+    <input type="text" id="url-input" placeholder="https://example.com">
+    <button onclick="checkRedirect()">Check Redirect</button>
+
+    <div id="result" class="result"></div>
+
+    <script>
+        async function checkRedirect() {
+            const urlInput = document.getElementById('url-input');
+            const resultDiv = document.getElementById('result');
+
+            const url = urlInput.value.trim();
+
+            if (!url) {
+                resultDiv.innerHTML = '<p class="error">Please enter a URL!</p>';
+                return;
+            }
+
+            resultDiv.innerHTML = 'Checking...';
+
+            try {
+                // Send a request to the server to check the redirect
+                const response = await fetch(`/check-redirect?url=${encodeURIComponent(url)}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    resultDiv.innerHTML = `<p class="error">${data.error}</p>`;
+                } else {
+                    resultDiv.innerHTML = `
+                        <p><strong>Status:</strong> ${data.status}</p>
+                        <p><strong>Final URL:</strong> <a href="${data.redirectedUrl}" target="_blank">${data.redirectedUrl}</a></p>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+    "name": "url-redirect-checker",
+    "version": "1.0.0",
+    "description": "A simple project to check URL redirection status.",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.18.2",
+      "axios": "^1.5.0"
+    }
+  }
+  
