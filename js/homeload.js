@@ -520,10 +520,14 @@ const setupSearch = async () => {
             overlay.style.display = 'none'; // Hide overlay after a brief delay
             resultsContainer.style.display = 'none'; // Hide the results container
             
-            // Add 'overflow: hidden' directly to the <html> element's style attribute
-            document.documentElement.setAttribute('style', 'overflow: hidden;'); // Disable scrolling on <html>
+            // Target the <html> element with lang="en" and disable scrolling
+            const htmlElement = document.querySelector('html[lang="en"]');
+            if (htmlElement) {
+                htmlElement.style.overflow = 'hidden';  // Disable scrolling on <html lang="en">
+            }
         }, 0); // Delay should match the transition time
     });
+    
     
 };
 

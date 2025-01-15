@@ -3,16 +3,17 @@ const { exec } = require('child_process');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const axios = require('axios'); // Add axios for HTTP requests
 const app = express();
 const port = 3000;
 
-// Set up file upload storage
+// Set up file upload storage (temporary local storage for upload to file.io)
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/');
+    cb(null, 'uploads/'); // Temporary storage for uploads
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname)); // Add a timestamp to avoid name collisions
+    cb(null, Date.now() + path.extname(file.originalname)); // Add timestamp for uniqueness
   }
 });
 
@@ -27,12 +28,28 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'index.html'));
 });
 
+// Helper function to upload files to file.io
+async function uploadToFileIO(filePath) {
+  const fileData = fs.readFileSync(filePath); // Read file data
+  const formData = new FormData();
+  formData.append('file', fileData, path.basename(filePath));
+
+  try {
+    const response = await axios.post('https://file.io', formData, {
+      headers: formData.getHeaders(),
+    });
+    return response.data.link; // Return the file.io link
+  } catch (error) {
+    throw new Error('Error uploading to file.io: ' + error.message);
+  }
+}
+
 // Handle the file upload and zsign execution
 app.post('/upload', upload.fields([
   { name: 'ipaFile', maxCount: 1 },
   { name: 'p12File', maxCount: 1 },
   { name: 'mobileprovisionFile', maxCount: 1 }
-]), (req, res) => {
+]), async (req, res) => {
   if (!req.files.ipaFile || !req.files.p12File || !req.files.mobileprovisionFile) {
     return res.status(400).send('Please upload all required files: IPA, .p12, and .mobileprovision');
   }
@@ -51,7 +68,7 @@ app.post('/upload', upload.fields([
   if (req.body.force) command += ' -f';
 
   // Execute the zsign command
-  exec(command, (error, stdout, stderr) => {
+  exec(command, async (error, stdout, stderr) => {
     if (error) {
       return res.send(`Error: ${error.message}`);
     }
@@ -59,20 +76,18 @@ app.post('/upload', upload.fields([
       return res.send(`stderr: ${stderr}`);
     }
 
-    // Provide download link for the signed IPA
-    res.send(`
-      <h2>IPA Signed Successfully!</h2>
-      <p>Click below to download the signed IPA:</p>
-      <a href="/download/${path.basename(signedFile)}" download>Download Signed IPA</a>
-    `);
+    try {
+      // Upload signed IPA to file.io
+      const downloadLink = await uploadToFileIO(signedFile);
+      res.send(`
+        <h2>IPA Signed Successfully!</h2>
+        <p>Click below to download the signed IPA:</p>
+        <a href="${downloadLink}" target="_blank">Download Signed IPA</a>
+      `);
+    } catch (uploadError) {
+      res.send(`Error uploading signed IPA to file.io: ${uploadError.message}`);
+    }
   });
-});
-
-// Serve signed IPA files
-app.get('/download/:fileName', (req, res) => {
-  const fileName = req.params.fileName;
-  const filePath = path.join(__dirname, 'uploads', fileName);
-  res.download(filePath);
 });
 
 // Start the server
