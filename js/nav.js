@@ -1,5 +1,3 @@
-// navigation.js
-
 const navItems = document.querySelectorAll('.nav-item');
 const pages = document.querySelectorAll('.content');
 
@@ -34,6 +32,19 @@ navItems.forEach(item => {
         });
         item.classList.add('active');
         item.querySelector('img').classList.add('clicked');
+
+        // Apply scrolling logic based on page content
+        const homePage = document.getElementById('home-page');
+        const content = document.querySelector('.content');
+
+        // Allow scrolling for active page
+        if (target === 'home') {
+            homePage.style.overflow = 'auto'; // Enable scrolling on homepage
+            content.style.overflow = 'hidden'; // Disable scrolling on other content
+        } else {
+            homePage.style.overflow = 'hidden'; // Disable scrolling on homepage
+            content.style.overflow = 'auto'; // Enable scrolling for other pages
+        }
     });
 });
 

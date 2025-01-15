@@ -513,22 +513,20 @@ const setupSearch = async () => {
         }
     });
 
-    // Close overlay when clicking on the background (overlay)
     overlay.addEventListener('click', () => {
         // Hide the overlay with a delay to simulate a fade-out effect
         overlay.style.transition = 'background 0s ease'; // Optional transition effect
         setTimeout(() => {
             overlay.style.display = 'none'; // Hide overlay after a brief delay
             resultsContainer.style.display = 'none'; // Hide the results container
-            document.body.classList.remove('no-scroll');
+            
+            // Add 'overflow: hidden' directly to the <html> element's style attribute
+            document.documentElement.setAttribute('style', 'overflow: hidden;'); // Disable scrolling on <html>
         }, 0); // Delay should match the transition time
     });
-
-    // Prevent the overlay from being closed when clicking inside the results container
-    resultsContainer.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent click from bubbling up to the overlay
-    });
+    
 };
+
 
 
 

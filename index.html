@@ -56,6 +56,8 @@ img {
 }
 
 
+
+
 /* The switch - the box around the slider */
 .container1 {
   width: 51px;
@@ -217,13 +219,17 @@ img {
       .content {
           padding: 20px;
           display: none;
+          overflow: hidden;
           
          
       }
 
+     
+
       .content.active {
           display: block;
           left: 10px;
+          overflow: hidden;
           
       }
 
@@ -949,6 +955,10 @@ window.onresize = function() {
     <div class="content active" id="home-page" style="overflow-x: hidden;">
       
     </div>
+
+
+
+
     <div class="content" id="categories-page" style="overflow-x: hidden; overflow-y: auto; ">
       <!-- Header Section -->
       <div style="display: flex; align-items: center; position: relative; height: 60px;">
@@ -1077,7 +1087,7 @@ window.onresize = function() {
  
   <div id="testsignen" style="width: 90%; position: absolute; left: 50%; transform: translateX(-50%);">
     <h1 style="font-size: 30px; position: absolute; top: 20px; left: 5px;">Signer</h1>
-     <label for="file-upload" id="file-upload-label" style="background-color: white; z-index: 3; width: 100%; height: 40px; border-radius: 15px; position: relative; display: flex; top: 90px; margin-left: auto; margin-right: auto;">
+     <label for="file-upload" id="file-upload-label" style="background-color: white; z-index: 1; width: 100%; height: 40px; border-radius: 15px; position: relative; display: flex; top: 90px; margin-left: auto; margin-right: auto;">
         <img src="images/signer/arrow_down_doc.png" style="width: 30px; height: 30px; position: absolute; left: 5px; top: 50%; transform: translateY(-50%); display: block;">
         <span style="position: absolute; left: 40px; font-size: 17.5px; color: black; font-family: 'apple', sans-serif; top: 50%; transform: translateY(-50%);">Import .ipa File</span>
         <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
@@ -1086,28 +1096,35 @@ window.onresize = function() {
 
     <input type="file" id="file-upload" style="display: none;" accept=".ipa" onchange="fileSelect()">
 
-     <!-- This div will hold content related to the IPA info and be positioned relative -->
-<!-- This div will hold content related to the IPA info and be positioned relative -->
 <div id="contentSigner" style="position: relative; margin-top: 120px; width: 95%; transition: none; display: flex; left: 50%; transform: translateX(-50%); z-index: 1;">
 
-  <div style="width: 90vw; left: 0; height: 100px; top: 0; left: 50%; transform: translateX(-50%); position: absolute; display: flex;">
+  <div style="width: 90vw; left: 0; height: 100px; top: 10px; left: 50%; transform: translateX(-50%); position: absolute; display: flex;">
     <span style="position: absolute; font-size: 20px; font-weight: 1;">Certificate</span>
     <span style="position: absolute; font-size: 16px; font-family: 'apple', sans-serif; opacity: 65%;"><br>In Order to Sign Apps, you need to import a Certificate</span>
   </div>
-<div style="width: 90vw; border-radius: 15px; height: 100px; top: 70px; background-color: #191A1C; left: 50%; transform: translateX(-50%); position: absolute;">
-    
+  <div class="triggerDiv" onclick="toggleModalApple()" style="width: 90vw; border-radius: 15px; height: 80px; top: 85px; background-color: #191A1C; left: 50%; transform: translateX(-50%); position: absolute;">
+    <img src="images/signer/folder_fill_badge_plus.png" style="left: 20px; opacity: 80%; position: absolute; top: 50%; transform: translateY(-50%); width: 60px; height: 60px;" alt="">
+ <h1 style="left: 90px; font-weight: 1; font-size: 18px; position: absolute; top: 10px;">Add Certificate</h1>
+<h1 style="left: 90px; font-family: 'apple'; font-size: 13px; position: absolute; top: 35px; opacity: 50%;">Add Your Certificate or use a <br>Working One from our Certificate Hub.</h1>
+<img src="images/home/chevron.png" style="right: 10px; position: absolute; top: 50%; transform: translateY(-50%); width: 25px; height: 25px; opacity: 50%;" alt="">
   </div>
+
+
+
+
   <!-- The inner div now has width set to 95% -->
-  <div style="height: 250px; width: 90vw; background-color: #191A1C; z-index: 3; top: 180px; position: absolute; left: 50%; transform: translateX(-50%); border-radius: 15px;">
+  <div style="height: 250px; width: 90vw; background-color: #191A1C; z-index: 3; top: 175px; position: absolute; left: 50%; transform: translateX(-50%); border-radius: 15px;">
     <div style="background-image: url('images/signer/340554.webp'); height: 80%; top: 0; left: 0; width: 100%; z-index: 1; border-top-left-radius: 15px; border-top-right-radius: 15px; position: absolute;" alt="">
       <img src="images/signer/350x350bb.jpg" style="left: 10px; top: 10px; width: 90px; height: 90px; position: absolute; border-radius: 15px;" alt="">
       <h1 style="position: absolute; left: 110px; top: 10px; font-weight: 1; font-size: 20px;">Private Certificate</h1>
       <h1 style="position: absolute; left: 110px; top: 40px; font-family: 'apple', sans-serif; opacity: 65%; font-size: 20px;">What Are the Benefits?</h1>
-      <h1 style="position: absolute; left: 110px; top: 70px; font-family: 'apple', sans-serif; opacity: 65%; font-size: 14px; ">- No Revoke For a Year<br>- Option to only Use Private Cert</h1>
+      <h1 style="position: absolute; left: 110px; top: 70px; font-family: 'apple', sans-serif; opacity: 65%; font-size: 14px; ">- No Revoke For a Year<br>- Option to only Use Private Cert <br>- </h1>
      </div>
      <button style="bottom: 5px; width: 60px; height: 25px; border: none; text-align: center; background-image: url('images/signer/340554.webp'); position: absolute; right: 5px;">BUY</button>
    <h1 style="color: white; bottom: 10px; position: absolute; font-weight: 1; left: 10px; font-size: 18px;">10$/Year</h1>
   </div>
+
+  <div style="top: 400px; position: absolute; background-color: #131416; height: 300px; width: 1px;"></div>
   
 </div>
 
@@ -1177,6 +1194,11 @@ window.onresize = function() {
         <span style="position: absolute; left: 40px; font-size: 17.5px; color: black; font-family: 'apple', sans-serif; top: 50%; transform: translateY(-50%);">Sign</span>
         <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
     </button>
+    <label for="file-upload" id="file-upload-label" style="background-color: white; z-index: 2; width: calc(100% - 20px); height: 40px; border-radius: 15px; position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); margin-left: auto; margin-right: auto;">
+        <img src="images/signer/arrow_down_doc.png" style="width: 30px; height: 30px; position: absolute; left: 5px; top: 50%; transform: translateY(-50%); display: block;">
+        <span style="position: absolute; left: 40px; font-size: 17.5px; color: black; font-family: 'apple', sans-serif; top: 50%; transform: translateY(-50%);">Change .ipa File</span>
+        <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
+    </label>
 
                 </div>
               `;
@@ -1189,8 +1211,8 @@ window.onresize = function() {
               const newTop = infoDivBottom + -49; // Use -79px for the button positioning
 
               // Animate the "Import .ipa" button to slide down
-              fileUploadLabel.style.transition = 'top 0.5s ease'; // Smooth transition for the button
-              fileUploadLabel.style.top = `${newTop}px`; // Move the button to the new position
+             
+              fileUploadLabel.style.top = `-400px`; // Move the button to the new position
 
               // Slide down the contentSigner by 20px (directly below the button)
               contentSigner.style.transition = 'margin-top 0.5s ease'; // Smooth transition for the contentSigner
@@ -1682,11 +1704,213 @@ document.getElementById('fileInput').addEventListener('change', (event) => {
             <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
         </button>
         
-        <button style="margin-left: auto; margin-right: auto; background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+        <button id="notificationPage" style="margin-left: auto; margin-right: auto; background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
             <img src="images/settingspage/app_badge.png" style="width: 27px; height: 27px; position: absolute; left: 12px; display: block;">
             <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Notifications</span>
             <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
         </button>
+
+        <div id="overlay12" style="display: block; position: fixed; background: transparent; backdrop-filter: blur(15px); z-index: 99999999; top: 0; left: 0; width: 100vw; height: 100%;">
+          <img src="images/settingspage/bell_fill.png" style="top: 45px; transform: translateX(-50%); position: absolute; opacity: 80%; left: 50%; width: 100px; height: 100px;" alt="">
+      
+          <h1 style="font-size: 30px; color: white; position: absolute; left: 50%; transform: translateX(-50%); font-weight: 1; top: 180px;">Notifications</h1>
+         
+          <div id="notificationPage" style="background-color: #191A1C; bottom: 0; position: absolute; max-width: 500px; left: 50%; transform: translateX(-50%); height: 250px; width: 100%; border-top-right-radius: 25px; border-top-left-radius: 25px; border: #ffffff40 1px solid;">
+              <img src="images/settingspage/bell_slash_fill.png" style="top: 45px; position: absolute; opacity: 80%; left: 70px; width: 100px; height: 100px;" alt="">
+              <img src="images/settingspage/bell_fill.png" style="top: 45px; position: absolute; opacity: 80%; right: 70px; width: 100px; height: 100px;" alt="">
+      
+              <div style="position: absolute; width: 100%; height: 50px; top: 140px;">
+                  <!-- Button 1: Disable Notifications -->
+                  <button id="allow-btn" style="position: absolute; bottom: -5px; width: 35px; background-color: white; border-radius: 50%; left: 90px; height: 35px;">
+                  </button>
+      
+                  <!-- Button 2: Enable Notification Permission -->
+                  <button id="request-btn" style="position: absolute; bottom: -5px; width: 35px; background-color: transparent; border: #ffffff40 2px solid; border-radius: 50%; right: 90px; height: 35px;">
+                  </button>
+              </div>
+      
+              <!-- Notification Info Text -->
+              
+          </div>
+      </div>
+
+      <script>
+        // Wait for the DOM to load before executing any code
+        document.addEventListener("DOMContentLoaded", function() {
+      
+          const overlay = document.getElementById('overlay12');
+          const privacyPolicy = document.getElementById('notificationPage');
+          const settingsPage = document.getElementById('settings-page');
+          
+          // Function to show the overlay with fade-in effect
+          function showOverlay() {
+            overlay.style.display = 'block'; // Make the overlay visible
+            settingsPage.style.overflow = 'hidden'; // Prevent scrolling on the main page
+            setTimeout(() => {
+              overlay.style.opacity = '1'; // Fade in
+            }, 10); // Small delay to allow display change
+          }
+      
+          // Function to hide the overlay with fade-out effect
+          function hideOverlay() {
+            overlay.style.opacity = '0'; // Fade out
+            setTimeout(() => {
+              overlay.style.display = 'none'; // Hide the overlay after the animation
+              settingsPage.style.overflow = 'auto'; // Restore scrolling on the main page
+            }, 300); // Match the duration of the fade-out animation
+          }
+      
+          // Show the overlay when clicking on #privacyPolicy
+          privacyPolicy.addEventListener('click', showOverlay);
+      
+          // Hide the overlay when clicking on the transparent background outside the overlay content
+          overlay.addEventListener('click', function(event) {
+            if (event.target === overlay) {
+              hideOverlay();
+            }
+          });
+        });
+      </script>
+      
+      <script>
+          const allowBtn = document.getElementById('allow-btn');
+          const requestBtn = document.getElementById('request-btn');
+      
+          let notificationsEnabled = false;  // Track whether notifications are enabled or disabled
+          let permissionRequested = false;  // Track if permission has been requested
+      
+          // Function to check the notification permission state
+          function checkNotificationPermission() {
+              if (Notification.permission === 'granted') {
+                  notificationsEnabled = true;
+                  toggleButtonState(true); // Button 2 active (notifications enabled)
+              } else {
+                  notificationsEnabled = false;
+                  toggleButtonState(false); // Button 1 active (notifications disabled)
+              }
+          }
+      
+          // Toggle button state
+          function toggleButtonState(isEnabled) {
+              if (isEnabled) {
+                  // Notifications are enabled, Button 2 active, Button 1 disabled
+                  allowBtn.style.backgroundColor = 'transparent';
+                  allowBtn.style.border = '#ffffff40 2px solid';
+                  removeCheckmarkFromButton(allowBtn);
+      
+                  requestBtn.style.backgroundColor = 'white';
+                  requestBtn.style.border = 'none';
+                  injectCheckmarkToButton(requestBtn);
+      
+                  // Save to localStorage
+                  localStorage.setItem('activeButton', 'request');
+              } else {
+                  // Notifications are disabled, Button 1 active, Button 2 disabled
+                  allowBtn.style.backgroundColor = 'white';
+                  allowBtn.style.border = 'none';
+                  injectCheckmarkToButton(allowBtn);
+      
+                  requestBtn.style.backgroundColor = 'transparent';
+                  requestBtn.style.border = '#ffffff40 2px solid';
+                  removeCheckmarkFromButton(requestBtn);
+      
+                  // Save to localStorage
+                  localStorage.setItem('activeButton', 'allow');
+              }
+          }
+      
+          // Inject checkmark image into the given button
+          function injectCheckmarkToButton(button) {
+              const checkmarkImg = document.createElement('img');
+              checkmarkImg.src = 'images/settings/checkmark.png';
+              checkmarkImg.style.width = '25px';
+              checkmarkImg.style.height = '25px';
+              checkmarkImg.style.position = 'absolute';
+              checkmarkImg.style.top = '50%';
+              checkmarkImg.style.left = '50%';
+              checkmarkImg.style.transform = 'translate(-50%, -50%)';
+              button.appendChild(checkmarkImg);
+          }
+      
+          // Remove checkmark image from the given button
+          function removeCheckmarkFromButton(button) {
+              const checkmarkImg = button.querySelector('img');
+              if (checkmarkImg) {
+                  button.removeChild(checkmarkImg);
+              }
+          }
+      
+          // Handle click on Button 1 (Disable Notifications)
+          allowBtn.addEventListener('click', function () {
+              if (notificationsEnabled) {
+                  // Disable notifications
+                  notificationsEnabled = false;
+                  toggleButtonState(false);
+      
+                  // Unregister the service worker to stop receiving notifications
+                  if ('serviceWorker' in navigator) {
+                      navigator.serviceWorker.getRegistration().then(function (registration) {
+                          if (registration) {
+                              registration.unregister().then(() => {
+                                  console.log("Service worker unregistered and notifications blocked.");
+                              });
+                          }
+                      });
+                  }
+      
+                  // Prevent further push notifications from being sent by removing push event listener
+                  if ('PushManager' in window) {
+                      // Unsubscribe from push notifications
+                      navigator.serviceWorker.ready.then(function (registration) {
+                          registration.pushManager.getSubscription().then(function(subscription) {
+                              if (subscription) {
+                                  subscription.unsubscribe().then(function() {
+                                      console.log("Push subscription unsubscribed.");
+                                  }).catch(function(error) {
+                                      console.log("Failed to unsubscribe from push:", error);
+                                  });
+                              }
+                          });
+                      });
+                  }
+              }
+          });
+      
+          // Handle click on Button 2 (Request Notification Permission)
+          requestBtn.addEventListener('click', function () {
+              if (!notificationsEnabled && !permissionRequested) {
+                  // Request permission only if not granted yet and not requested already
+                  Notification.requestPermission().then(permission => {
+                      if (permission === 'granted') {
+                          notificationsEnabled = true;
+                          permissionRequested = true;  // Mark permission as requested
+                          toggleButtonState(true);
+                          console.log("Notifications are enabled.");
+                      }
+                  });
+              }
+          });
+      
+          // Check the notification permission state when the page loads
+          window.addEventListener('load', function() {
+              // Check localStorage for the last active button
+              const activeButton = localStorage.getItem('activeButton');
+              if (activeButton === 'request') {
+                  // Simulate "Request Notification Permission" button being active
+                  notificationsEnabled = true;
+                  toggleButtonState(true);
+              } else if (activeButton === 'allow') {
+                  // Simulate "Allow Notifications" button being active
+                  notificationsEnabled = false;
+                  toggleButtonState(false);
+              } else {
+                  checkNotificationPermission();
+              }
+          });
+      </script>
+      
+      
+      
         
         <h1 style="font-size: 17.5px; color: white; opacity: 50%; margin-top: 25px; margin-left: 10px; font-family: 'apple', sans-serif;">SOCIALS</h1>
 
