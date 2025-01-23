@@ -99,13 +99,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     // Create close button
-                    const closeButton = `
+                    const closeButton = ` 
                      <img src="images/home/chevron_left.png" alt="Close" 
                             style="position: absolute; top: 50px; left: 20px; z-index: 21; cursor: pointer; width: 30px; height: 30px; filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));" />
                     `;
 
                     fullscreenDiv.innerHTML = closeButton;
-                    fullscreenDiv.innerHTML += `
+                    fullscreenDiv.innerHTML += ` 
                         <div style="position: relative; width: 100%; height: 200px; ">
                             <div style="width: 100%; height: 100%;  position: absolute; display: flex; background-repeat: no-repeat; background-image: none;" id="imageWrapper">
                                <div style="overflow-x: hidden;">
@@ -159,7 +159,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Event listener for close button
                     fullscreenDiv.querySelector('img').addEventListener('click', () => {
                         fullscreenDiv.remove();
+                        document.documentElement.style.position = ''; // Reset <html> position
+                        document.documentElement.style.overflow = ''; // Reset <html> overflow
                     });
+
+                    // Apply styles to <html> tag to prevent scrolling
+                    document.documentElement.style.position = 'relative'; // Apply position: relative
+                    document.documentElement.style.overflow = 'hidden'; // Prevent scrolling
 
                     // Append to body
                     document.body.appendChild(fullscreenDiv);
@@ -232,9 +238,6 @@ document.addEventListener('DOMContentLoaded', () => {
         'tweaks/packagemanagers/Cydia.mobileconfig',
         'tweaks/packagemanagers/Sileo.mobileconfig',
         'tweaks/packagemanagers/Zebra.mobileconfig'
-       
-       
-       
     ];
 
     function createMobileConfigButtons() {
@@ -244,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const button = document.createElement('button');
             button.classList.add('nav-button');
             button.setAttribute('data-section', 'package-managers');
-            button.innerHTML = `
+            button.innerHTML = ` 
                 <img class="icon" src="[icon]" alt="Icon" style="width: 80px; height: 80px; border-radius: 15px; margin-left: 0px;">
                 <p class="label" style="position: absolute; left: 100px; top: 20px; color: white; font-weight: 1; font-size: 16px;">Loading...</p>
                 <p class="label" style="position: absolute; left: 100px; top: 40px; color: white; font-family: 'apple', sans-serif; opacity: 50%; font-size: 13px;">[id]</p>

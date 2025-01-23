@@ -420,22 +420,29 @@ if (app.screenshotURLs && app.screenshotURLs.length > 0) {
 }
 
 
-    // Insert modal HTML into the DOM
-    document.body.insertAdjacentHTML('beforeend', modalHtml);
-    const modal = document.getElementById('modal');
+   // Insert modal HTML into the DOM
+document.body.insertAdjacentHTML('beforeend', modalHtml);
+const modal = document.getElementById('modal');
 
-    modal.style.visibility = 'visible';
-    setTimeout(() => {
-        modal.style.opacity = '1'; 
-    }, 10);
+// Make changes to the <html> tag when the modal is open
+const html = document.documentElement;
+html.style.position = 'relative';
+html.style.overflow = 'hidden';
 
-    // Disable body scrolling when modal is open
-    document.body.style.overflow = 'hidden'; 
-    const appContainer = document.getElementById('home-page');
-    appContainer.style.overflow = 'hidden'; 
+modal.style.visibility = 'visible';
+setTimeout(() => {
+    modal.style.opacity = '1'; 
+}, 10);
 
-    // Set up the back button to close the modal
-    document.getElementById('back').onclick = closeModal; 
+// Disable body scrolling when modal is open
+document.body.style.overflow = 'hidden'; 
+const appContainer = document.getElementById('home-page');
+appContainer.style.overflow = 'hidden'; 
+
+// Set up the back button to close the modal
+document.getElementById('back').onclick = closeModal;
+
+
 };
 
 
@@ -453,7 +460,13 @@ const closeModal = () => {
 
     const appContainer = document.getElementById('home-page');
     appContainer.style.overflow = 'auto'; 
+
+    // Remove styles from <html> tag when modal is closed
+    const html = document.documentElement;
+    html.style.position = '';  // Remove position relative
+    html.style.overflow = '';  // Remove overflow hidden
 };
+
 
 // Convert size from bytes to MB
 const bytesToMB = (bytes) => {
@@ -520,14 +533,10 @@ const setupSearch = async () => {
             overlay.style.display = 'none'; // Hide overlay after a brief delay
             resultsContainer.style.display = 'none'; // Hide the results container
             
-            // Target the <html> element with lang="en" and disable scrolling
-            const htmlElement = document.querySelector('html[lang="en"]');
-            if (htmlElement) {
-                htmlElement.style.overflow = 'hidden';  // Disable scrolling on <html lang="en">
-            }
+            // Add 'overflow: hidden' directly to the <html> element's style attribute
+            document.documentElement.setAttribute('style', 'overflow: hidden;'); // Disable scrolling on <html>
         }, 0); // Delay should match the transition time
     });
-    
     
 };
 
