@@ -1026,10 +1026,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 overlay.style.display = 'flex';
                 htmlElement.style.position = 'relative';
                 htmlElement.style.overflow = 'hidden'; // Disable scrolling
+                document.body.style.overflow = 'hidden';
+                document.body.style.position = 'relative';
             } else {
                 overlay.style.display = 'none';
                 htmlElement.style.position = '';
                 htmlElement.style.overflow = ''; // Re-enable scrolling
+                document.body.style.overflow = '';
             }
         }
     
@@ -1039,8 +1042,11 @@ document.addEventListener('DOMContentLoaded', () => {
             var htmlElement = document.documentElement;
     
             overlay.style.display = 'none';
-            htmlElement.style.position = '';
-            htmlElement.style.overflow = '';
+htmlElement.style.position = '';
+htmlElement.style.overflow = '';
+document.body.style.overflow = '';
+document.body.style.position = '';
+
         }
     </script>
     
