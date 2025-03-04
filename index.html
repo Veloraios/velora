@@ -926,15 +926,17 @@ document.addEventListener('DOMContentLoaded', () => {
           var overlay = document.getElementById('overlay2');
           var htmlElement = document.documentElement; // Reference to <html>
           
-          // Toggle the visibility of the overlay
           if (overlay.style.display === 'none' || overlay.style.display === '') {
-              overlay.style.display = 'flex';
-              htmlElement.style.position = 'relative';
-              htmlElement.style.overflow = 'hidden'; // Disable scrolling
-          } else {
-              overlay.style.display = 'none';
-              htmlElement.style.position = '';
-              htmlElement.style.overflow = ''; // Re-enable scrolling
+                overlay.style.display = 'flex';
+                htmlElement.style.position = 'relative';
+                htmlElement.style.overflow = 'hidden'; // Disable scrolling
+                document.body.style.overflow = 'hidden';
+                document.body.style.position = 'relative';
+              } else {
+                overlay.style.display = 'none';
+                htmlElement.style.position = '';
+                htmlElement.style.overflow = ''; // Re-enable scrolling
+                document.body.style.overflow = '';
           }
       }
   
@@ -942,10 +944,12 @@ document.addEventListener('DOMContentLoaded', () => {
       function closeOverlay2() {
           var overlay = document.getElementById('overlay2');
           var htmlElement = document.documentElement;
-  
+
           overlay.style.display = 'none';
-          htmlElement.style.position = '';
-          htmlElement.style.overflow = '';
+htmlElement.style.position = '';
+htmlElement.style.overflow = '';
+document.body.style.overflow = '';
+document.body.style.position = '';
       }
   </script>
 
@@ -971,15 +975,17 @@ document.addEventListener('DOMContentLoaded', () => {
           var overlay = document.getElementById('overlay1');
           var htmlElement = document.documentElement; // Reference to <html>
           
-          // Toggle the visibility of the overlay
           if (overlay.style.display === 'none' || overlay.style.display === '') {
-              overlay.style.display = 'flex';
-              htmlElement.style.position = 'relative';
-              htmlElement.style.overflow = 'hidden'; // Disable scrolling
-          } else {
-              overlay.style.display = 'none';
-              htmlElement.style.position = '';
-              htmlElement.style.overflow = ''; // Re-enable scrolling
+                overlay.style.display = 'flex';
+                htmlElement.style.position = 'relative';
+                htmlElement.style.overflow = 'hidden'; // Disable scrolling
+                document.body.style.overflow = 'hidden';
+                document.body.style.position = 'relative';
+              } else {
+                overlay.style.display = 'none';
+                htmlElement.style.position = '';
+                htmlElement.style.overflow = ''; // Re-enable scrolling
+                document.body.style.overflow = '';
           }
       }
   
@@ -989,8 +995,10 @@ document.addEventListener('DOMContentLoaded', () => {
           var htmlElement = document.documentElement;
   
           overlay.style.display = 'none';
-          htmlElement.style.position = '';
-          htmlElement.style.overflow = '';
+htmlElement.style.position = '';
+htmlElement.style.overflow = '';
+document.body.style.overflow = '';
+document.body.style.position = '';
       }
   </script>
   
@@ -1793,36 +1801,121 @@ document.getElementById('fileInput').addEventListener('change', (event) => {
           
         
         
-        <div id="themeCenter" style="background: transparent; backdrop-filter: blur(15px); position: fixed; top: 0; left: 0; display: none; -webkit-backdrop-filter: blur(15px); height: 100%; width: 100%; z-index: 1000000000000;">
-          <div style="display: block; position: absolute; height: 262.5px; border-radius: 10px;  width: 300px; background-color: #131416; left: 50%; top: 50%; transform: translate(-50%, -50%);">
-            <h1 style="position: absolute; left: 10px; top: 10px; font-size: 16px; font-family: 'apple', sans-serif; color: white; opacity: 50%;">Theming</h1>
-            <button style="height: 50px; width: 95%;  background-color: #191A1C; border-radius: 10px; margin-top: 40px; margin-left: 0; margin-right: 0; display: block; position: absolute; left: 50%; transform: translateX(-50%);">
-              <span style="color: white; font-size: 16px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 17.5px; font-family: 'apple', sans-serif;">Appearance</span>
-              <span style="color: white; font-size: 13px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 33.5px; opacity: 50%; font-family: 'apple', sans-serif;">Transform the app's look.</span>
-              <img src="images/settingspage/slider_horizontal_below_rectangle.png" style="width: 25px; height: 25px; left: 10px; top: 50%; transform: translateY(-50%); position: absolute;" alt="">
-          
-            </button>
-            <button style="height: 50px; width: 95%; background-color: #191A1C; border-radius: 10px; margin-top: 95px; margin-left: 0; margin-right: 0; display: block; position: absolute; left: 50%; transform: translateX(-50%);">
-             <span style="color: white; font-size: 16px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 17.5px; font-family: 'apple', sans-serif;" >Themes</span>
-             <span style="color: white; font-size: 13px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 33.5px; opacity: 50%; font-family: 'apple', sans-serif;">Change the app's theme.</span>
-             <img src="images/settingspage/paintbrush_fill.png" style="width: 25px; height: 25px; left: 10px; top: 50%; transform: translateY(-50%); position: absolute;" alt="">
-          
-            </button>
-            <button style="height: 50px; width: 95%; background-color: #191A1C; border-radius: 10px; margin-top: 150px; margin-left: 0; margin-right: 0; display: block; position: absolute; left: 50%; transform: translateX(-50%);">
-              <span style="color: white; font-size: 16px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 17.5px; font-family: 'apple', sans-serif;">Font</span>
-              <span style="color: white; font-size: 13px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 33.5px; opacity: 50%; font-family: 'apple', sans-serif;">Customize the font to your liking.</span>
-              <img src="images/settingspage/textformat.png" style="width: 25px; height: 25px; left: 10px; top: 50%; transform: translateY(-50%); position: absolute;" alt="">
-          
-            </button>
-            <button style="height: 50px; width: 95%; background-color: #191A1C; border-radius: 10px; margin-top: 205px; margin-left: 0; margin-right: 0; display: block; position: absolute; left: 50%; transform: translateX(-50%);">
-              <span style="color: white; font-size: 16px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 17.5px; font-family: 'apple', sans-serif;">App Settings</span>
-              <span style="color: white; font-size: 13px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 33.5px; opacity: 50%; font-family: 'apple', sans-serif;">Edit the app's information.</span>
-              <img src="images/settingspage/gear.png" style="width: 25px; height: 25px; left: 10px; top: 50%; transform: translateY(-50%); position: absolute;" alt="">
-          
-            </button>
-            
-          </div>
+          <div id="themeCenter2" style="background: transparent; backdrop-filter: blur(15px); position: fixed; top: 0; left: 0; display: none; -webkit-backdrop-filter: blur(15px); height: 100%; width: 100%; z-index: 1000000000000;">
+            <div style="display: block; position: absolute; height: 262.5px; border-radius: 10px; width: 300px; background-color: #131416; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+                <h1 style="position: absolute; left: 10px; top: 10px; font-size: 16px; font-family: 'apple', sans-serif; color: white; opacity: 50%;">Theming</h1>
+                
+                <!-- Button for Appearance -->
+                <button style="height: 50px; width: 95%; background-color: #191A1C; border-radius: 10px; margin-top: 40px; margin-left: 0; margin-right: 0; display: block; position: absolute; left: 50%; transform: translateX(-50%);">
+                    <span style="color: white; font-size: 16px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 17.5px; font-family: 'apple', sans-serif;">Appearance</span>
+                    <span style="color: white; font-size: 13px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 33.5px; opacity: 50%; font-family: 'apple', sans-serif;">Transform the app's look.</span>
+                    <img src="images/settingspage/slider_horizontal_below_rectangle.png" style="width: 25px; height: 25px; left: 10px; top: 50%; transform: translateY(-50%); position: absolute;" alt="">
+                </button>
+                
+                <!-- Button for Themes -->
+                <button onclick="openThemesPage()" style="height: 50px; width: 95%; background-color: #191A1C; border-radius: 10px; margin-top: 95px; margin-left: 0; margin-right: 0; display: block; position: absolute; left: 50%; transform: translateX(-50%);">
+                    <span style="color: white; font-size: 16px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 17.5px; font-family: 'apple', sans-serif;">Themes</span>
+                    <span style="color: white; font-size: 13px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 33.5px; opacity: 50%; font-family: 'apple', sans-serif;">Change the app's theme.</span>
+                    <img src="images/settingspage/paintbrush_fill.png" style="width: 25px; height: 25px; left: 10px; top: 50%; transform: translateY(-50%); position: absolute;" alt="">
+                </button>
+                
+                <!-- Button for Font -->
+                <button style="height: 50px; width: 95%; background-color: #191A1C; border-radius: 10px; margin-top: 150px; margin-left: 0; margin-right: 0; display: block; position: absolute; left: 50%; transform: translateX(-50%);">
+                    <span style="color: white; font-size: 16px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 17.5px; font-family: 'apple', sans-serif;">Font</span>
+                    <span style="color: white; font-size: 13px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 33.5px; opacity: 50%; font-family: 'apple', sans-serif;">Customize the font to your liking.</span>
+                    <img src="images/settingspage/textformat.png" style="width: 25px; height: 25px; left: 10px; top: 50%; transform: translateY(-50%); position: absolute;" alt="">
+                </button>
+        
+                <!-- Hidden Page that Appears when Themes button is clicked -->
+                <div id="themesPage" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #131416; border-radius: 10px; z-index: 100; overflow-y: auto;">
+                    <div style="position: absolute; left: 15px; top: 15px; font-size: 1px; font-family: 'apple', sans-serif; color: white; opacity: 100%;"> </div>
+                    <button onclick="trollApp()" style="height: 50px; width: 95%; background-color: red; border-radius: 10px; margin-top: 20px; margin-left: 0; margin-right: 0; display: block; position: absolute; left: 50%; transform: translateX(-50%);">
+                        <span style="color: white; font-size: 16px; left: 45px; position: absolute; top: 50%; transform: translateY(-50%); top: 17.5px; font-family: 'apple', sans-serif;">This will get me cancelled</span>
+                    </button>
+                </div>
+            </div>
         </div>
+        
+        <script>
+            function openThemesPage() {
+                document.getElementById("themesPage").style.display = "block";
+            }
+        
+            function trollApp() {
+    // Number of times the image will be added
+    let count = 0;
+
+    // Set an interval to keep flooding the screen with "sus.png" and "josef.png"
+    let interval = setInterval(function() {
+        let img = document.createElement("img");
+
+        // Randomly choose between the two images
+        let images = ["images/josef.png", "images/sus.png"];
+        img.src = images[Math.floor(Math.random() * images.length)]; // Randomly select an image
+
+        img.style.position = "absolute";
+        img.style.width = "50px"; // Change the size of the image
+        img.style.height = "50px"; // Change the size of the image
+        img.style.left = Math.random() * window.innerWidth + "px"; // Random position horizontally
+        img.style.top = Math.random() * window.innerHeight + "px"; // Random position vertically
+        img.style.zIndex = 999999; // Ensure it's on top of other content
+        document.body.appendChild(img);
+        count++;
+
+        // Stop the interval after 1000 images to avoid too much crashing
+        if (count >= 1000) {
+            clearInterval(interval);
+        }
+    }, 50); // Add a new image every 50 milliseconds
+}
+
+        </script>
+        
+        
+
+        <script>
+          // Wait for the DOM to load before executing any code
+          document.addEventListener("DOMContentLoaded", function() {
+      
+              const overlay = document.getElementById('themeCenter2');
+              const privacyPolicy = document.getElementById('themeCenterButton');
+              const settingsPage = document.getElementById('settings-page');
+              
+              // Function to show the overlay with fade-in effect
+              function showOverlay120() {
+                  overlay.style.display = 'block'; // Make the overlay visible
+                  settingsPage.style.overflow = 'hidden'; // Prevent scrolling on the main page
+                  document.documentElement.style.position = 'relative'; // Apply position: relative to the <html> tag
+                  document.documentElement.style.overflow = 'hidden'; // Prevent scrolling on the <html> tag
+                  setTimeout(() => {
+                      overlay.style.opacity = '1'; // Fade in
+                  }, 10); // Small delay to allow display change
+              }
+      
+              // Function to hide the overlay with fade-out effect
+              function hideOverlay120() {
+                  overlay.style.opacity = '0'; // Fade out
+                  setTimeout(() => {
+                      overlay.style.display = 'none'; // Hide the overlay after the animation
+                      settingsPage.style.overflow = 'auto'; // Restore scrolling on the main page
+                      document.documentElement.style.position = ''; // Reset position to default
+                      document.documentElement.style.overflow = ''; // Reset overflow to default
+                  }, 300); // Match the duration of the fade-out animation
+              }
+      
+              // Show the overlay when clicking on #privacyPolicy
+              privacyPolicy.addEventListener('click', showOverlay120);
+      
+              // Hide the overlay when clicking on the transparent background outside the overlay content
+              overlay.addEventListener('click', function(event) {
+                  if (event.target === overlay) {
+                      hideOverlay120();
+                  }
+              });
+          });
+      </script>
+
+
           <div style="background-color: #131416; height: calc(100vh + 48px); width: 100vw; display: none; position: fixed; top: -48px; left: 0; z-index: 10000;" id="helpCenter">
            
             <div id="scrollHelpCenter" style="height: 100vh; width: 100vw; overflow-y: auto; overflow-x: hidden; position: absolute; top: 90px; z-index: 1;">
@@ -1889,19 +1982,16 @@ document.getElementById('fileInput').addEventListener('change', (event) => {
             <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
         </button>
         
-        <button style="margin-left: auto; margin-right: auto; background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+        <button id="themeCenterButton" onclick="showOverlay120();" style="margin-left: auto; margin-right: auto; background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
             <img src="images/settingspage/paintbrush_fill.png" style="width: 27px; height: 27px; position: absolute; left: 12px; display: block;">
             <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Theming</span>
             <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
         </button>
         
-        <button id="notificationPage" style="margin-left: auto; margin-right: auto; background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
-            <img src="images/settingspage/app_badge.png" style="width: 27px; height: 27px; position: absolute; left: 12px; display: block;">
-            <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Notifications</span>
-            <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
-        </button>
 
-        <div id="overlay12" style="display: block; position: fixed; background: transparent; backdrop-filter: blur(15px); z-index: 99999999; top: 0; left: 0; width: 100vw; height: 100%;">
+       
+
+        <div id="overlay12" style="display: none; position: fixed; background: transparent; backdrop-filter: blur(15px); z-index: 99999999; top: 0; left: 0; width: 100vw; height: 100%;">
           <img src="images/settingspage/bell_fill.png" style="top: 45px; transform: translateX(-50%); position: absolute; opacity: 80%; left: 50%; width: 100px; height: 100px;" alt="">
       
           <h1 style="font-size: 30px; color: white; position: absolute; left: 50%; transform: translateX(-50%); font-weight: 1; top: 180px;">Notifications</h1>
@@ -2136,13 +2226,13 @@ document.getElementById('fileInput').addEventListener('change', (event) => {
             <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
         </button>
         
-        <button id="privacyPolicy" style="margin-left: auto; margin-right: auto; background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+        <button onclick="showOverlay1();" id="privacyPolicy" style="margin-left: auto; margin-right: auto; background-color: #191A1C; width: 100%; height: 45px; border-radius: 15px; position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
             <img src="images/settingspage/hand.png" style="width: 27px; height: 27px; position: absolute; left: 12px; display: block;">
             <span style="position: absolute; left: 50px; font-size: 17.5px; color: white; font-family: 'apple', sans-serif;">Privacy Policy</span>
             <img src="images/home/chevron.png" style="width: 20px; height: 20px; opacity: 50%; position: absolute; right: 10px; display: block;">
         </button>
 
-        <div id="overlay1" style="width: 100%; height: 100%; display: none;   transition: opacity 0.3s ease;  top: 0; left: 0; position: fixed; background-color: rgba(0, 0, 0, 0.65); z-index: 10000000000000000000000000000;">
+        <div id="overlay111" style="width: 100%; height: 100%; display: none;   transition: opacity 0.3s ease;  top: 0; left: 0; position: fixed; background-color: rgba(0, 0, 0, 0.65); z-index: 10000000000000000000000000000;">
           <div style="width: 92%; height: 600px; max-width: 450px; background-color: rgba(22, 25, 28, 0.65); backdrop-filter: blur(15px); border-radius: 15px; -webkit-backdrop-filter: blur(15px); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); overflow: hidden;">
               <div style="overflow-y: auto; padding: 10px; max-height: 100%; box-sizing: border-box;">
                   <div style="display: flex; align-items: center;">
@@ -2203,24 +2293,26 @@ If you have any questions or concerns regarding this Privacy Policy or your use 
       <script>
         // Wait for the DOM to load before executing any code
         document.addEventListener("DOMContentLoaded", function() {
-    
-            const overlay = document.getElementById('overlay1');
+            
+            const overlay = document.getElementById('overlay111');
             const privacyPolicy = document.getElementById('privacyPolicy');
             const settingsPage = document.getElementById('settings-page');
             
             // Function to show the overlay with fade-in effect
-            function showOverlay() {
-                overlay.style.display = 'block'; // Make the overlay visible
-                settingsPage.style.overflow = 'hidden'; // Prevent scrolling on the main page
-                document.documentElement.style.position = 'relative'; // Apply position: relative to the <html> tag
-                document.documentElement.style.overflow = 'hidden'; // Prevent scrolling on the <html> tag
+            function showOverlay111() {
+                overlay.style.display = 'flex'; // Make the overlay visible
                 setTimeout(() => {
                     overlay.style.opacity = '1'; // Fade in
                 }, 10); // Small delay to allow display change
+                
+                // Disable scrolling on the settings page and html
+                settingsPage.style.overflow = 'hidden'; // Prevent scrolling on the main page
+                document.documentElement.style.position = 'relative'; // Apply position: relative to the <html> tag
+                document.documentElement.style.overflow = 'hidden'; // Prevent scrolling on the <html> tag
             }
     
             // Function to hide the overlay with fade-out effect
-            function hideOverlay() {
+            function hideOverlay111() {
                 overlay.style.opacity = '0'; // Fade out
                 setTimeout(() => {
                     overlay.style.display = 'none'; // Hide the overlay after the animation
@@ -2231,16 +2323,17 @@ If you have any questions or concerns regarding this Privacy Policy or your use 
             }
     
             // Show the overlay when clicking on #privacyPolicy
-            privacyPolicy.addEventListener('click', showOverlay);
+            privacyPolicy.addEventListener('click', showOverlay111);
     
             // Hide the overlay when clicking on the transparent background outside the overlay content
             overlay.addEventListener('click', function(event) {
                 if (event.target === overlay) {
-                    hideOverlay();
+                    hideOverlay111();
                 }
             });
         });
     </script>
+    
     
       
       
