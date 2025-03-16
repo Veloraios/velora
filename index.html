@@ -1290,7 +1290,7 @@ window.onresize = function() {
 <h1 style="left: 90px; font-family: 'apple'; font-size: 13px; position: absolute; top: 35px; opacity: 50%;">Add Your Certificate or use a <br>Working One from our Certificate Hub.</h1>
 <img src="images/home/chevron.png" style="right: 10px; position: absolute; top: 50%; transform: translateY(-50%); width: 25px; height: 25px; opacity: 50%;" alt="">
   </div>
-<script>
+ <script>
     // Function to clean the URL by removing anything after "/?"
     function cleanUrl() {
         let currentUrl = window.location.href;
@@ -1301,6 +1301,7 @@ window.onresize = function() {
         // If the URL was modified, redirect to the cleaned URL
         if (currentUrl !== cleanUrl) {
             window.location.href = cleanUrl;
+            showDeviceLinkingMessage();
         }
     }
 
@@ -1340,43 +1341,7 @@ window.onresize = function() {
         }
     }
 
-    // Function to save device info from URL
-    function saveDeviceInfo() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const deviceBase64 = urlParams.get('device');
-
-        if (deviceBase64) {
-            // Decode the base64-encoded device info
-            const decodedData = atob(deviceBase64);
-
-            try {
-                // Parse the JSON data from the decoded string
-                const deviceInfo = JSON.parse(decodedData);
-
-                // Save the device info to localStorage
-                localStorage.setItem('deviceInfo', JSON.stringify(deviceInfo));
-
-                // Show the full-screen gray div with the message
-                showDeviceLinkingMessage();
-
-            } catch (error) {
-                // No alert for errors anymore
-            }
-        }
-    }
-
-    // Function to show saved device information from localStorage
-    function showSavedDeviceInfo() {
-        const savedDeviceInfo = localStorage.getItem('deviceInfo');
-        if (savedDeviceInfo) {
-            const deviceInfo = JSON.parse(savedDeviceInfo);
-            // Show the device info in JSON format in the alert
-            alert(JSON.stringify(deviceInfo, null, 2)); // Pretty JSON format
-        }
-    }
-
-    // Function to show the full-screen gray div with the message
-    function showDeviceLinkingMessage() {
+      function showDeviceLinkingMessage() {
         const overlayDiv = document.createElement('div');
         overlayDiv.style.position = 'fixed';
         overlayDiv.style.top = '0';
@@ -1396,18 +1361,49 @@ window.onresize = function() {
         document.body.appendChild(overlayDiv);
     }
 
+    // Function to save device info from URL
+    function saveDeviceInfo() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const deviceBase64 = urlParams.get('device');
+
+        if (deviceBase64) {
+            // Decode the base64-encoded device info
+            const decodedData = atob(deviceBase64);
+
+            try {
+                // Parse the JSON data from the decoded string
+                const deviceInfo = JSON.parse(decodedData);
+
+                // Save the device info to localStorage
+                localStorage.setItem('deviceInfo', JSON.stringify(deviceInfo));
+
+            } catch (error) {
+                // No alert for errors anymore
+            }
+        }
+    }
+
+    // Function to show saved device information from localStorage
+    function showSavedDeviceInfo() {
+        const savedDeviceInfo = localStorage.getItem('deviceInfo');
+        if (savedDeviceInfo) {
+            const deviceInfo = JSON.parse(savedDeviceInfo);
+            // Show the device info in JSON format in the alert
+            alert(JSON.stringify(deviceInfo, null, 2)); // Pretty JSON format
+        }
+    }
+
     window.onload = function() {
         saveDeviceInfo();  // Automatically save device info on page load if present in the URL
         cleanUrl();  // Clean the URL if it contains "/?"
     };
 </script>
 
-<div onclick="postRequest()" style="width: 90vw; height: 40px; border-radius: 15px; position: absolute; left: 50%; transform: translateX(-50%); background-color: #191A1C; top: 175px;">
-    <img src="images/signer/link.png" style="left: 10px; position: absolute; width: 25px; height: 25px; opacity: 50%; top: 50%; transform: translateY(-50%);" alt="">
-    <h1 style="left: 40px; position: absolute; font-family: 'apple'; font-size: 16px; opacity: 50%; top: 50%; transform: translateY(-50%);">Link Device</h1>
-    <img onclick="showSavedDeviceInfo()" src="images/signer/question_circle.png" style="right: 10px; position: absolute; width: 25px; height: 25px; opacity: 50%; top: 50%; transform: translateY(-50%);" alt="">
+  <div onclick="postRequest()" style="width: 90vw; height: 40px; border-radius: 15px; position: absolute; left: 50%; transform: translateX(-50%); background-color: #191A1C; top: 175px;">
+<img src="images/signer/link.png" style="left: 10px; position: absolute; width: 25px; height: 25px; opacity: 50%; top: 50%; transform: translateY(-50%);" alt="">
+  <h1 style="left: 40px; position: absolute; font-family: 'apple'; font-size: 16px; opacity: 50%; top: 50%; transform: translateY(-50%);">Link Device</h1>
+  <img onclick="showSavedDeviceInfo()" src="images/signer/question_circle.png" style="right: 10px; position: absolute; width: 25px; height: 25px; opacity: 50%; top: 50%; transform: translateY(-50%);" alt="">
 </div>
-
 
 
   <div style="height: 250px; width: 90vw; background-color: #191A1C; z-index: 3; top: 225px; position: absolute; left: 50%; transform: translateX(-50%); border-radius: 15px; 
