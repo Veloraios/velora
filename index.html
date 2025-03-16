@@ -1372,37 +1372,7 @@ window.onresize = function() {
         }
     }
 
-    // Function to modify the div after deviceInfo is found
-    function modifyDivOnDeviceInfo() {
-        const savedDeviceInfo = localStorage.getItem('deviceInfo');
-        
-        if (savedDeviceInfo) {
-            // Parse the saved deviceInfo
-            const deviceInfo = JSON.parse(savedDeviceInfo);
-
-            // Change the height of the div to 100px
-            const divElement = document.querySelector('div');
-            divElement.style.height = '100px';
-            
-            // Add new content inside the div with deviceInfo properties
-            const newContent = `
-                <img src="skiklaus.png" style="width: 25px; height: 25px; opacity: 50%; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" alt="skiklaus image">
-                <h1 style="font-family: 'apple'; font-size: 16px; opacity: 50%; position: absolute; right: 40px; top: 50%; transform: translateY(-50%);">${deviceInfo.name}</h1>
-                <h1 style="font-family: 'apple'; font-size: 16px; opacity: 50%; position: absolute; right: 40px; top: 60%; transform: translateY(-50%);">${deviceInfo.udid}</h1>
-                <img src="skiklaus.png" style="right: 10px; position: absolute; width: 25px; height: 25px; opacity: 50%; top: 50%; transform: translateY(-50%);" alt="skiklaus image">
-            `;
-            
-            // Set the innerHTML of the div to the new content
-            divElement.innerHTML = newContent;
-
-            // Change the top style of the element with ID 'deal'
-            const dealElement = document.getElementById('deal');
-            if (dealElement) {
-                dealElement.style.top = '285px';
-            }
-        }
-    }
-
+   
     window.onload = function() {
         saveDeviceInfo();  // Automatically save device info on page load if present in the URL
         cleanUrl();  // Clean the URL if it contains "/?"
@@ -1410,7 +1380,41 @@ window.onresize = function() {
     };
 </script>
 
-<div onclick="postRequest()" style="width: 90vw; height: 40px; border-radius: 15px; position: absolute; left: 50%; transform: translateX(-50%); background-color: #191A1C; top: 175px;">
+<script>
+    window.onload = function() {
+        // Get the saved device information from localStorage
+        const savedDeviceInfo = localStorage.getItem('deviceInfo');
+        
+        if (savedDeviceInfo) {
+            // Parse the device info (it is a base64 string and then a JSON object)
+            const deviceInfo = JSON.parse(atob(savedDeviceInfo));
+
+            // Change the height of the div to 100px
+            const divElement = document.getElementById('linkDeviceDiv');
+            if (divElement) {
+                divElement.style.height = '100px';
+
+                // Set the inner HTML of the div to show device name and udid
+                divElement.innerHTML = `
+                    <img src="skiklaus.png" style="width: 25px; height: 25px; opacity: 50%; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" alt="skiklaus image">
+                    <h1 style="font-family: 'apple'; font-size: 16px; opacity: 50%; position: absolute; right: 40px; top: 50%; transform: translateY(-50%);">${deviceInfo.name}</h1>
+                    <h1 style="font-family: 'apple'; font-size: 16px; opacity: 50%; position: absolute; right: 40px; top: 60%; transform: translateY(-50%);">${deviceInfo.udid}</h1>
+                    <img src="skiklaus.png" style="right: 10px; position: absolute; width: 25px; height: 25px; opacity: 50%; top: 50%; transform: translateY(-50%);" alt="skiklaus image">
+                `;
+            }
+
+            // Adjust the 'deal' element's top position
+            const dealElement = document.getElementById('deal');
+            if (dealElement) {
+                // Get the current top value and add 60px to it
+                const currentTop = parseInt(window.getComputedStyle(dealElement).top, 10);
+                dealElement.style.top = `${currentTop + 60}px`;
+            }
+        }
+    };
+</script>
+
+<div id="linkDeviceDiv" onclick="postRequest()" style="width: 90vw; height: 40px; border-radius: 15px; position: absolute; left: 50%; transform: translateX(-50%); background-color: #191A1C; top: 175px;">
     <img src="images/signer/link.png" style="left: 10px; position: absolute; width: 25px; height: 25px; opacity: 50%; top: 50%; transform: translateY(-50%);" alt="">
     <h1 style="left: 40px; position: absolute; font-family: 'apple'; font-size: 16px; opacity: 50%; top: 50%; transform: translateY(-50%);">Link Device</h1>
     <img onclick="showSavedDeviceInfo()" src="images/signer/question_circle.png" style="right: 10px; position: absolute; width: 25px; height: 25px; opacity: 50%; top: 50%; transform: translateY(-50%);" alt="">
