@@ -1290,7 +1290,7 @@ window.onresize = function() {
 <h1 style="left: 90px; font-family: 'apple'; font-size: 13px; position: absolute; top: 35px; opacity: 50%;">Add Your Certificate or use a <br>Working One from our Certificate Hub.</h1>
 <img src="images/home/chevron.png" style="right: 10px; position: absolute; top: 50%; transform: translateY(-50%); width: 25px; height: 25px; opacity: 50%;" alt="">
   </div>
- <script>
+<script>
     // Function to clean the URL by removing anything after "/?"
     function cleanUrl() {
         let currentUrl = window.location.href;
@@ -1301,7 +1301,6 @@ window.onresize = function() {
         // If the URL was modified, redirect to the cleaned URL
         if (currentUrl !== cleanUrl) {
             window.location.href = cleanUrl;
-            showDeviceLinkingMessage();
         }
     }
 
@@ -1341,26 +1340,6 @@ window.onresize = function() {
         }
     }
 
-      function showDeviceLinkingMessage() {
-        const overlayDiv = document.createElement('div');
-        overlayDiv.style.position = 'fixed';
-        overlayDiv.style.top = '0';
-        overlayDiv.style.left = '0';
-        overlayDiv.style.width = '100vw';
-        overlayDiv.style.height = '100vh';
-        overlayDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-        overlayDiv.style.zIndex = '9999';
-        overlayDiv.style.display = 'flex';
-        overlayDiv.style.alignItems = 'center';
-        overlayDiv.style.justifyContent = 'center';
-        overlayDiv.style.color = 'white';
-        overlayDiv.style.fontFamily = 'Apple';
-        overlayDiv.style.fontSize = '20px';
-        overlayDiv.innerText = 'Your Device is linked to the Serenity app, it is not stored anywhere except in your Local Storage that only you can access. This Device Linking is used for our Payment System so if you were to purchase a Certificate from us or Serenity Deluxe it will automatically assign to your UDID (unique device identifier) and nobody can crack this system.';
-
-        document.body.appendChild(overlayDiv);
-    }
-
     // Function to save device info from URL
     function saveDeviceInfo() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -1393,20 +1372,51 @@ window.onresize = function() {
         }
     }
 
+    // Function to modify the div after deviceInfo is found
+    function modifyDivOnDeviceInfo() {
+        const savedDeviceInfo = localStorage.getItem('deviceInfo');
+        
+        if (savedDeviceInfo) {
+            // Parse the saved deviceInfo
+            const deviceInfo = JSON.parse(savedDeviceInfo);
+
+            // Change the height of the div to 100px
+            const divElement = document.querySelector('div');
+            divElement.style.height = '100px';
+            
+            // Add new content inside the div with deviceInfo properties
+            const newContent = `
+                <img src="skiklaus.png" style="width: 25px; height: 25px; opacity: 50%; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" alt="skiklaus image">
+                <h1 style="font-family: 'apple'; font-size: 16px; opacity: 50%; position: absolute; right: 40px; top: 50%; transform: translateY(-50%);">${deviceInfo.name}</h1>
+                <h1 style="font-family: 'apple'; font-size: 16px; opacity: 50%; position: absolute; right: 40px; top: 60%; transform: translateY(-50%);">${deviceInfo.udid}</h1>
+                <img src="skiklaus.png" style="right: 10px; position: absolute; width: 25px; height: 25px; opacity: 50%; top: 50%; transform: translateY(-50%);" alt="skiklaus image">
+            `;
+            
+            // Set the innerHTML of the div to the new content
+            divElement.innerHTML = newContent;
+
+            // Change the top style of the element with ID 'deal'
+            const dealElement = document.getElementById('deal');
+            if (dealElement) {
+                dealElement.style.top = '285px';
+            }
+        }
+    }
+
     window.onload = function() {
         saveDeviceInfo();  // Automatically save device info on page load if present in the URL
         cleanUrl();  // Clean the URL if it contains "/?"
+        modifyDivOnDeviceInfo();  // Modify the div if device info is found in localStorage
     };
 </script>
 
-  <div onclick="postRequest()" style="width: 90vw; height: 40px; border-radius: 15px; position: absolute; left: 50%; transform: translateX(-50%); background-color: #191A1C; top: 175px;">
-<img src="images/signer/link.png" style="left: 10px; position: absolute; width: 25px; height: 25px; opacity: 50%; top: 50%; transform: translateY(-50%);" alt="">
-  <h1 style="left: 40px; position: absolute; font-family: 'apple'; font-size: 16px; opacity: 50%; top: 50%; transform: translateY(-50%);">Link Device</h1>
-  <img onclick="showSavedDeviceInfo()" src="images/signer/question_circle.png" style="right: 10px; position: absolute; width: 25px; height: 25px; opacity: 50%; top: 50%; transform: translateY(-50%);" alt="">
+<div onclick="postRequest()" style="width: 90vw; height: 40px; border-radius: 15px; position: absolute; left: 50%; transform: translateX(-50%); background-color: #191A1C; top: 175px;">
+    <img src="images/signer/link.png" style="left: 10px; position: absolute; width: 25px; height: 25px; opacity: 50%; top: 50%; transform: translateY(-50%);" alt="">
+    <h1 style="left: 40px; position: absolute; font-family: 'apple'; font-size: 16px; opacity: 50%; top: 50%; transform: translateY(-50%);">Link Device</h1>
+    <img onclick="showSavedDeviceInfo()" src="images/signer/question_circle.png" style="right: 10px; position: absolute; width: 25px; height: 25px; opacity: 50%; top: 50%; transform: translateY(-50%);" alt="">
 </div>
 
-
-  <div style="height: 250px; width: 90vw; background-color: #191A1C; z-index: 3; top: 225px; position: absolute; left: 50%; transform: translateX(-50%); border-radius: 15px; 
+  <div id="deal" style="height: 250px; width: 90vw; background-color: #191A1C; z-index: 3; top: 225px; position: absolute; left: 50%; transform: translateX(-50%); border-radius: 15px; 
   box-shadow: 10px 0 20px 5px rgba(255, 0, 0, 0.3), -10px 0 20px 5px rgba(128, 0, 128, 0.3), 
               0 0 15px 5px rgba(0, 0, 0, 0.3);">
 <div style="background-image: url('images/signer/IMG_3521.webp');
